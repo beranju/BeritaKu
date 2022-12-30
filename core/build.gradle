@@ -1,8 +1,9 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
+    id "com.android.library"
+    id "kotlin-android"
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 
 }
 
@@ -15,13 +16,21 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 32
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+        }
         release {
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -56,5 +65,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation "androidx.room:room-ktx:$room_version"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2"
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 }

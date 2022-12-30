@@ -2,21 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_width="270dp"
+    android:layout_height="270dp"
     android:paddingStart="24dp"
     >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/thumbnail_headline"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/rounded_corner"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:shapeAppearanceOverlay="@style/rounded_corner" />
 
     <TextView
         android:id="@+id/title_headline"

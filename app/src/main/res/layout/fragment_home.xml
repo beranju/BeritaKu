@@ -47,7 +47,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/thumbnail_news"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +117,7 @@
         app:layout_constraintTop_toBottomOf="@+id/thumbnail_news" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_headline"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
