@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/thumbnail_news"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:shapeAppearanceOverlay="@style/rounded_corner_bottom"
+        tools:srcCompat="@drawable/test" />
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -44,17 +55,6 @@
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/thumbnail_news"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:shapeAppearanceOverlay="@style/rounded_corner"
-        app:srcCompat="@drawable/test" />
-
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -63,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@id/thumbnail_news"
         app:layout_constraintRight_toRightOf="@id/thumbnail_news"
-        app:layout_constraintTop_toTopOf="@+id/tv_label"
+        app:layout_constraintTop_toTopOf="@+id/thumbnail_news"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -73,7 +73,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Readmore"
+        android:text="Read more"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:maxLength="80"
-        android:text="lore kldfdjg  fjghs gj sfjgh  fjhgshdgsfjghfsdgh fjdgh g dfjhfdg dhjgdgdh fgjdshgghjgkd jgkdfgjdkj jgkdfgfkdjfdgkj"
+        tools:text="lore kldfdjg  fjghs gj sfjgh  fjhgshdgsfjghfsdgh fjdgh g dfjhfdg dhjgdgdh fgjdshgghjgkd jgkdfgjdkj jgkdfgfkdjfdgkj"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_readmore"
         app:layout_constraintEnd_toEndOf="@+id/tv_readmore"
@@ -98,7 +98,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/bg_badge_pill"
         android:paddingHorizontal="10dp"
-        android:text="health"
+        tools:text="health"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_title_news"
         app:layout_constraintStart_toStartOf="@+id/tv_title_news" />

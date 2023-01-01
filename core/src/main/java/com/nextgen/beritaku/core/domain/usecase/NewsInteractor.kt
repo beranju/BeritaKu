@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsInteractor @Inject constructor(private val newsRepository: INewsRepository): NewsUseCase {
-    override fun getAllNews(category: String, query: String): Flow<Resource<List<NewsModel>>> =
+    override fun getAllNews(category: String, query: String?): Flow<Resource<List<NewsModel>>> =
         newsRepository.getAllNews(category, query)
 
     override fun getFavoriteNews(): Flow<List<NewsModel>> =

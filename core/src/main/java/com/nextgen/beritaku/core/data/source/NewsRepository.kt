@@ -21,7 +21,7 @@ class NewsRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors
 ): INewsRepository {
-    override fun getAllNews(category: String, query: String): Flow<Resource<List<NewsModel>>> =
+    override fun getAllNews(category: String, query: String?): Flow<Resource<List<NewsModel>>> =
         object : NetworkBoundResources<List<NewsModel>, List<ArticlesItem>>(appExecutors){
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapResponseToEntity(data)
@@ -32,9 +32,7 @@ class NewsRepository @Inject constructor(
                 return remoteDataSource.getAllNews(category, query)
             }
 
-            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean {
-                return true
-            }
+            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true
 
             override fun loadFromDb(): Flow<List<NewsModel>> {
                 return localDataSource.getAllNews().map {
