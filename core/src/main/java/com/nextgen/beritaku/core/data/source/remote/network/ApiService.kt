@@ -17,8 +17,8 @@ interface ApiService {
     suspend fun getAllNews(
         @Query("category") category: String = "general",
         @Query("q") query: String?,
-        @Query("pageSize") pageSize: Int = 20,
-        @Query("page") page: Int = 1,
+        @Query("pageSize") pageSize: Int?,
+        @Query("page") page: Int? = 1,
         @Query("country") country: String = "id"
     ): NewsResponse
 }

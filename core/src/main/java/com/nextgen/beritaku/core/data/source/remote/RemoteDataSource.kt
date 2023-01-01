@@ -13,10 +13,10 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-    suspend fun getAllNews(category: String, query: String?): Flow<ApiResponse<List<ArticlesItem>>>{
+    suspend fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<ApiResponse<List<ArticlesItem>>>{
         return flow {
             try {
-                val response = apiService.getAllNews(category, query)
+                val response = apiService.getAllNews(category, query, pageSize)
                 val dataArray = response.articles
                 if (dataArray!!.isNotEmpty()){
                     emit(ApiResponse.Success(dataArray))

@@ -5,7 +5,7 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 import kotlinx.coroutines.flow.Flow
 
 interface NewsUseCase {
-    fun getAllNews(category: String, query: String?): Flow<Resource<List<NewsModel>>>
+    fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<Resource<List<NewsModel>>>
 
     fun getFavoriteNews(): Flow<List<NewsModel>>
 

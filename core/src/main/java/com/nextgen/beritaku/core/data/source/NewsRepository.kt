@@ -21,7 +21,7 @@ class NewsRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors
 ): INewsRepository {
-    override fun getAllNews(category: String, query: String?): Flow<Resource<List<NewsModel>>> =
+    override fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<Resource<List<NewsModel>>> =
         object : NetworkBoundResources<List<NewsModel>, List<ArticlesItem>>(appExecutors){
             override suspend fun saveCallResult(data: List<ArticlesItem>) {
                 val newsList = DataMapper.mapResponseToEntity(data)
@@ -29,7 +29,7 @@ class NewsRepository @Inject constructor(
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> {
-                return remoteDataSource.getAllNews(category, query)
+                return remoteDataSource.getAllNews(category, query, pageSize)
             }
 
             override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true

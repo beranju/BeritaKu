@@ -75,6 +75,7 @@
                     android:drawableStart="@drawable/ic_search_24"
                     android:drawablePadding="4dp"
                     android:hint="explore news"
+                    android:maxLines="1"
                     android:textColor="@color/black"
                     android:minHeight="48dp"
                     android:padding="10dp"

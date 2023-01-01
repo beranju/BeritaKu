@@ -33,7 +33,7 @@ class ExploreFragment : Fragment() {
         newsAdapter.viewType = 2
 
 
-        viewModel.exploreNews("general", "").observe(viewLifecycleOwner){result->
+        viewModel.exploreNews("general", null, null).observe(viewLifecycleOwner){result->
             when(result){
                 is Resource.Success -> {
                     newsAdapter.setData(result.data)
