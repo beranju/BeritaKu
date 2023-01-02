@@ -21,4 +21,12 @@ interface ApiService {
         @Query("page") page: Int? = 1,
         @Query("country") country: String = "id"
     ): NewsResponse
+
+    @GET("everything")
+    @Headers("Authorization: apiKey $API_KEY", "User-Agent: request")
+    suspend fun searchNews(
+        @Query("q") query: String?
+    ): NewsResponse
+
+
 }

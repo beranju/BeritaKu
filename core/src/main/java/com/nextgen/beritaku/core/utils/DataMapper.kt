@@ -6,7 +6,7 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 
 object DataMapper {
 
-    fun mapResponseToEntity(input: List<ArticlesItem>): List<NewsEntity>{
+    fun mapResponseToEntity(input: List<ArticlesItem>, category: String = "general"): List<NewsEntity>{
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(
@@ -18,6 +18,7 @@ object DataMapper {
                 title = it.title,
                 url = it.url,
                 content = it.content,
+                category = category,
                 isFavorite = false
             )
             newsList.add(news)
@@ -36,6 +37,7 @@ object DataMapper {
                 title = it.title.toString(),
                 url = it.url.toString(),
                 content = it.content.toString(),
+                category = it.category.toString(),
                 isFavorite = false
             )
         }
@@ -50,6 +52,7 @@ object DataMapper {
             title = input.title.toString(),
             url = input.url.toString(),
             content = input.content.toString(),
+            category = input.category,
             isFavorite = false
         )
 }

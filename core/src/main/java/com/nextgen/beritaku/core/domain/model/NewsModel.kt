@@ -16,5 +16,6 @@ data class NewsModel(
     var title: String,
     var url: String,
     var content: String,
+    var category: String,
     var isFavorite: Boolean
 ):Parcelable

@@ -42,12 +42,29 @@ class NewsRepository @Inject constructor(
 
         }.asFlow()
 
-//    override fun getAllNewsByCategory(
-//        category: String,
-//        query: String?,
-//    ): Flow<Resource<List<NewsModel>>> {
-//        return null
-//    }
+    override fun getAllNewsByCategory(
+        category: String,
+        query: String?,
+    ): Flow<Resource<List<NewsModel>>> =
+        object : NetworkBoundResources<List<NewsModel>, List<ArticlesItem>>(appExecutors){
+            override suspend fun saveCallResult(data: List<ArticlesItem>) {
+                val newsList = DataMapper.mapResponseToEntity(data, category)
+                localDataSource.insertNews(newsList)
+            }
+
+            override suspend fun createCall(): Flow<ApiResponse<List<ArticlesItem>>> {
+                return remoteDataSource.getAllNews(category, query, null)
+            }
+
+            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true
+
+            override fun loadFromDb(): Flow<List<NewsModel>> {
+                return localDataSource.getAllNewsByCategory(category).map {
+                    DataMapper.entityToDomain(it)
+                }
+            }
+
+        }.asFlow()
 
     override fun getFavoriteNews(): Flow<List<NewsModel>> {
         return localDataSource.getFavoriteNews().map {

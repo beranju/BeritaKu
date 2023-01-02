@@ -10,6 +10,11 @@ class NewsInteractor @Inject constructor(private val newsRepository: INewsReposi
     override fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<Resource<List<NewsModel>>> =
         newsRepository.getAllNews(category, query, pageSize)
 
+    override fun getAllNewsByCategory(
+        category: String,
+        query: String?,
+    ): Flow<Resource<List<NewsModel>>> = newsRepository.getAllNewsByCategory(category, query)
+
     override fun getFavoriteNews(): Flow<List<NewsModel>> =
         newsRepository.getFavoriteNews()
 

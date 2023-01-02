@@ -10,6 +10,8 @@ import javax.inject.Singleton
 class LocalDataSource @Inject constructor(private val newsDao: NewsDao) {
     fun getAllNews(): Flow<List<NewsEntity>> =newsDao.getAllNews()
 
+    fun getAllNewsByCategory(category: String): Flow<List<NewsEntity>> =newsDao.getAllNewsByCategory(category)
+
     fun getFavoriteNews(): Flow<List<NewsEntity>> = newsDao.getFavoriteNews()
 
     suspend fun insertNews(news: List<NewsEntity>) = newsDao.insertNews(news)

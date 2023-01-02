@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,4 +14,60 @@
         tools:listitem="@layout/item_explore_news"
         />
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/empty_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_empty_data"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_news_item"
+            app:layout_constraintEnd_toEndOf="@+id/rv_news_item"
+            app:layout_constraintStart_toStartOf="@+id/rv_news_item"
+            app:layout_constraintTop_toTopOf="@+id/rv_news_item" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="news not found"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/load_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_load_data"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_news_item"
+            app:layout_constraintEnd_toEndOf="@+id/rv_news_item"
+            app:layout_constraintStart_toStartOf="@+id/rv_news_item"
+            app:layout_constraintTop_toTopOf="@+id/rv_news_item" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="load data ..."
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,53 +27,27 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tabName = arguments?.getString(ARG_SECTION_NUMBER).toString()
-        setViewPager(tabName)
 
+        fetchData(tabName)
+        setupRecyclerView()
+
+    }
+
+    private fun setupRecyclerView() {
         newsAdapter.viewType = 2
-
         binding.rvNewsItem.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
             adapter = newsAdapter
         }
-
-
-
     }
 
     private fun isLoading(state: Boolean) {
-
-    }
-
-    private fun setViewPager(tabName: String) {
-        when(tabName) {
-            TAB_BUSINESS -> {
-                viewModel.exploreNews("business",null, null).observe(viewLifecycleOwner){result->
-                    when(result){
-                        is Resource.Success -> {
-                            isLoading(false)
-                            newsAdapter.setData(result.data)
-                        }
-                        is Resource.Error -> {
-                            isLoading(false)
-                            Log.e(TAG, "${result.message}")
-                        }
-                        is Resource.Loading -> {
-                            isLoading(true)
-                        }
-                    }
-                }
-            }
-            TAB_ENTERTAINMENT -> fetchData(tabName)
-            TAB_HEALTH -> fetchData(tabName)
-            TAB_SCIENCE -> fetchData(tabName)
-            TAB_SPORT -> fetchData(tabName)
-            TAB_TECH -> fetchData(tabName)
-        }
+        binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
     }
 
     private fun fetchData(tabName: String) {
-        viewModel.exploreNews(tabName,null, null).observe(viewLifecycleOwner){result->
+        viewModel.exploreNews(tabName, null).observe(viewLifecycleOwner){result->
             when(result){
                 is Resource.Success -> {
                     isLoading(false)
@@ -81,6 +55,7 @@ class NewsFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     isLoading(false)
+                    binding.emptyData.visibility = View.VISIBLE
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {

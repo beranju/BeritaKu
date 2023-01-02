@@ -10,7 +10,7 @@ abstract class NetworkBoundResources<ResultType, RequestType>(private val appExe
         val dbSource = loadFromDb().first()
         if (shouldFetch(dbSource)){
             emit(Resource.Loading())
-            when(val api = createCall().first()){
+            when(val api = createCall().firstOrNull()){
                 is ApiResponse.Empty ->{
                     emitAll(loadFromDb().map { Resource.Success(it) })
                 }
@@ -22,6 +22,7 @@ abstract class NetworkBoundResources<ResultType, RequestType>(private val appExe
                     onFetchFailed()
                     emit(Resource.Error<ResultType>(api.message))
                 }
+                else -> {}
             }
         }
     }

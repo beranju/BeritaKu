@@ -39,6 +39,9 @@ data class NewsEntity(
     @ColumnInfo(name = "content")
     var content: String? = null,
 
+    @ColumnInfo(name = "category")
+    var category: String? = null,
+
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
 ): Parcelable

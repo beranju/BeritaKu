@@ -15,6 +15,9 @@ interface NewsDao {
     @Query("SELECT * FROM news")
     fun getAllNews(): Flow<List<NewsEntity>>
 
+    @Query("SELECT * FROM news WHERE category= :category")
+    fun getAllNewsByCategory(category: String): Flow<List<NewsEntity>>
+
     @Query("SELECT * FROM news WHERE isFavorite = 1")
     fun getFavoriteNews(): Flow<List<NewsEntity>>
 
