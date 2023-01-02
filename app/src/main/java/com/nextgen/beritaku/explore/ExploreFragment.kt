@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
@@ -21,34 +24,21 @@ class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ExploreViewModel by viewModels()
+    private val pagerAdapter: SectionPagerAdapter by lazy {
+        SectionPagerAdapter(requireActivity() as AppCompatActivity)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // * * https://medium.com/@abubakr.jabbarov/shared-searchview-with-tabslaout-and-collapsing-toolbar-in-android-daa19ee0fd6a
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val newsAdapter = NewsAdapter()
-        newsAdapter.viewType = 2
-
-
-        viewModel.exploreNews("general", null, null).observe(viewLifecycleOwner){result->
-            when(result){
-                is Resource.Success -> {
-                    newsAdapter.setData(result.data)
-                }
-                is Resource.Error -> {}
-                is Resource.Loading -> {}
-            }
-        }
-
-//        binding.rvNewsCategory.apply {
-//            layoutManager = LinearLayoutManager(requireContext())
-//            setHasFixedSize(true)
-//            adapter = newsAdapter
-//        }
-
+        val viewPager: ViewPager2 = binding.viewPager as ViewPager2
+        viewPager.adapter = pagerAdapter
+        val tabs: TabLayout = binding.tabs as TabLayout
+        TabLayoutMediator(tabs, viewPager){tab, position->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
     override fun onCreateView(
@@ -66,5 +56,13 @@ class ExploreFragment : Fragment() {
 
     companion object {
         const val TAG = "ExploreFragment"
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2,
+            R.string.tab_text_3,
+            R.string.tab_text_4,
+            R.string.tab_text_5,
+            R.string.tab_text_6
+        )
     }
 }

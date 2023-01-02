@@ -2,10 +2,8 @@ package com.nextgen.beritaku.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -73,26 +71,6 @@ class HomeFragment  : Fragment() {
         binding.toolbar.apply {
             (activity as AppCompatActivity).setSupportActionBar(this)
             (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-
-            inflateMenu(R.menu.menu_option_home)
-            setOnMenuItemClickListener {
-                when(it.itemId){
-                    R.id.explore_menu -> {
-                        findNavController().navigate(R.id.explore_navigation)
-                        true
-                    }
-                    R.id.favorite_menu -> {
-                        findNavController().navigate(R.id.favorite_navigation)
-                        true
-                    }
-                    R.id.profile_menu -> {
-                        findNavController().navigate(R.id.account_navigation)
-                        true
-                    }
-                    else -> super.onOptionsItemSelected(it)
-                }
-            }
-
         }
 
     }

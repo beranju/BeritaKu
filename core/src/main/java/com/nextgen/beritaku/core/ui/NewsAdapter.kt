@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.nextgen.beritaku.core.R
 import com.nextgen.beritaku.core.databinding.ItemExploreNewsBinding
 import com.nextgen.beritaku.core.databinding.ItemHeadlineNewsBinding
 import com.nextgen.beritaku.core.domain.model.NewsModel
@@ -51,14 +53,16 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int = listNews.size
 
-    class ViewHolderExplore(private val binding: ItemExploreNewsBinding) : ViewHolder(binding.root) {
+    inner class ViewHolderExplore(private val binding: ItemExploreNewsBinding) : ViewHolder(binding.root) {
         fun bind(data: NewsModel) {
             binding.apply {
                 tvTitlenews.text = data.title
                 author.text = data.author ?: ""
                 time.text = DateUtils.dateFormat(data.publishedAt)
                 Glide.with(itemView.context)
+                    .asBitmap()
                     .load(data.urlToImage)
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
                     .centerCrop()
                     .into(ivThumbnail)
             }
@@ -73,7 +77,9 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                 timeHeadline.text = DateUtils.dateFormat(data.publishedAt)
                 author.text = data.author
                 Glide.with(itemView.context)
+                    .asBitmap()
                     .load(data.urlToImage)
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
                     .centerCrop()
                     .into(thumbnailHeadline)
             }

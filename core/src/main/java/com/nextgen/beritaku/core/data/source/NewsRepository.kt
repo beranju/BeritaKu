@@ -42,6 +42,13 @@ class NewsRepository @Inject constructor(
 
         }.asFlow()
 
+//    override fun getAllNewsByCategory(
+//        category: String,
+//        query: String?,
+//    ): Flow<Resource<List<NewsModel>>> {
+//        return null
+//    }
+
     override fun getFavoriteNews(): Flow<List<NewsModel>> {
         return localDataSource.getFavoriteNews().map {
             DataMapper.entityToDomain(it)

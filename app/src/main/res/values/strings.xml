@@ -7,4 +7,11 @@
     <string name="favorite">Favorite</string>
     <string name="profile">Profile</string>
     <string name="headlines_news">Headlines News</string>
+
+    <string name="tab_text_1">Business</string>
+    <string name="tab_text_2">Entertainment</string>
+    <string name="tab_text_3">Health</string>
+    <string name="tab_text_4">Science</string>
+    <string name="tab_text_5">Sport</string>
+    <string name="tab_text_6">Technology</string>
 </resources>
