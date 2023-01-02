@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.nextgen.beritaku.R
@@ -14,6 +15,7 @@ import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
+import com.nextgen.beritaku.detail.DetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -40,6 +42,10 @@ class HomeFragment  : Fragment() {
         setupRecyclerView()
         fetchData()
 
+        binding.tvViewMore.setOnClickListener {
+            findNavController().navigate(R.id.explore_navigation)
+        }
+
     }
 
     private fun fetchData() {
@@ -48,6 +54,13 @@ class HomeFragment  : Fragment() {
                 is Resource.Success -> {
                     isLoading(false)
                     newsAdapter.setData(result.data)
+                    result.data?.map {
+                        newsAdapter.onClick = {selectedNews->
+                            val bundle = Bundle()
+                            bundle.putParcelable(DetailFragment.DATA_ITEM, selectedNews)
+                            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
+                        }
+                    }
                     setTopNews(result.data?.randomOrNull())
                 }
                 is Resource.Error -> {
@@ -93,7 +106,14 @@ class HomeFragment  : Fragment() {
                 .load(random?.urlToImage)
                 .centerCrop()
                 .into(thumbnailNews)
+
+            tvReadmore.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailFragment.DATA_ITEM, random)
+                findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
+            }
         }
+
     }
 
     override fun onDestroyView() {

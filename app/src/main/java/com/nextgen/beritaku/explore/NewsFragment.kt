@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
+import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +41,11 @@ class NewsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
             adapter = newsAdapter
+        }
+        newsAdapter.onClick = {dataNews->
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
+            findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
         }
     }
 

@@ -9,6 +9,8 @@ interface NewsUseCase {
 
     fun getAllNewsByCategory(category: String, query: String?): Flow<Resource<List<NewsModel>>>
 
+    fun searchNews(query: String?): Flow<Resource<List<NewsModel>>>
+
     fun getFavoriteNews(): Flow<List<NewsModel>>
 
     fun setFavoriteNews(news: NewsModel, state: Boolean)

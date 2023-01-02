@@ -22,6 +22,7 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
     }
 
     private var listNews = ArrayList<NewsModel>()
+    var onClick: ((NewsModel) -> Unit)? = null
     var viewType = 1
 
     fun setData(newListNews: List<NewsModel>?){
@@ -68,6 +69,12 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
             }
         }
 
+        init {
+            binding.root.setOnClickListener {
+                onClick?.invoke(listNews[adapterPosition])
+            }
+        }
+
     }
 
     inner class ViewHolderHeadlines(private val binding: ItemHeadlineNewsBinding): ViewHolder(binding.root) {
@@ -82,6 +89,12 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                     .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
                     .centerCrop()
                     .into(thumbnailHeadline)
+            }
+        }
+
+        init {
+            binding.root.setOnClickListener {
+                onClick?.invoke(listNews[adapterPosition])
             }
         }
 

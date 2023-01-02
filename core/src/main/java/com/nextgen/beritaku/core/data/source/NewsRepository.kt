@@ -11,6 +11,7 @@ import com.nextgen.beritaku.core.utils.AppExecutors
 import com.nextgen.beritaku.core.utils.DataMapper
 import dagger.Module
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -65,6 +66,20 @@ class NewsRepository @Inject constructor(
             }
 
         }.asFlow()
+
+    override fun searchNews(query: String?): Flow<Resource<List<NewsModel>>> {
+        return flow {
+            remoteDataSource.searchNews(query).collect{result->
+                when(result){
+                    is ApiResponse.Success -> {
+                        val data = DataMapper.mapResponseToDomain(result.data)
+                        emit(Resource.Success(data))
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
 
     override fun getFavoriteNews(): Flow<List<NewsModel>> {
         return localDataSource.getFavoriteNews().map {
