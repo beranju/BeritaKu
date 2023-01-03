@@ -38,7 +38,7 @@ object DataMapper {
                 url = it.url.toString(),
                 content = it.content.toString(),
                 category = it.category.toString(),
-                isFavorite = false
+                isFavorite = it.isFavorite
             )
         }
 

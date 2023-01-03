@@ -5,12 +5,13 @@ import com.nextgen.beritaku.core.utils.AppExecutors
 import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResources<ResultType, RequestType>(private val appExecutors: AppExecutors) {
+
     private val result:Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())
         val dbSource = loadFromDb().first()
         if (shouldFetch(dbSource)){
             emit(Resource.Loading())
-            when(val api = createCall().firstOrNull()){
+            when(val api = createCall().first()){
                 is ApiResponse.Empty ->{
                     emitAll(loadFromDb().map { Resource.Success(it) })
                 }
@@ -24,6 +25,8 @@ abstract class NetworkBoundResources<ResultType, RequestType>(private val appExe
                 }
                 else -> {}
             }
+        }else{
+            emitAll(loadFromDb().map { Resource.Success(it) })
         }
     }
 

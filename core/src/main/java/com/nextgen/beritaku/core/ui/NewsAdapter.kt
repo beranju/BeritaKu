@@ -66,6 +66,8 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                     .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
                     .centerCrop()
                     .into(ivThumbnail)
+
+
             }
         }
 

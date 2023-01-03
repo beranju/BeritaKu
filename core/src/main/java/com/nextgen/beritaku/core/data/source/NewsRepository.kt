@@ -33,7 +33,7 @@ class NewsRepository @Inject constructor(
                 return remoteDataSource.getAllNews(category, query, pageSize)
             }
 
-            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true
+            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = dbSource == null || dbSource.isEmpty()
 
             override fun loadFromDb(): Flow<List<NewsModel>> {
                 return localDataSource.getAllNews().map {
@@ -57,7 +57,7 @@ class NewsRepository @Inject constructor(
                 return remoteDataSource.getAllNews(category, query, null)
             }
 
-            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true
+            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = dbSource == null || dbSource.isEmpty()
 
             override fun loadFromDb(): Flow<List<NewsModel>> {
                 return localDataSource.getAllNewsByCategory(category).map {
