@@ -1,0 +1,2 @@
+# BeritaKu
+Simple News App
