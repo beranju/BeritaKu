@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_explore_navigation_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_explore_navigation_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/favorite_navigation"
@@ -60,4 +63,13 @@
         android:name="com.nextgen.beritaku.detail.WebFragment"
         android:label="fragment_web"
         tools:layout="@layout/fragment_web" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.nextgen.beritaku.explore.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

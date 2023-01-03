@@ -11,6 +11,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val newsUseCase: NewsUseCase): ViewModel() {
 //    val headlineNews = newsUseCase.getAllNews()
 
-    fun headlineNews(category: String, query: String?, pageSize: Int?) =
-        newsUseCase.getAllNews(category, query, pageSize).asLiveData()
+    fun headlineNews() = newsUseCase.getAllNews().asLiveData()
 }

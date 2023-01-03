@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nextgen.beritaku.R
@@ -35,16 +37,31 @@ import kotlinx.coroutines.launch
 class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        setupToolbar()
+        setupTabLayout()
+
+    }
+
+    private fun setupTabLayout() {
         binding.viewPager.adapter = SectionPagerAdapter( (activity as AppCompatActivity))
         TabLayoutMediator(binding.tabs, binding.viewPager){tab, position->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+    }
 
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        binding.apply {
+            toolbar.title = "Discover News"
+            toolbarLayout.setExpandedTitleColor(resources.getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
+            binding.searchField.setOnClickListener {
+                findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
+            }
+        }
 
     }
 

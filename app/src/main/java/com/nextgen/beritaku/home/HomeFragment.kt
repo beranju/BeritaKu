@@ -49,7 +49,7 @@ class HomeFragment  : Fragment() {
     }
 
     private fun fetchData() {
-        homeViewModel.headlineNews("general", null, 7).observe(viewLifecycleOwner){result->
+        homeViewModel.headlineNews().observe(viewLifecycleOwner){result->
             when(result){
                 is Resource.Success -> {
                     isLoading(false)

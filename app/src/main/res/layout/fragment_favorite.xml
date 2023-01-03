@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".favorite.FavoriteFragment">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="24dp"
         tools:listitem="@layout/item_explore_news"
         />
 

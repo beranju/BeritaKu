@@ -7,8 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsInteractor @Inject constructor(private val newsRepository: INewsRepository): NewsUseCase {
-    override fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<Resource<List<NewsModel>>> =
-        newsRepository.getAllNews(category, query, pageSize)
+    override fun getAllNews(): Flow<Resource<List<NewsModel>>> = newsRepository.getAllNews()
 
     override fun getAllNewsByCategory(
         category: String,
