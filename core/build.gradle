@@ -1,0 +1,70 @@
+plugins {
+    id "com.android.library"
+    id "kotlin-android"
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+
+}
+
+apply from: '../shared_dependencies.gradle'
+
+android {
+    namespace 'com.nextgen.beritaku.core'
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 32
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+        }
+        release {
+            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
+            buildConfigField "String", "API_KEY", '"065632db359c4f7f9ffd74105e77f66b"'
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir:"libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+    //coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+}
