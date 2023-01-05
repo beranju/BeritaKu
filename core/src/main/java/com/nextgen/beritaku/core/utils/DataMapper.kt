@@ -6,7 +6,7 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 
 object DataMapper {
 
-    fun mapResponseToEntity(input: List<ArticlesItem>, category: String = "general"): List<NewsEntity>{
+    fun mapResponseToEntity(input: List<ArticlesItem>, category: String? = null): List<NewsEntity>{
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(

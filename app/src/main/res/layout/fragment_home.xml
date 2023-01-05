@@ -7,59 +7,20 @@
     tools:context=".home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/thumbnail_news"
             android:layout_width="match_parent"
-            android:layout_height="310dp"
+            android:layout_height="330dp"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintEnd_toEndOf="@id/container"
+            app:layout_constraintStart_toStartOf="@id/container"
             app:shapeAppearanceOverlay="@style/rounded_corner_bottom"
             tools:srcCompat="@drawable/test" />
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorOnPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <ImageView
-                android:id="@+id/profile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="8dp"
-                app:srcCompat="@drawable/ic_account_24"
-                android:layout_gravity="end"/>
-            <ImageView
-                android:id="@+id/explore"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginHorizontal="8dp"
-                app:srcCompat="@drawable/ic_search_24"
-                android:layout_gravity="end"/>
-            <ImageView
-                android:id="@+id/favorite"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/ic_baseline_favorite_24"
-                android:layout_gravity="end"/>
-            <ImageView
-                android:id="@+id/main_menu"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginHorizontal="8dp"
-                android:src="@drawable/ic_baseline_menu_24"
-                android:layout_gravity="start"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"

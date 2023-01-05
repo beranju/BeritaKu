@@ -2,11 +2,10 @@ package com.nextgen.beritaku.explore
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
@@ -14,14 +13,13 @@ import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
 import com.nextgen.beritaku.detail.DetailFragment
-import com.nextgen.beritaku.home.HomeFragment
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ExploreViewModel by viewModels()
+    private val viewModel: ExploreViewModel by viewModel()
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
     }

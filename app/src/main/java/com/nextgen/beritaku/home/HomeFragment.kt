@@ -2,11 +2,10 @@ package com.nextgen.beritaku.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -16,12 +15,11 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
 import com.nextgen.beritaku.detail.DetailFragment
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class HomeFragment  : Fragment() {
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModel()
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val newsAdapter: NewsAdapter by lazy {
@@ -37,8 +35,6 @@ class HomeFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupToolbar()
         setupRecyclerView()
         fetchData()
 
@@ -49,7 +45,7 @@ class HomeFragment  : Fragment() {
     }
 
     private fun fetchData() {
-        homeViewModel.headlineNews("general", null, 7).observe(viewLifecycleOwner){result->
+        homeViewModel.headlineNews().observe(viewLifecycleOwner){result->
             when(result){
                 is Resource.Success -> {
                     isLoading(false)
@@ -78,14 +74,6 @@ class HomeFragment  : Fragment() {
         binding.pbMain.apply {
             visibility = if (state) View.VISIBLE else View.GONE
         }
-    }
-
-    private fun setupToolbar() {
-        binding.toolbar.apply {
-            (activity as AppCompatActivity).setSupportActionBar(this)
-            (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        }
-
     }
 
     private fun setupRecyclerView() {

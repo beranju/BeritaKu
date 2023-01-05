@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 apply from: '../shared_dependencies.gradle'
@@ -40,6 +39,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+    dynamicFeatures = [':favorite']
 }
 
 dependencies {

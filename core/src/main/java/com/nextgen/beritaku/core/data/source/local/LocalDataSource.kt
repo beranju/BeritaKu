@@ -3,11 +3,9 @@ package com.nextgen.beritaku.core.data.source.local
 import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.data.source.local.room.NewsDao
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class LocalDataSource @Inject constructor(private val newsDao: NewsDao) {
+
+class LocalDataSource (private val newsDao: NewsDao) {
     fun getAllNews(): Flow<List<NewsEntity>> =newsDao.getAllNews()
 
     fun getAllNewsByCategory(category: String): Flow<List<NewsEntity>> =newsDao.getAllNewsByCategory(category)
