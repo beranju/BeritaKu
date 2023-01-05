@@ -37,8 +37,6 @@ class HomeFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupToolbar()
         setupRecyclerView()
         fetchData()
 
@@ -78,14 +76,6 @@ class HomeFragment  : Fragment() {
         binding.pbMain.apply {
             visibility = if (state) View.VISIBLE else View.GONE
         }
-    }
-
-    private fun setupToolbar() {
-        binding.toolbar.apply {
-            (activity as AppCompatActivity).setSupportActionBar(this)
-            (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        }
-
     }
 
     private fun setupRecyclerView() {

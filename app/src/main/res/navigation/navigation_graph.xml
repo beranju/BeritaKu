@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/home_navigation"
         android:name="com.nextgen.beritaku.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_navigation_to_detailFragment"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/explore_navigation"
         android:name="com.nextgen.beritaku.explore.ExploreFragment"
-        android:label="fragment_explore"
+        android:label="Explore"
         tools:layout="@layout/fragment_explore" >
         <action
             android:id="@+id/action_explore_navigation_to_detailFragment"
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/favorite_navigation"
         android:name="com.nextgen.beritaku.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
+        android:label="Profile"
         tools:layout="@layout/fragment_favorite" >
         <action
             android:id="@+id/action_favorite_navigation_to_detailFragment"

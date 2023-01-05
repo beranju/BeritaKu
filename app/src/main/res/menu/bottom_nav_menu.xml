@@ -14,12 +14,6 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/favorite_navigation"
-        android:title="@string/favorite"
-        android:icon="@drawable/ic_baseline_favorite_24"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/account_navigation"
         android:title="@string/profile"
         android:icon="@drawable/ic_account_24"

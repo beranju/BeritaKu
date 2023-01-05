@@ -47,6 +47,9 @@ class SearchFragment : Fragment() {
                     is Resource.Success -> {
                         isLoading(false)
                         newsAdapter.setData(result.data)
+                        if (result.data!!.isNotEmpty()){
+                            binding.noData.visibility = View.GONE
+                        }
                     }
                     is Resource.Error -> {
                         isLoading(false)

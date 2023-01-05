@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nextgen.beritaku.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         // ** setup bottom navigation
         val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.home_navigation, R.id.explore_navigation, R.id.account_navigation
+        ).build()
         val navController =navHostFragment.navController
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{_, destination: NavDestination, _ ->
@@ -38,10 +44,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun invisible() {
         binding.navView.visibility = View.GONE
+        supportActionBar?.hide()
     }
 
     private fun visible() {
         binding.navView.visibility = View.VISIBLE
+        supportActionBar?.show()
     }
 
 

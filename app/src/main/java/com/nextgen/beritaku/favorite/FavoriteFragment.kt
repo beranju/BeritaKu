@@ -1,11 +1,13 @@
 package com.nextgen.beritaku.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +32,27 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupToolbar()
+        binding.tvAktifkanFeature.setOnClickListener {
+            try {
+                moveToFavoriteActivity()
+            }catch (e: Exception){
+                Toast.makeText(requireContext(), "Module Not Found", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+
+        setupRecyclerView()
+
+    }
+
+    private fun moveToFavoriteActivity() {
+        startActivity(Intent(requireActivity(), Class.forName("com.nextgen.beritaku.favorite.FavoriteActivity")))
+    }
+
+    private fun setupRecyclerView() {
         newsAdapter.viewType = 2
         viewModel.favoriteNews.observe(viewLifecycleOwner){result->
             newsAdapter.setData(result)
@@ -46,8 +69,11 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun isLoading(state: Boolean) {
-
+    private fun setupToolbar() {
+        binding.apply {
+            toolbar.title = "Favorite News"
+            toolbarLayout.setExpandedTitleColor(resources.getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
+        }
     }
 
     override fun onCreateView(

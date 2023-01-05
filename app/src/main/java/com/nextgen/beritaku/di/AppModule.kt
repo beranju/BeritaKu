@@ -15,3 +15,4 @@ abstract class AppModule {
     @ViewModelScoped
     abstract fun provideNewsUseCase(newsInteractor: NewsInteractor): NewsUseCase
 }
+

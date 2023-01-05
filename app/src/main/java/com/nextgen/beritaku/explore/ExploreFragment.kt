@@ -54,14 +54,13 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.apply {
-            toolbar.title = "Discover News"
-            toolbarLayout.setExpandedTitleColor(resources.getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
-            binding.searchField.setOnClickListener {
-                findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
-            }
-        }
+//        binding.apply {
+//            toolbar.title = "Discover News"
+//            toolbarLayout.setExpandedTitleColor(resources.getColor(com.google.android.material.R.color.mtrl_btn_transparent_bg_color))
+//            binding.searchField.setOnClickListener {
+//                findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
+//            }
+//        }
 
     }
 
