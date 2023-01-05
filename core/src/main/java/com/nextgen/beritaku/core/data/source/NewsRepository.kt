@@ -4,20 +4,15 @@ import com.nextgen.beritaku.core.data.source.local.LocalDataSource
 import com.nextgen.beritaku.core.data.source.remote.RemoteDataSource
 import com.nextgen.beritaku.core.data.source.remote.network.ApiResponse
 import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
-import com.nextgen.beritaku.core.data.source.remote.response.NewsResponse
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import com.nextgen.beritaku.core.utils.AppExecutors
 import com.nextgen.beritaku.core.utils.DataMapper
-import dagger.Module
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class NewsRepository @Inject constructor(
+
+class NewsRepository (
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors

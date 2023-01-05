@@ -1,7 +1,6 @@
 package com.nextgen.beritaku.core.data.source.remote
 
 import android.util.Log
-import com.nextgen.beritaku.core.data.source.remote.network.API_KEY
 import com.nextgen.beritaku.core.data.source.remote.network.ApiResponse
 import com.nextgen.beritaku.core.data.source.remote.network.ApiService
 import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
@@ -9,11 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
+class RemoteDataSource (private val apiService: ApiService) {
     suspend fun getAllNews(category: String, query: String?, pageSize: Int?): Flow<ApiResponse<List<ArticlesItem>>>{
         return flow {
             try {

@@ -4,9 +4,8 @@ import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class NewsInteractor @Inject constructor(private val newsRepository: INewsRepository): NewsUseCase {
+class NewsInteractor (private val newsRepository: INewsRepository): NewsUseCase {
     override fun getAllNews(): Flow<Resource<List<NewsModel>>> = newsRepository.getAllNews()
 
     override fun getAllNewsByCategory(

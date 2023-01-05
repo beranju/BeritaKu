@@ -1,21 +1,17 @@
 package com.nextgen.beritaku.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentWebBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
 class WebFragment : Fragment() {
     private var _binding: FragmentWebBinding? = null
     private val binding get() = _binding!!
