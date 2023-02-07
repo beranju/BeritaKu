@@ -1,34 +1,32 @@
 package com.nextgen.beritaku.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
-import com.nextgen.beritaku.core.utils.ObjectConverter
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val data = activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: return
+        val data =
+            activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
         setupView(data)
+
+        binding.backButton.setOnClickListener(this)
 
     }
 
@@ -71,6 +69,14 @@ class DetailFragment : Fragment() {
         }
     }
 
+    override fun onClick(view: View?) {
+        when(view){
+            binding.backButton -> {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,4 +94,5 @@ class DetailFragment : Fragment() {
         const val TAG = "DetailFragment"
         const val DATA_ITEM = "data"
     }
+
 }

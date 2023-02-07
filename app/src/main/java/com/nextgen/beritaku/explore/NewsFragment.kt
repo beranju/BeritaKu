@@ -42,9 +42,9 @@ class NewsFragment : Fragment() {
             adapter = newsAdapter
         }
         newsAdapter.onClick = {dataNews->
-//            val dataString = dataNews.let { ObjectConverter.fromNewsModel(dataNews) }
-//            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(dataString)
-//            findNavController().navigate(action)
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
+            findNavController().navigate(R.id.action_newsFragment_to_detailFragment, bundle)
         }
     }
 

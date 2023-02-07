@@ -49,7 +49,7 @@ class FavoriteActivity : AppCompatActivity() {
                 newsAdapter.setData(result)
             }
             newsAdapter.onClick = { selectedItem ->
-                val uri = Uri.parse("beritaku://detail/success")
+                val uri = Uri.parse("beritaku://detail")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                     .putExtra(DetailFragment.DATA_ITEM, selectedItem)
                 startActivity(intent)
