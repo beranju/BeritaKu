@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             when(destination.id){
                 R.id.home_navigation -> visible()
                 R.id.explore_navigation -> visible()
-                R.id.favorite_navigation -> visible()
                 R.id.account_navigation -> visible()
                 else -> invisible()
             }

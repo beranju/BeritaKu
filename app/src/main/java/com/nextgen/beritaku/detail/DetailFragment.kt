@@ -9,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
+import com.nextgen.beritaku.core.utils.ObjectConverter
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,15 +27,8 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "detail"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-        val data = arguments?.getParcelable<NewsModel>(DATA_ITEM)
-        Log.d(TAG, "$data")
-        if (data != null){
-            setupView(data)
-        }
+        val data = activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: return
+        setupView(data)
 
     }
 

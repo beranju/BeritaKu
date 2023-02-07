@@ -12,10 +12,16 @@ data class NewsModel(
     var author: String,
     var urlToImage: String,
     var description: String,
-    var source: @RawValue Source,
+    var source: SourceModel,
     var title: String,
     var url: String,
     var content: String,
     var category: String,
     var isFavorite: Boolean
+):Parcelable
+
+@Parcelize
+data class SourceModel(
+    var name: String,
+    var id: String
 ):Parcelable

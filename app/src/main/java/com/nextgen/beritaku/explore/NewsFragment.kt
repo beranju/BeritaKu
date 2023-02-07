@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
+import com.nextgen.beritaku.core.utils.ObjectConverter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
 import com.nextgen.beritaku.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,9 +42,9 @@ class NewsFragment : Fragment() {
             adapter = newsAdapter
         }
         newsAdapter.onClick = {dataNews->
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
-            findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
+//            val dataString = dataNews.let { ObjectConverter.fromNewsModel(dataNews) }
+//            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(dataString)
+//            findNavController().navigate(action)
         }
     }
 
