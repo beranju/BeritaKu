@@ -5,7 +5,6 @@ import androidx.lifecycle.asLiveData
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 
 class HomeViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
-//    val headlineNews = newsUseCase.getAllNews()
 
     fun headlineNews() = newsUseCase.getAllNews().asLiveData()
 }

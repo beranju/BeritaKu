@@ -31,7 +31,7 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.searchField.setOnClickListener {
+        binding.searchButton.setOnClickListener {
             findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
         }
     }

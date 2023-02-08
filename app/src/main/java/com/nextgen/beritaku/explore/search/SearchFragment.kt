@@ -12,10 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
+import com.nextgen.beritaku.UiState
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentSearchBinding
 import com.nextgen.beritaku.detail.DetailFragment
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,30 +40,24 @@ class SearchFragment : Fragment() {
     }
 
     private fun getSearchNews() {
-        viewModel.searchResult.observe(viewLifecycleOwner){
-            it.observe(viewLifecycleOwner){result->
-                when(result){
-                    is Resource.Success -> {
-                        isLoading(false)
-                        newsAdapter.setData(result.data)
-                        if (result.data!!.isNotEmpty()){
-                            binding.noData.visibility = View.GONE
-                        }
-                    }
-                    is Resource.Error -> {
-                        isLoading(false)
-                        Log.e(TAG, "${result.message}")
-                    }
-                    is Resource.Loading -> {
-                        isLoading(true)
-                    }
+
+        viewModel.searchResult.observe(viewLifecycleOwner){result->
+            lifecycleScope.launch {
+                result.collect{
+                    newsAdapter.setData(it)
+                    binding.noData.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
                 }
             }
         }
     }
 
+    private fun render(it: UiState) {
+        TODO("Not yet implemented")
+    }
+
     private fun isLoading(state: Boolean) {
         binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
+        binding.noData.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {

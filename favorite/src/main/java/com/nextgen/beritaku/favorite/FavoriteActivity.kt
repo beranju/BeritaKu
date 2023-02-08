@@ -1,9 +1,9 @@
 package com.nextgen.beritaku.favorite
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.detail.DetailFragment
@@ -26,28 +26,29 @@ class FavoriteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         loadKoinModules(favoriteModule)
+        setupRecyclerView()
+    }
 
-        newsAdapter.viewType = 2
-        viewModel.favoriteNews.observe(this){result->
-            newsAdapter.setData(result)
-            newsAdapter.onClick = {selectedItem->
-                val fragment = DetailFragment
-                val bundle = Bundle()
-                bundle.putParcelable(DetailFragment.DATA_ITEM, selectedItem)
-                val transaction = supportFragmentManager.commit {
-                    add(DetailFragment::class.java, bundle, DetailFragment::class.java.simpleName)
-                }
-                val intent = Intent(this, DetailFragment::class.java)
-                intent.putExtra(DetailFragment.DATA_ITEM, selectedItem)
-                startActivity(intent)
-            }
-        }
+    private fun setupRecyclerView() {
         binding.rvFavoriteNews.apply {
             layoutManager = LinearLayoutManager(this@FavoriteActivity)
             setHasFixedSize(true)
             adapter = newsAdapter
+            newsAdapter.viewType = 2
+            viewModel.favoriteNews.observe(this@FavoriteActivity){ result ->
+                newsAdapter.setData(result)
+            }
+            newsAdapter.onClick = { selectedItem ->
+                val uri = Uri.parse("beritaku://detail")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                    .putExtra(DetailFragment.DATA_ITEM, selectedItem)
+                startActivity(intent)
+            }
         }
+    }
 
-
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

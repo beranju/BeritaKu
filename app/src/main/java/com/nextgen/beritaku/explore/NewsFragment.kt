@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
+import com.nextgen.beritaku.core.utils.ObjectConverter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
 import com.nextgen.beritaku.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel

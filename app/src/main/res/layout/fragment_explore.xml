@@ -7,13 +7,28 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".explore.ExploreFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="fill_horizontal"
+            >
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Discover"
                 android:textSize="36sp"
+                android:layout_weight="2"
                 android:layout_marginHorizontal="16dp"
                 android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/searchButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="12dp"
+                android:src="@drawable/ic_search_24"/>
+        </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -22,20 +37,7 @@
                 android:layout_marginBottom="16dp"
                 />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/search_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:background="@drawable/bg_search_rounded_colored"
-                android:drawableStart="@drawable/ic_search_24"
-                android:drawablePadding="4dp"
-                android:hint="explore news"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:minHeight="48dp"
-                android:padding="10dp"
-                android:textColorHint="@color/black" />
+
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
@@ -44,8 +46,9 @@
                 android:background="@android:color/transparent"
                 android:scrollbars="horizontal"
                 app:tabGravity="fill"
+                app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="?attr/colorSecondary"
+                app:tabSelectedTextColor="?attr/colorPrimary"
                 app:tabBackground="@android:color/transparent"
                 app:tabTextColor="?attr/colorOnSecondary" />
             <androidx.viewpager2.widget.ViewPager2

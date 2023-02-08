@@ -27,15 +27,6 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favorite_navigation"
-        android:name="com.nextgen.beritaku.favorite.FavoriteFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_favorite" >
-        <action
-            android:id="@+id/action_favorite_navigation_to_detailFragment"
-            app:destination="@id/detailFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/account_navigation"
         android:name="com.nextgen.beritaku.profile.ProfileFragment"
         android:label="fragment_profile"
@@ -44,10 +35,13 @@
         android:id="@+id/detailFragment"
         android:name="com.nextgen.beritaku.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_detailFragment_to_webFragment"
             app:destination="@id/webFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="beritaku://detail" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
