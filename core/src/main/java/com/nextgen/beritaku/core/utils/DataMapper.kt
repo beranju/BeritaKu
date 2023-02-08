@@ -62,23 +62,23 @@ object DataMapper {
             isFavorite = false
         )
 
-//    fun mapResponseToDomain(input: List<ArticlesItem>): List<NewsModel>{
-//        val newsList = ArrayList<NewsModel>()
-//        input.map {
-//            val news = NewsModel(
-//                publishedAt = it.publishedAt,
-//                author = it.author.toString(),
-//                urlToImage = it.urlToImage.toString(),
-//                description = it.description.toString(),
-//                source = it.source!!,
-//                title = it.title.toString(),
-//                url = it.url.toString(),
-//                content = it.content.toString(),
-//                category = "",
-//                isFavorite = false
-//            )
-//            newsList.add(news)
-//        }
-//        return newsList
-//    }
+    fun mapResponseToDomain(input: List<ArticlesItem>): List<NewsModel>{
+        val newsList = ArrayList<NewsModel>()
+        input.map {
+            val news = NewsModel(
+                publishedAt = it.publishedAt,
+                author = it.author.toString(),
+                urlToImage = it.urlToImage.toString(),
+                description = it.description.toString(),
+                source = it.source.let {data-> SourceModel(data?.name!!, data.id!!) },
+                title = it.title.toString(),
+                url = it.url.toString(),
+                content = it.content.toString(),
+                category = "",
+                isFavorite = false
+            )
+            newsList.add(news)
+        }
+        return newsList
+    }
 }

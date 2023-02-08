@@ -44,7 +44,7 @@ class NewsFragment : Fragment() {
         newsAdapter.onClick = {dataNews->
             val bundle = Bundle()
             bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
-            findNavController().navigate(R.id.action_newsFragment_to_detailFragment, bundle)
+            findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
         }
     }
 

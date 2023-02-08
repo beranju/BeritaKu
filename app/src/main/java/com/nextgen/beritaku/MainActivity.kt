@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.favorite_menu -> {
+                findNavController(R.id.nav_host_fragment).popBackStack()
                 startActivity(Intent(this, Class.forName("com.nextgen.beritaku.favorite.FavoriteActivity")))
                 true
             }

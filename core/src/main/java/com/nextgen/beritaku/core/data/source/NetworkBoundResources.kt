@@ -23,7 +23,6 @@ abstract class NetworkBoundResources<ResultType, RequestType>(private val appExe
                     onFetchFailed()
                     emit(Resource.Error<ResultType>(api.message))
                 }
-                else -> {}
             }
         }else{
             emitAll(loadFromDb().map { Resource.Success(it) })
