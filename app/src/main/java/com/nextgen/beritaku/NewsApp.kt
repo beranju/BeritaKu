@@ -1,6 +1,7 @@
 package com.nextgen.beritaku
 
 import android.app.Application
+import com.nextgen.beritaku.core.di.authRepositoryModule
 import com.nextgen.beritaku.core.di.databaseModule
 import com.nextgen.beritaku.core.di.networkModule
 import com.nextgen.beritaku.core.di.repositoryModule
@@ -22,6 +23,7 @@ class NewsApp: Application() {
                     databaseModule,
                     networkModule,
                     repositoryModule,
+                    authRepositoryModule,
                     useCaseModule,
                     viewModelModule
                 )

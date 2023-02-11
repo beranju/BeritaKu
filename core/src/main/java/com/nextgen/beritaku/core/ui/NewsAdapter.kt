@@ -66,8 +66,6 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                     .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
                     .centerCrop()
                     .into(ivThumbnail)
-
-
             }
         }
 
@@ -76,7 +74,6 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                 onClick?.invoke(listNews[adapterPosition])
             }
         }
-
     }
 
     inner class ViewHolderHeadlines(private val binding: ItemHeadlineNewsBinding): ViewHolder(binding.root) {
@@ -99,6 +96,5 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
                 onClick?.invoke(listNews[adapterPosition])
             }
         }
-
     }
 }

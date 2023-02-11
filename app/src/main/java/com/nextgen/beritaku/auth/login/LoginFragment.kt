@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentLoginBinding
+import com.nextgen.beritaku.utils.UiState
 import com.nextgen.beritaku.utils.isEmailValid
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -21,7 +26,24 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener(this)
+        binding.tvSignUp.setOnClickListener(this)
 
+        viewModel.uiState
+            .flowWithLifecycle(lifecycle)
+            .onEach { state -> handleStateChanges(state) }
+            .launchIn(lifecycleScope)
+
+    }
+
+    private fun handleStateChanges(state: UiState<Unit>) {
+        when(state){
+            is UiState.Loading -> {}
+            is UiState.Error -> {}
+            is UiState.Success -> {
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
+                findNavController().navigate(action)
+            }
+        }
     }
 
     override fun onCreateView(
@@ -47,9 +69,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 val email = binding.etEmail.text.toString().trim()
                 val password = binding.etPassword.text.toString().trim()
                 if (validate(email, password)){
-                    val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
-                    findNavController().navigate(action)
+                    viewModel.loginWithEmail(email, password)
                 }
+            }
+            binding.tvSignUp ->{
+                val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+                findNavController().navigate(action)
             }
         }
 

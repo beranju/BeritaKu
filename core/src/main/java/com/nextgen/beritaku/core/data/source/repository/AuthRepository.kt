@@ -7,7 +7,7 @@ import com.nextgen.beritaku.core.domain.repository.IAuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class AuthRepository(private val auth: FirebaseAuth = FirebaseAuth.getInstance()): IAuthRepository {
+class AuthRepository( private val auth: FirebaseAuth = FirebaseAuth.getInstance()): IAuthRepository {
     override fun loginWithEmail(email: String, password: String): Flow<Resource<Unit>> {
         val dataFlow = MutableStateFlow<Resource<Unit>>(Resource.Loading())
         try {

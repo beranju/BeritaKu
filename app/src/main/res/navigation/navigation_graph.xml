@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_home_navigation_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_home_navigation_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/explore_navigation"
@@ -29,11 +32,11 @@
     <fragment
         android:id="@+id/account_navigation"
         android:name="com.nextgen.beritaku.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Your Profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_account_navigation_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_account_navigation_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -87,5 +90,8 @@
         <action
             android:id="@+id/action_loginFragment_to_home_navigation"
             app:destination="@id/home_navigation" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
 </navigation>
