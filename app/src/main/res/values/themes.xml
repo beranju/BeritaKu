@@ -47,6 +47,15 @@
     <style name="Button"/>
     <style name="Button.rectangle_8_primary">
         <item name="cornerSize">8dp</item>
+        <item name="fontFamily">@font/patrick_hand</item>
         <item name="backgroundColor">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TextView"/>
+    <style name="TextView.Title">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#181823</item>
     </style>
 </resources>

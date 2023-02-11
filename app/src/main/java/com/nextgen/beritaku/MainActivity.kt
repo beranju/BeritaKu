@@ -1,6 +1,7 @@
 package com.nextgen.beritaku
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -60,8 +61,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.favorite_menu -> {
-                findNavController(R.id.nav_host_fragment).popBackStack()
-                startActivity(Intent(this, Class.forName("com.nextgen.beritaku.favorite.FavoriteActivity")))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://favorite"))
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

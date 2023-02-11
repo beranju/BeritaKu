@@ -1,13 +1,20 @@
 package com.nextgen.beritaku.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentLoginBinding
 import com.nextgen.beritaku.utils.UiState
@@ -38,7 +45,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private fun handleStateChanges(state: UiState<Unit>) {
         when(state){
             is UiState.Loading -> {}
-            is UiState.Error -> {}
+            is UiState.Error -> {
+                Toast.makeText(requireContext(), state.message.toString(), Toast.LENGTH_SHORT).show()
+            }
             is UiState.Success -> {
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
                 findNavController().navigate(action)

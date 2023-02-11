@@ -24,7 +24,6 @@ class SignupFragment : Fragment(), View.OnClickListener {
 
     private var _binding : FragmentSignupBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: SignUpViewModel by viewModel()
 
 
@@ -53,7 +52,6 @@ class SignupFragment : Fragment(), View.OnClickListener {
 //                    btnSignup.apply {
 //                        isEnabled = false
 //                    }
-//                    tvOnTapSignUp.isEnabled = false
 //                    tvLogin.isEnabled = false
 //                }
             }

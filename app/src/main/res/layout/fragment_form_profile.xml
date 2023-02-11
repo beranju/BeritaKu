@@ -20,6 +20,16 @@
         app:shapeAppearanceOverlay="@style/rounded_corner"
         />
 
+    <ImageView
+        android:id="@+id/iv_selectPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_baseline_insert_photo_24"
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+        app:layout_constraintEnd_toEndOf="@+id/photoProfile" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
@@ -38,32 +48,13 @@
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-        <EditText
-            android:id="@+id/edt_alamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/alamat"
-            android:inputType="textPersonName"
-            android:maxLines="1" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:text="@string/simpan"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        android:text="@string/simpan"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         tools:layout_editor_absoluteX="24dp" />
 
 
