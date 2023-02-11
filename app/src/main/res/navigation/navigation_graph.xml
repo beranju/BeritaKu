@@ -101,5 +101,9 @@
         android:id="@+id/formProfileFragment"
         android:name="com.nextgen.beritaku.profile.FormProfileFragment"
         android:label="fragment_form_profile"
-        tools:layout="@layout/fragment_form_profile" />
+        tools:layout="@layout/fragment_form_profile" >
+        <action
+            android:id="@+id/action_formProfileFragment_to_account_navigation"
+            app:destination="@id/account_navigation" />
+    </fragment>
 </navigation>

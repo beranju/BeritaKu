@@ -1,6 +1,8 @@
 package com.nextgen.beritaku.core.data.source.repository
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.repository.IAuthRepository
@@ -49,5 +51,30 @@ class AuthRepository( private val auth: FirebaseAuth = FirebaseAuth.getInstance(
         }
         return dataFlow
     }
+
+    override fun updateUserData(name: String, uri: Uri): Flow<Resource<Unit>> {
+        val dataFlow = MutableStateFlow<Resource<Unit>>(Resource.Loading())
+        try {
+            val currentUser = getUser()
+            currentUser?.let { user->
+                val updateRequest = userProfileChangeRequest {
+                    displayName = name
+                    photoUri = uri
+                }
+                user.updateProfile(updateRequest)
+                    .addOnSuccessListener {
+                        dataFlow.value = Resource.Success(Unit)
+                    }
+                    .addOnFailureListener {
+                        dataFlow.value = Resource.Error(it.message.toString())
+                    }
+            }
+        }catch (e: Exception){
+            dataFlow.value = Resource.Error(e.message.toString())
+        }
+        return dataFlow
+    }
+
+    override fun getUser(): FirebaseUser? = auth.currentUser
 
 }
