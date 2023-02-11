@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/thumbnail_news"
@@ -34,33 +34,34 @@
 
         <TextView
             android:id="@+id/tv_readmore"
+            style="@style/TextView.patrick_hand_18_3F4E4F"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:text="Read more"
+            android:text="@string/read_more"
             android:textColor="?attr/colorPrimary"
-            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_title_news"
+            style="@style/TextView.patrick_hand_24_181823"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:maxLength="80"
             android:maxLines="3"
             tools:text="lore kldfdjg  fjghs gj sfjgh  fjhgshdgsfjghfsdgh fjdgh g dfjhfdg dhjgdgdh fgjdshgghjgkd jgkdfgjdkj jgkdfgfkdjfdgkj"
-            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_readmore"
             app:layout_constraintEnd_toEndOf="@+id/tv_readmore"
             app:layout_constraintStart_toStartOf="@+id/tv_readmore" />
 
         <TextView
             android:id="@+id/tv_label"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -73,6 +74,7 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/TextView.patrick_hand_24_181823"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -85,10 +87,11 @@
 
         <TextView
             android:id="@+id/tv_view_more"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="more"
+            android:text="@string/more"
             android:textColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"

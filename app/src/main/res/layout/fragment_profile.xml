@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/tv_username"
-        style="@style/TextView.Title"
+        style="@style/TextView.patrick_hand_24_181823"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:text="Edit"
+        android:text="@string/btn_edit"
         app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/siv_profile" />

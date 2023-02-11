@@ -14,10 +14,10 @@
             android:layout_gravity="fill_horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                style="@style/TextView.patrick_hand_28_181823"
                 android:layout_height="wrap_content"
-                android:text="Discover"
-                android:textSize="36sp"
+                android:text="@string/discover"
                 android:layout_weight="2"
                 android:layout_marginHorizontal="16dp"
                 android:textStyle="bold"/>
@@ -30,9 +30,10 @@
         </LinearLayout>
 
             <TextView
+                style="@style/TextView.patrick_hand_18_3F4E4F"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="News from all over the world"
+                android:text="@string/news_from_all_over_the_world"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="16dp"
                 />
@@ -46,6 +47,7 @@
                 android:background="@android:color/transparent"
                 android:scrollbars="horizontal"
                 app:tabGravity="fill"
+                app:tabTextAppearance="@style/Tab"
                 app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="?attr/colorPrimary"

@@ -41,6 +41,7 @@
 
         <TextView
             android:id="@+id/label"
+            style="@style/TextView.patrick_hand_12_3F4E4F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -50,11 +51,11 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/TextView.patrick_hand_28_181823"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="100"
             android:maxLines="3"
-            android:textSize="24sp"
             tools:text="lkdfjg lgkajg lkdfjg lkfdjg aak,fjg" />
 
     </LinearLayout>
@@ -73,6 +74,7 @@
 
         <TextView
             android:id="@+id/author"
+            style="@style/TextView.patrick_hand_12_3F4E4F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -80,13 +82,13 @@
             android:background="@drawable/bg_badge_pill"
             android:maxLines="40"
             android:paddingHorizontal="8dp"
-            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="beranju" />
 
         <TextView
             android:id="@+id/date"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -97,6 +99,7 @@
 
         <TextView
             android:id="@+id/description"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -107,6 +110,7 @@
 
         <TextView
             android:id="@+id/content"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -115,6 +119,7 @@
             tools:text="fkgjaljg aflkgjfalgj afglkjdf gdlfjg dflgjdlkgj dflkgj dlfgj dflgjdfjgdjlfgdjgdjfgldjgjdjgdlgd fkldgjdalkg dg" />
 
         <TextView
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:id="@+id/readmore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

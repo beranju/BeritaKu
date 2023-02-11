@@ -18,12 +18,12 @@
 
     <TextView
         android:id="@+id/tv_titlenews"
+        style="@style/TextView.patrick_hand_18_181823"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:maxLength="70"
-        android:textSize="18sp"
         android:maxLines="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_thumbnail"
@@ -32,12 +32,12 @@
 
     <TextView
         android:id="@+id/author"
+        style="@style/TextView.patrick_hand_12_3F4E4F"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:maxLines="1"
-        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_thumbnail"
         app:layout_constraintEnd_toStartOf="@+id/time"
         app:layout_constraintStart_toEndOf="@id/iv_thumbnail"
@@ -45,11 +45,11 @@
 
     <TextView
         android:id="@+id/time"
+        style="@style/TextView.patrick_hand_12_3F4E4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/iv_thumbnail"
         app:layout_constraintEnd_toEndOf="@id/tv_titlenews"
-        android:textSize="10sp"
         tools:text="1 day ago" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

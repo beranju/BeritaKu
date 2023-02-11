@@ -33,6 +33,7 @@
 
         <EditText
             android:id="@+id/et_email"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -55,6 +56,7 @@
 
         <EditText
             android:id="@+id/et_password"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -65,22 +67,23 @@
 
     <Button
         android:id="@+id/btn_login"
+        style="@style/Button.rectangle_8_primary"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape_ractangle_8_primary"
-        android:text="Login"
-        android:textAllCaps="false"
+        android:text="@string/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/TextView.patrick_hand_14_3F4E4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Don't Have an account ?"
+        android:text="@string/don_t_have_an_account"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
@@ -88,6 +91,7 @@
 
     <TextView
         android:id="@+id/tv_signUp"
+        style="@style/TextView.patrick_hand_14_3F4E4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
