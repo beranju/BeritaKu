@@ -2,7 +2,7 @@ package com.nextgen.beritaku.core.di
 
 import androidx.room.Room
 import com.nextgen.beritaku.core.BuildConfig
-import com.nextgen.beritaku.core.data.source.NewsRepository
+import com.nextgen.beritaku.core.data.source.repository.NewsRepository
 import com.nextgen.beritaku.core.data.source.local.LocalDataSource
 import com.nextgen.beritaku.core.data.source.local.room.NewsDatabase
 import com.nextgen.beritaku.core.data.source.remote.RemoteDataSource

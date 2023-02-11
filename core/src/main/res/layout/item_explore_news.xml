@@ -37,6 +37,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:maxLines="1"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_thumbnail"
         app:layout_constraintEnd_toStartOf="@+id/time"
         app:layout_constraintStart_toEndOf="@id/iv_thumbnail"
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/iv_thumbnail"
         app:layout_constraintEnd_toEndOf="@id/tv_titlenews"
+        android:textSize="10sp"
         tools:text="1 day ago" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

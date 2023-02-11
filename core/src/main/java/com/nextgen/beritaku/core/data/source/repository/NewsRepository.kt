@@ -1,7 +1,8 @@
-package com.nextgen.beritaku.core.data.source
+package com.nextgen.beritaku.core.data.source.repository
 
+import com.nextgen.beritaku.core.data.source.NetworkBoundResources
+import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.data.source.local.LocalDataSource
-import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.data.source.remote.RemoteDataSource
 import com.nextgen.beritaku.core.data.source.remote.network.ApiResponse
 import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem

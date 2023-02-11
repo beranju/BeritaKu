@@ -15,4 +15,15 @@
     <string name="tab_text_5">Sport</string>
     <string name="tab_text_6">Technology</string>
     <string name="title_favorite">Favorite</string>
+    <string name="name">Nama</string>
+    <string name="alamat">Alamat</string>
+    <string name="simpan">Simpan</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="rePassword">Retype Password</string>
+    <string name="error_et_name">Nama tidak boleh kosong</string>
+    <string name="error_et_email">Email tidak boleh kosong</string>
+    <string name="error_et_password">Password tidak boleh kosong</string>
+    <string name="error_pass_not_match">Password tidak cocok</string>
+    <string name="error_email_not_valid">Email tidak valid</string>
 </resources>

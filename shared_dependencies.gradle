@@ -24,4 +24,6 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
 
     implementation "org.ocpsoft.prettytime:prettytime:5.0.6.Final"
+
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
 }

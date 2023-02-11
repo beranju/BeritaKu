@@ -3,7 +3,6 @@ package com.nextgen.beritaku.explore.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
-import com.nextgen.beritaku.UiState
-import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentSearchBinding
 import com.nextgen.beritaku.detail.DetailFragment
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,15 +45,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun render(it: UiState) {
-        TODO("Not yet implemented")
-    }
-
-    private fun isLoading(state: Boolean) {
-        binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
-        binding.noData.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {
@@ -97,9 +84,14 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.searchField.text = null
     }
 
     override fun onDestroyView() {
