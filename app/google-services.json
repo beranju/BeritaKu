@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "906070765157",
+    "project_id": "beritaku-ef9c8",
+    "storage_bucket": "beritaku-ef9c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906070765157:android:65ba37a12f1b229567a08c",
+        "android_client_info": {
+          "package_name": "com.nextgen.beritaku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906070765157-fneuqtjq0joe6cef7sbf4mdiqqgufjm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTF0QcJFYeEZVy-WuXLSgALM7VpQr1GhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906070765157-fneuqtjq0joe6cef7sbf4mdiqqgufjm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

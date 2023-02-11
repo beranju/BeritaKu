@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
 }
 
 apply from: '../shared_dependencies.gradle'
@@ -47,5 +48,7 @@ dependencies {
     implementation project(":core")
     implementation fileTree(dir:'libs',include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "androidx.core:core-splashscreen:1.0.0"
 
 }

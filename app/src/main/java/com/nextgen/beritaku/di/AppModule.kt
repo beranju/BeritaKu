@@ -1,5 +1,7 @@
 package com.nextgen.beritaku.di
 
+import com.nextgen.beritaku.auth.login.LoginViewModel
+import com.nextgen.beritaku.auth.signup.SignUpViewModel
 import com.nextgen.beritaku.core.domain.usecase.NewsInteractor
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 import com.nextgen.beritaku.detail.DetailViewModel
@@ -18,4 +20,6 @@ val viewModelModule = module {
     viewModel { ExploreViewModel(get()) }
     viewModel { DetailViewModel(get()) }
     viewModel { SearchViewModel(get()) }
+    viewModel { SignUpViewModel() }
+    viewModel { LoginViewModel() }
 }

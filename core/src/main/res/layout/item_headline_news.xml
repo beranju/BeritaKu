@@ -25,7 +25,7 @@
         android:maxLength="50"
         android:maxLines="2"
         tools:text="loreodklfd ggkljlg  fkdlvj vkdljvdkv  dfvkljdvjdvkd vdjlkvjd vdkjlvdjvjdfgjfdkl g dfkj "
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/thumbnail_headline"
         app:layout_constraintStart_toStartOf="@+id/thumbnail_headline"
         app:layout_constraintTop_toBottomOf="@+id/thumbnail_headline" />
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:text="1 hours ago"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/title_headline"
         app:layout_constraintStart_toStartOf="@+id/title_headline"
         app:layout_constraintTop_toBottomOf="@+id/title_headline" />
@@ -46,7 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="beranju"
-        android:textSize="16sp"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/time_headline"
         app:layout_constraintStart_toStartOf="@+id/time_headline"
         app:layout_constraintTop_toBottomOf="@+id/time_headline" />

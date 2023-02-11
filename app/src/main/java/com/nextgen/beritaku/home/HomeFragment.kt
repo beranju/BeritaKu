@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsModel
@@ -35,6 +36,7 @@ class HomeFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         fetchData()
 
