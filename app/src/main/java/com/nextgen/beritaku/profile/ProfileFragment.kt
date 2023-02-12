@@ -49,6 +49,7 @@ class ProfileFragment : Fragment() {
                 }
                 OtherMenu.Logout.string -> {
                     auth.signOut()
+                    findNavController().popBackStack()
                     val action = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()
                     findNavController().navigate(action)
                 }

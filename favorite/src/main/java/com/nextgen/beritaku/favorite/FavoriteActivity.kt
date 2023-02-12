@@ -25,6 +25,8 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        supportActionBar?.title = getString(R.string.favorite_activity_title)
+
         loadKoinModules(favoriteModule)
         setupRecyclerView()
     }
