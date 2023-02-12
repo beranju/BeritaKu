@@ -2,6 +2,7 @@ package com.nextgen.beritaku.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,24 +36,24 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding.btnLogin.setOnClickListener(this)
         binding.tvSignUp.setOnClickListener(this)
 
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle)
-            .onEach { state -> handleStateChanges(state) }
-            .launchIn(lifecycleScope)
-
-    }
-
-    private fun handleStateChanges(state: UiState<Unit>) {
-        when(state){
-            is UiState.Loading -> {}
-            is UiState.Error -> {
-                Toast.makeText(requireContext(), state.message.toString(), Toast.LENGTH_SHORT).show()
-            }
-            is UiState.Success -> {
-                val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
-                findNavController().navigate(action)
+        viewModel.uiState.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UiState.Loading -> {
+                    Log.d(TAG, "Loading...")
+                    binding.apply {
+                        btnLogin.isEnabled = false
+                    }
+                }
+                is UiState.Error -> {
+                    Log.e(TAG, state.message)
+                }
+                is UiState.Success -> {
+                    val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
+                    findNavController().navigate(action)
+                }
             }
         }
+
     }
 
     override fun onCreateView(

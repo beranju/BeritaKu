@@ -118,17 +118,25 @@
             app:layout_constraintTop_toBottomOf="@+id/description"
             tools:text="fkgjaljg aflkgjfalgj afglkjdf gdlfjg dflgjdlkgj dflkgj dlfgj dflgjdfjgdjlfgdjgdjfgldjgjdjgdlgd fkldgjdalkg dg" />
 
-        <TextView
-            style="@style/TextView.patrick_hand_14_3F4E4F"
+        <Button
             android:id="@+id/readmore"
+            style="@style/Button.rectangle_8_primary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Read more"
-            android:textColor="?attr/colorPrimary"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/read_more"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_share_24"
+            app:layout_constraintBottom_toBottomOf="@+id/readmore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/readmore" />
 
         <ImageView
             android:id="@+id/favorite"

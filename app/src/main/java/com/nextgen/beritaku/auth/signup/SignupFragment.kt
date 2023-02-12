@@ -1,6 +1,7 @@
 package com.nextgen.beritaku.auth.signup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,33 +34,28 @@ class SignupFragment : Fragment(), View.OnClickListener {
 
         binding.btnSignup.setOnClickListener(this)
         binding.tvLogin.setOnClickListener(this)
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle)
-            .onEach { state -> handleStateChange(state) }
-            .launchIn(lifecycleScope)
-
-
-    }
-
-    private fun handleStateChange(state: UiState<Unit>) {
-        when(state){
-            is UiState.Success -> {
-                val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
-                findNavController().navigate(action)
-            }
-            is UiState.Loading -> {
-//                binding.apply {
-//                    btnSignup.apply {
-//                        isEnabled = false
-//                    }
-//                    tvLogin.isEnabled = false
-//                }
-            }
-            is UiState.Error -> {
-                Toast.makeText(requireContext(), state.message.toString(), Toast.LENGTH_SHORT).show()
+        viewModel.uiState.observe(viewLifecycleOwner){state->
+            when(state){
+                is UiState.Loading -> {
+                    Log.d(TAG, "Loading...")
+                    binding.apply {
+                        btnSignup.isEnabled = false
+                        tvLogin.isEnabled = false
+                    }
+                }
+                is UiState.Error -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Success -> {
+                    val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                }
             }
         }
+
+
     }
+
 
     override fun onClick(view: View?) {
         when(view){

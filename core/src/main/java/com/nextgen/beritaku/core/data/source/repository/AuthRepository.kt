@@ -2,6 +2,9 @@ package com.nextgen.beritaku.core.data.source.repository
 
 import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.nextgen.beritaku.core.data.source.Resource
@@ -43,7 +46,15 @@ class AuthRepository( private val auth: FirebaseAuth = FirebaseAuth.getInstance(
                         }
                         dataFlow.value = Resource.Success(Unit)
                     }else{
-                        dataFlow.value = Resource.Error(task.exception?.message.toString())
+                        try {
+                            task.exception
+                        }catch (invalidEmail: FirebaseAuthInvalidCredentialsException){
+                            dataFlow.value = Resource.Error("onComplete: Malformed email")
+                        }catch (existsEmail: FirebaseAuthUserCollisionException){
+                            dataFlow.value = Resource.Error("onComplete: exists email")
+                        }catch (e: Exception){
+                            dataFlow.value = Resource.Error("onComplete: ${e.message}")
+                        }
                     }
                 }
         }catch (e: Exception){

@@ -1,5 +1,7 @@
 package com.nextgen.beritaku.auth.signup
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nextgen.beritaku.core.data.source.Resource
@@ -13,8 +15,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val repository: IAuthRepository = AuthRepository()): ViewModel()  {
-    private var _uiState = MutableStateFlow<UiState<Unit>>(UiState.Loading)
-    val uiState: StateFlow<UiState<Unit>> get() = _uiState
+    private var _uiState = MutableLiveData<UiState<Unit>>()
+    val uiState: LiveData<UiState<Unit>> get() = _uiState
 
     fun registerWithEmail(email: String, password: String, name: String){
         viewModelScope.launch {
