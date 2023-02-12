@@ -19,34 +19,34 @@
 
     <TextView
         android:id="@+id/title_headline"
+        style="@style/TextView.patrick_hand_18_181823"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:maxLength="50"
         android:maxLines="2"
         tools:text="loreodklfd ggkljlg  fkdlvj vkdljvdkv  dfvkljdvjdvkd vdjlkvjd vdkjlvdjvjdfgjfdkl g dfkj "
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/thumbnail_headline"
         app:layout_constraintStart_toStartOf="@+id/thumbnail_headline"
         app:layout_constraintTop_toBottomOf="@+id/thumbnail_headline" />
 
     <TextView
         android:id="@+id/time_headline"
+        style="@style/TextView.patrick_hand_12_3F4E4F"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:text="1 hours ago"
-        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/title_headline"
         app:layout_constraintStart_toStartOf="@+id/title_headline"
         app:layout_constraintTop_toBottomOf="@+id/title_headline" />
 
     <TextView
         android:id="@+id/author"
+        style="@style/TextView.patrick_hand_12_3F4E4F"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="beranju"
-        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="@+id/time_headline"
         app:layout_constraintStart_toStartOf="@+id/time_headline"
         app:layout_constraintTop_toBottomOf="@+id/time_headline" />

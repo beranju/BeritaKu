@@ -1,12 +1,15 @@
 package com.nextgen.beritaku.core.di
 
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.core.BuildConfig
 import com.nextgen.beritaku.core.data.source.repository.NewsRepository
 import com.nextgen.beritaku.core.data.source.local.LocalDataSource
 import com.nextgen.beritaku.core.data.source.local.room.NewsDatabase
 import com.nextgen.beritaku.core.data.source.remote.RemoteDataSource
 import com.nextgen.beritaku.core.data.source.remote.network.ApiService
+import com.nextgen.beritaku.core.data.source.repository.AuthRepository
+import com.nextgen.beritaku.core.domain.repository.IAuthRepository
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import com.nextgen.beritaku.core.utils.AppExecutors
 import okhttp3.OkHttpClient
@@ -46,6 +49,10 @@ val networkModule = module {
             .build()
         retrofit.create(ApiService::class.java)
     }
+}
+
+val authRepositoryModule = module {
+    single<IAuthRepository> { AuthRepository(FirebaseAuth.getInstance())  }
 }
 
 val repositoryModule = module {

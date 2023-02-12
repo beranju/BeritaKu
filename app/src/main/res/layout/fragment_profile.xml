@@ -6,44 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".profile.ProfileFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:elevation="4dp"
-        app:cardCornerRadius="8dp"
-        android:padding="8dp"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/siv_profile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="32dp"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:shapeAppearanceOverlay="@style/rounded_corner" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        style="@style/TextView.patrick_hand_24_181823"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/siv_profile"
+        app:layout_constraintTop_toTopOf="@+id/siv_profile"
+        app:layout_constraintVertical_bias="0.23000002"
+        tools:text="Username" />
+
+    <Button
+        android:id="@+id/btn_edit"
+        style="@style/Button.rectangle_8_primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/btn_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/siv_profile" />
+
+    <ListView
+        android:id="@+id/lv_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:layout_marginHorizontal="12dp"
-                android:src="@drawable/ic_load_data"/>
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginVertical="8dp"
-                android:layout_marginHorizontal="12dp"
-                android:text="Kamu belum punya profile :)"/>
-            <Button
-                android:id="@+id/btn_signup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:text="Atur Sekarang"/>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit"
+        tools:listitem="@android:layout/simple_list_item_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

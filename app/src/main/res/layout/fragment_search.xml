@@ -6,25 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".explore.search.SearchFragment">
 
-    <EditText
-        android:id="@+id/search_field"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:textColorHint="?attr/colorOnSecondary"
-        android:textColor="?attr/colorOnSecondary"
-        android:background="@drawable/bg_search_rounded_colored"
-        android:drawableStart="@drawable/ic_search_24"
-        android:drawablePadding="8dp"
-        android:paddingHorizontal="8dp"
-        android:hint="explore news"
-        android:singleLine="true"
-        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/Shape.Rounded"
+        app:startIconDrawable="@drawable/ic_search_24">
+
+        <EditText
+            android:id="@+id/search_field"
+            style="@style/TextView.patrick_hand_18_3F4E4F"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:drawablePadding="8dp"
+            android:hint="explore news"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:singleLine="true"
+            android:textColor="?attr/colorOnSecondary"
+            android:textColorHint="?attr/colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_item_search"
@@ -35,30 +46,32 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/search_field"
-        app:layout_constraintStart_toStartOf="@+id/search_field"
-        app:layout_constraintTop_toBottomOf="@+id/search_field"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/no_data"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_item_search">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1">
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_no_data"/>
+            android:src="@drawable/ic_no_data" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nothing found"/>
+            android:text="nothing found" />
     </LinearLayout>
 
     <LinearLayout

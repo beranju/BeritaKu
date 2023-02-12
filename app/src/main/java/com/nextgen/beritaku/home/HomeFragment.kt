@@ -23,6 +23,7 @@ class HomeFragment  : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
     }
@@ -36,6 +37,13 @@ class HomeFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser == null){
+            val action = HomeFragmentDirections.actionHomeNavigationToLoginFragment()
+            findNavController().navigate(action)
+        }
 
         setupRecyclerView()
         fetchData()

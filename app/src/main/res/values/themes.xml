@@ -47,6 +47,42 @@
     <style name="Button"/>
     <style name="Button.rectangle_8_primary">
         <item name="cornerSize">8dp</item>
+        <item name="fontFamily">@font/patrick_hand</item>
         <item name="backgroundColor">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TextView"/>
+    <style name="TextView.patrick_hand_28_181823">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">#181823</item>
+    </style>
+    <style name="TextView.patrick_hand_24_181823">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#181823</item>
+    </style>
+    <style name="TextView.patrick_hand_20_181823">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#181823</item>
+    </style>
+    <style name="TextView.patrick_hand_18_3F4E4F">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#3F4E4F</item>
+    </style>
+    <style name="TextView.patrick_hand_14_3F4E4F">
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#3F4E4F</item>
+    </style>
+
+    <style name="Tab">
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/patrick_hand</item>
+        <item name="android:textColor">#181823</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

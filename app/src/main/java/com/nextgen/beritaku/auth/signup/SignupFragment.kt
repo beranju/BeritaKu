@@ -1,13 +1,16 @@
 package com.nextgen.beritaku.auth.signup
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentSignupBinding
 import com.nextgen.beritaku.utils.UiState
@@ -16,12 +19,12 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.Duration
 
 class SignupFragment : Fragment(), View.OnClickListener {
 
     private var _binding : FragmentSignupBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: SignUpViewModel by viewModel()
 
 
@@ -31,24 +34,28 @@ class SignupFragment : Fragment(), View.OnClickListener {
 
         binding.btnSignup.setOnClickListener(this)
         binding.tvLogin.setOnClickListener(this)
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle)
-            .onEach { state -> handleStateChange(state) }
-            .launchIn(lifecycleScope)
-
-
-    }
-
-    private fun handleStateChange(state: UiState<Unit>) {
-        when(state){
-            is UiState.Success -> {
-                val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
-                findNavController().navigate(action)
+        viewModel.uiState.observe(viewLifecycleOwner){state->
+            when(state){
+                is UiState.Loading -> {
+                    Log.d(TAG, "Loading...")
+                    binding.apply {
+                        btnSignup.isEnabled = false
+                        tvLogin.isEnabled = false
+                    }
+                }
+                is UiState.Error -> {
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Success -> {
+                    val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                }
             }
-            is UiState.Loading -> {}
-            is UiState.Error -> {}
         }
+
+
     }
+
 
     override fun onClick(view: View?) {
         when(view){

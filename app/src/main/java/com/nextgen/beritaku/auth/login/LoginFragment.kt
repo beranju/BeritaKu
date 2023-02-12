@@ -1,14 +1,27 @@
 package com.nextgen.beritaku.auth.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentLoginBinding
+import com.nextgen.beritaku.utils.UiState
 import com.nextgen.beritaku.utils.isEmailValid
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -21,6 +34,25 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener(this)
+        binding.tvSignUp.setOnClickListener(this)
+
+        viewModel.uiState.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UiState.Loading -> {
+                    Log.d(TAG, "Loading...")
+                    binding.apply {
+                        btnLogin.isEnabled = false
+                    }
+                }
+                is UiState.Error -> {
+                    Log.e(TAG, state.message)
+                }
+                is UiState.Success -> {
+                    val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
+                    findNavController().navigate(action)
+                }
+            }
+        }
 
     }
 
@@ -47,9 +79,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 val email = binding.etEmail.text.toString().trim()
                 val password = binding.etPassword.text.toString().trim()
                 if (validate(email, password)){
-                    val action = LoginFragmentDirections.actionLoginFragmentToHomeNavigation()
-                    findNavController().navigate(action)
+                    viewModel.loginWithEmail(email, password)
                 }
+            }
+            binding.tvSignUp ->{
+                val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
+                findNavController().navigate(action)
             }
         }
 

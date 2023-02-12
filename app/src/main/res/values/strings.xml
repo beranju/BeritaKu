@@ -26,4 +26,13 @@
     <string name="error_et_password">Password tidak boleh kosong</string>
     <string name="error_pass_not_match">Password tidak cocok</string>
     <string name="error_email_not_valid">Email tidak valid</string>
+    <string name="btn_edit">Edit</string>
+    <string name="read_more">Read more</string>
+    <string name="more">more</string>
+    <string name="btn_login">Login</string>
+    <string name="don_t_have_an_account">Don\'t Have an account ?</string>
+    <string name="have_an_account">Have an account ?</string>
+    <string name="login">Login</string>
+    <string name="discover">Discover</string>
+    <string name="news_from_all_over_the_world">News from all over the world</string>
 </resources>

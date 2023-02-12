@@ -1,60 +1,106 @@
 package com.nextgen.beritaku.profile
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.nextgen.beritaku.R
+import com.nextgen.beritaku.databinding.FragmentFormProfileBinding
+import com.nextgen.beritaku.utils.UiState
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FormProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FormProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class FormProfileFragment : Fragment(), View.OnClickListener {
+    private var _binding: FragmentFormProfileBinding? = null
+    private val binding get() = _binding!!
+    private var uri: Uri? = null
+    private val viewModel: ProfileViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private val intentGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
+            if (result.resultCode == Activity.RESULT_OK){
+                uri = result.data?.data
+                Glide.with(requireActivity()).load(uri).into(binding.photoProfile)
+            }
+
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val emptyImage = AppCompatResources.getDrawable(requireActivity(), R.drawable.undraw_male_avatar_g98d)
+        viewModel.getUser()?.let { user->
+            uri = user.photoUrl
+            Glide.with(requireContext())
+                .load(uri ?: emptyImage)
+                .into(binding.photoProfile)
+            binding.edtName.setText(user.displayName)
+        }
+        binding.ivSelectPhoto.setOnClickListener(this)
+        binding.btnUpdate.setOnClickListener(this)
+
+        viewModel.uiState
+            .flowWithLifecycle(lifecycle)
+            .onEach { state -> handleStateChange(state) }
+            .launchIn(lifecycleScope)
+    }
+
+    private fun handleStateChange(state: UiState<Unit>) {
+        when(state){
+            is UiState.Loading -> {}
+            is UiState.Error -> Log.e("FormProfileFragment", state.message)
+            is UiState.Success -> {
+                val go = FormProfileFragmentDirections.actionFormProfileFragmentToAccountNavigation()
+                findNavController().navigate(go)
+            }
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_form_profile, container, false)
+    ): View {
+        _binding = FragmentFormProfileBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FormProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FormProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        const val TAG = "FormProfileFragment"
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.ivSelectPhoto -> {
+                Intent(Intent.ACTION_PICK).apply {
+                    type = "image/*"
+                }.also { intentGallery.launch(Intent.createChooser(it, null)) }
             }
+            binding.btnUpdate -> {
+                val name = binding.edtName.text.toString().trim()
+                updateUserProfile(name, uri!!)
+            }
+        }
+    }
+
+    private fun updateUserProfile(name: String, uri: Uri) {
+        viewModel.updateDataUser(name, uri)
     }
 }

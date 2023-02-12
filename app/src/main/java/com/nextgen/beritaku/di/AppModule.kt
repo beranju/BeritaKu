@@ -8,6 +8,7 @@ import com.nextgen.beritaku.detail.DetailViewModel
 import com.nextgen.beritaku.explore.ExploreViewModel
 import com.nextgen.beritaku.explore.search.SearchViewModel
 import com.nextgen.beritaku.home.HomeViewModel
+import com.nextgen.beritaku.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -22,4 +23,5 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get()) }
     viewModel { SignUpViewModel() }
     viewModel { LoginViewModel() }
+    viewModel { ProfileViewModel() }
 }

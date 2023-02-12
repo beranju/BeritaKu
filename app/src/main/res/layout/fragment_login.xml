@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/ic_auth_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -33,6 +33,7 @@
 
         <EditText
             android:id="@+id/et_email"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -55,6 +56,7 @@
 
         <EditText
             android:id="@+id/et_password"
+            style="@style/TextView.patrick_hand_14_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -65,22 +67,23 @@
 
     <Button
         android:id="@+id/btn_login"
+        style="@style/Button.rectangle_8_primary"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/shape_ractangle_8_primary"
-        android:text="Login"
-        android:textAllCaps="false"
+        android:text="@string/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/TextView.patrick_hand_14_3F4E4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Don't Have an account ?"
+        android:text="@string/don_t_have_an_account"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
@@ -88,6 +91,7 @@
 
     <TextView
         android:id="@+id/tv_signUp"
+        style="@style/TextView.patrick_hand_14_3F4E4F"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -96,31 +100,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="or login with"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:drawableStart="@drawable/ic_google_icon"
-        android:drawablePadding="8dp"
-        android:text="Google"
-        android:padding="4dp"
-        android:textSize="16dp"
-        android:background="@drawable/shape_ractangle_8_bbbbbb"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
