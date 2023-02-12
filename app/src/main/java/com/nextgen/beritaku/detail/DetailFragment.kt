@@ -1,5 +1,6 @@
 package com.nextgen.beritaku.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,14 +20,16 @@ class DetailFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModel()
+    private var dataNews: NewsModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val data =
+        dataNews =
             activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
-        setupView(data)
+        setupView(dataNews)
 
         binding.backButton.setOnClickListener(this)
+        binding.ivShare.setOnClickListener(this)
 
     }
 
@@ -73,6 +76,16 @@ class DetailFragment : Fragment(), View.OnClickListener {
         when(view){
             binding.backButton -> {
                 findNavController().navigateUp()
+            }
+            binding.ivShare -> {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_SUBJECT, "Baca berita menarik dari ${dataNews?.source?.name}")
+                    putExtra(Intent.EXTRA_TEXT, dataNews?.title + "\nKlik link dibawah untuk selengkapnya ${dataNews?.url}")
+                    type = "text/plain"
+                }
+                val shareNews = Intent.createChooser(intent, null)
+                startActivity(shareNews)
             }
         }
     }
