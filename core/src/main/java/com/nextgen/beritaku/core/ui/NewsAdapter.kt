@@ -13,13 +13,8 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
 
 private const val HEADLINE = 1
-private const val EXPLORE = 2
 
-class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
-
-    public companion object{
-        var VIEW_TYPE = 1
-    }
+class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     private var listNews = ArrayList<NewsModel>()
     var onClick: ((NewsModel) -> Unit)? = null
@@ -58,7 +53,7 @@ class NewsAdapter(): RecyclerView.Adapter<ViewHolder>() {
         fun bind(data: NewsModel) {
             binding.apply {
                 tvTitlenews.text = data.title
-                author.text = data.author ?: ""
+                author.text = data.author
                 time.text = DateUtils.dateFormat(data.publishedAt)
                 Glide.with(itemView.context)
                     .asBitmap()

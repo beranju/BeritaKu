@@ -30,6 +30,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_empty_data"
+            android:contentDescription="@string/empty_image_acc_desc"
             app:layout_constraintBottom_toBottomOf="@+id/rv_news_item"
             app:layout_constraintEnd_toEndOf="@+id/rv_news_item"
             app:layout_constraintStart_toStartOf="@+id/rv_news_item"
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="news not found"/>
+            android:text="@string/error_news_not_found"/>
     </LinearLayout>
 
     <LinearLayout
@@ -57,6 +58,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_load_data"
+            android:contentDescription="@string/load_data_image_acc_desc"
             app:layout_constraintBottom_toBottomOf="@+id/rv_news_item"
             app:layout_constraintEnd_toEndOf="@+id/rv_news_item"
             app:layout_constraintStart_toStartOf="@+id/rv_news_item"
@@ -65,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="load data ..."
+            android:text="@string/load_data_status"
             android:textSize="16sp" />
     </LinearLayout>
 

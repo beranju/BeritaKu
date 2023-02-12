@@ -25,6 +25,7 @@
                 android:id="@+id/searchButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/button_search_desc"
                 android:layout_margin="12dp"
                 android:src="@drawable/ic_search_24"/>
         </LinearLayout>
