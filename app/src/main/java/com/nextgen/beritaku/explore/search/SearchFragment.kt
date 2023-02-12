@@ -14,7 +14,6 @@ import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentSearchBinding
 import com.nextgen.beritaku.detail.DetailFragment
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

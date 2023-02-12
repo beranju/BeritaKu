@@ -24,7 +24,7 @@
             style="@style/TextView.patrick_hand_18_3F4E4F"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="explore news"
+            android:hint="@string/search_hint"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="?attr/colorOnSecondary"
@@ -64,12 +64,13 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:contentDescription="@string/load_data_image_acc_desc"
             android:src="@drawable/ic_no_data" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nothing found" />
+            android:text="@string/nothing_found_desc" />
     </LinearLayout>
 
     <LinearLayout
@@ -86,11 +87,12 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:contentDescription="@string/load_data_image_acc_desc"
             android:src="@drawable/ic_load_data"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="load data ..."/>
+            android:text="@string/load_data_desc"/>
     </LinearLayout>
 
 

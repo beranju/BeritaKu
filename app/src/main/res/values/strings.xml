@@ -35,4 +35,19 @@
     <string name="login">Login</string>
     <string name="discover">Discover</string>
     <string name="news_from_all_over_the_world">News from all over the world</string>
+    <string name="back_button_desc">Back Button</string>
+    <string name="action_favorite_desc">Action Favorite</string>
+    <string name="action_share_desc">Action Share</string>
+    <string name="button_search_desc">Button Search</string>
+    <string name="select_photo_desc">Select Photo</string>
+    <string name="authentication_image_acc_desc">Authentication Image Acc</string>
+    <string name="text_signup">Signup</string>
+    <string name="empty_image_acc_desc">Empty Image Acc</string>
+    <string name="error_news_not_found">news not found</string>
+    <string name="load_data_image_acc_desc">Load Data Image Acc</string>
+    <string name="load_data_status">load data ...</string>
+    <string name="search_hint">explore news</string>
+    <string name="nothing_found_desc">nothing found</string>
+    <string name="load_data_desc">load data ...</string>
+    <string name="sign_up_desc">Sign Up</string>
 </resources>

@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
+        android:contentDescription="@string/select_photo_desc"
         android:src="@drawable/ic_baseline_insert_photo_24"
         app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
         app:layout_constraintEnd_toEndOf="@+id/photoProfile" />

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.data.source.repository.AuthRepository
 import com.nextgen.beritaku.core.domain.repository.IAuthRepository
-import com.nextgen.beritaku.di.viewModelModule
 import com.nextgen.beritaku.utils.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
