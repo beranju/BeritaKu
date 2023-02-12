@@ -1,6 +1,8 @@
 package com.nextgen.beritaku.profile
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nextgen.beritaku.core.data.source.Resource
@@ -14,8 +16,8 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: IAuthRepository = AuthRepository()): ViewModel() {
 
-    private var _uiState = MutableStateFlow<UiState<Unit>>(UiState.Loading)
-    val uiState: StateFlow<UiState<Unit>> get() = _uiState
+    private var _uiState = MutableLiveData<UiState<Unit>>()
+    val uiState: LiveData<UiState<Unit>> get() = _uiState
 
     fun updateDataUser(name: String, uri: Uri) {
         viewModelScope.launch {
