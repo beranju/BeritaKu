@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
@@ -52,19 +53,19 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
         binding.ivSelectPhoto.setOnClickListener(this)
         binding.btnUpdate.setOnClickListener(this)
 
-        viewModel.uiState
-            .flowWithLifecycle(lifecycle)
-            .onEach { state -> handleStateChange(state) }
-            .launchIn(lifecycleScope)
-    }
-
-    private fun handleStateChange(state: UiState<Unit>) {
-        when(state){
-            is UiState.Loading -> {}
-            is UiState.Error -> Log.e("FormProfileFragment", state.message)
-            is UiState.Success -> {
-                val go = FormProfileFragmentDirections.actionFormProfileFragmentToAccountNavigation()
-                findNavController().navigate(go)
+        viewModel.uiState.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UiState.Loading -> {
+                    binding.btnUpdate.isEnabled = false
+                }
+                is UiState.Success -> {
+                    val go = FormProfileFragmentDirections.actionFormProfileFragmentToAccountNavigation()
+                    findNavController().navigate(go)
+                }
+                is UiState.Error -> {
+                    Toast.makeText(requireContext(), "Something went wrong!", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "onError : ${state.message}")
+                }
             }
         }
     }

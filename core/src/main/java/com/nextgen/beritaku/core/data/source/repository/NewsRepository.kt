@@ -29,7 +29,7 @@ class NewsRepository (
                 return remoteDataSource.getAllNews("general", null, null)
             }
 
-            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = dbSource == null || dbSource.isEmpty()
+            override fun shouldFetch(dbSource: List<NewsModel>?): Boolean = true
 
             override fun loadFromDb(): Flow<List<NewsModel>> {
                 return localDataSource.getAllNews().map {
