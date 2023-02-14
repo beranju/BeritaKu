@@ -1,6 +1,5 @@
 package com.nextgen.beritaku.core.utils
 
-import org.ocpsoft.prettytime.PrettyTime
 import java.text.SimpleDateFormat
 import java.util.*
 

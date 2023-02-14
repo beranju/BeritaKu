@@ -50,7 +50,6 @@ class ExploreFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "ExploreFragment"
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
             R.string.tab_text_2,

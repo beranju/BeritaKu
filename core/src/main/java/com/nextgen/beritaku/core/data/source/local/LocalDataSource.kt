@@ -4,7 +4,6 @@ import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.data.source.local.room.NewsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 
 

@@ -8,8 +8,6 @@ import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 import com.nextgen.beritaku.core.utils.DataDummy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
