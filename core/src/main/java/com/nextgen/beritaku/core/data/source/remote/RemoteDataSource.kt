@@ -27,20 +27,4 @@ class RemoteDataSource (private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun searchNews(query: String?): Flow<ApiResponse<List<ArticlesItem>>>{
-        return flow {
-            try {
-                val response = apiService.searchNews(query)
-                val dataArray = response.articles
-                if (dataArray!!.isNotEmpty()){
-                    emit(ApiResponse.Success(dataArray))
-                }else{
-                    ApiResponse.Empty
-                }
-            }catch (e: Exception){
-                ApiResponse.Error(e.toString())
-                Log.e("RemoteDataSource", "${e.message}")
-            }
-        }.flowOn(Dispatchers.Main)
-    }
 }

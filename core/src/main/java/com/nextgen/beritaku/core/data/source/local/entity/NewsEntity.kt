@@ -1,11 +1,9 @@
 package com.nextgen.beritaku.core.data.source.local.entity
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import com.nextgen.beritaku.core.data.source.remote.response.Source
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
@@ -14,7 +12,6 @@ import kotlinx.android.parcel.RawValue
 @Entity(tableName = "news")
 data class NewsEntity(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "publishedAt")
     var publishedAt: String,
 

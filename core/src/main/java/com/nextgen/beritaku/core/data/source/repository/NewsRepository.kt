@@ -10,7 +10,8 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import com.nextgen.beritaku.core.utils.AppExecutors
 import com.nextgen.beritaku.core.utils.DataMapper
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 
 class NewsRepository (

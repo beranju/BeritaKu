@@ -50,7 +50,6 @@ class WebFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "WebFragment"
         const val URL = "url"
     }
 }

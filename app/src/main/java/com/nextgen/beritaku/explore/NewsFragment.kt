@@ -84,7 +84,7 @@ class NewsFragment : Fragment() {
     }
 
     companion object {
-        private val TAG = "NewsFragment"
+        private const val TAG = "NewsFragment"
         const val ARG_SECTION_NUMBER = "section_number"
         const val TAB_BUSINESS = "business"
         const val TAB_ENTERTAINMENT = "entertainment"

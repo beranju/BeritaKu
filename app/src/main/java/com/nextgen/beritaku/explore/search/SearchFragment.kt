@@ -98,7 +98,5 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        const val TAG = "SearchFragment"
-    }
+    companion object
 }

@@ -1,13 +1,7 @@
 package com.nextgen.beritaku.core.data.source.local.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
-import com.nextgen.beritaku.core.data.source.Resource
+import androidx.room.*
 import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
-import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao

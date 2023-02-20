@@ -104,7 +104,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
     }
 
     companion object {
-        const val TAG = "DetailFragment"
         const val DATA_ITEM = "data"
     }
 

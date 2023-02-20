@@ -1,7 +1,6 @@
 package com.nextgen.beritaku.core.domain.repository
 
 import com.nextgen.beritaku.core.data.source.Resource
-import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import kotlinx.coroutines.flow.Flow
 
