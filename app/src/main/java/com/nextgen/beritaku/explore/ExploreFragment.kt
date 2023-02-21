@@ -24,7 +24,7 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.viewPager.adapter = SectionPagerAdapter( (activity as AppCompatActivity))
+        binding.viewPager.adapter = SectionPagerAdapter( childFragmentManager, viewLifecycleOwner.lifecycle)
         TabLayoutMediator(binding.tabs, binding.viewPager){tab, position->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()

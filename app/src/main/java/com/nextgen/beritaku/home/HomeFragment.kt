@@ -115,6 +115,7 @@ class HomeFragment  : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvHeadline.adapter = null
         super.onDestroyView()
         _binding = null
     }

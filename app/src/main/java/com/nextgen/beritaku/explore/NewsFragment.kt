@@ -79,6 +79,7 @@ class NewsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvNewsItem.adapter = null
         super.onDestroyView()
         _binding = null
     }
