@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.favorite.databinding.ActivityFavoriteBinding
@@ -38,7 +39,13 @@ class FavoriteActivity : AppCompatActivity() {
             adapter = newsAdapter
             newsAdapter.viewType = 2
             viewModel.favoriteNews.observe(this@FavoriteActivity){ result ->
-                newsAdapter.setData(result)
+                when(result){
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                    is Resource.Success -> {
+                        newsAdapter.setData(result.data)
+                    }
+                }
             }
             newsAdapter.onClick = { selectedItem ->
                 val uri = Uri.parse("beritaku://detail")

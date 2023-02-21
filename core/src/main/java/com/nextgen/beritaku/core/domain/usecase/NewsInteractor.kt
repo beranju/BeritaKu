@@ -13,11 +13,14 @@ class NewsInteractor (private val newsRepository: INewsRepository): NewsUseCase 
         query: String?,
     ): Flow<Resource<List<NewsModel>>> = newsRepository.getAllNewsByCategory(category, query)
 
-    override fun searchNews(query: String): Flow<List<NewsModel>> = newsRepository.searchNews(query)
+    override fun searchNews(query: String): Flow<List<NewsModel>> = newsRepository.getNewsByQuery(query)
 
-    override fun getFavoriteNews(): Flow<List<NewsModel>> =
-        newsRepository.getFavoriteNews()
+    override fun getFavoriteNews(): Flow<Resource<List<NewsModel>>> = newsRepository.getFavoriteNews()
 
-    override fun setFavoriteNews(news: NewsModel, state: Boolean) =
-        newsRepository.setFavoriteNews(news, state)
+    override suspend fun isFavoriteNews(publishAt: String): Boolean = newsRepository.isFavoriteNews(publishAt)
+
+    override suspend fun insertFavoriteNews(news: NewsModel) = newsRepository.insertFavoriteNews(news)
+
+    override suspend fun deleteNews(news: NewsModel) = newsRepository.deleteNews(news)
+
 }

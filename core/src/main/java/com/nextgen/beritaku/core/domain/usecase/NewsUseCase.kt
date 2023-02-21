@@ -11,7 +11,11 @@ interface NewsUseCase {
 
     fun searchNews(query: String): Flow<List<NewsModel>>
 
-    fun getFavoriteNews(): Flow<List<NewsModel>>
+    fun getFavoriteNews(): Flow<Resource<List<NewsModel>>>
 
-    fun setFavoriteNews(news: NewsModel, state: Boolean)
+    suspend fun isFavoriteNews(publishAt: String): Boolean
+
+    suspend fun insertFavoriteNews(news: NewsModel)
+
+    suspend fun deleteNews(news: NewsModel)
 }

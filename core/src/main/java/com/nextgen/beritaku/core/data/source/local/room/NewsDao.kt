@@ -9,18 +9,12 @@ interface NewsDao {
     @Query("SELECT * FROM news")
     fun getAllNews(): Flow<List<NewsEntity>>
 
-    @Query("SELECT * FROM news WHERE category= :category")
-    fun getAllNewsByCategory(category: String): Flow<List<NewsEntity>>
-
-    @Query("SELECT * FROM news WHERE title LIKE '%' || :query || '%'")
-    fun getSearchNews(query: String) : Flow<List<NewsEntity>>
-
-    @Query("SELECT * FROM news WHERE isFavorite = 1")
-    fun getFavoriteNews(): Flow<List<NewsEntity>>
+    @Query("SELECT EXISTS(SELECT * FROM news WHERE publishedAt = :publishAt)")
+    suspend fun isNewsFavorite(publishAt: String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNews(news: List<NewsEntity>)
+    suspend fun insertFavoriteNews(news: NewsEntity)
 
-    @Update
-    fun updateNews(news: NewsEntity)
+    @Delete
+    suspend fun deleteNews(news: NewsEntity)
 }

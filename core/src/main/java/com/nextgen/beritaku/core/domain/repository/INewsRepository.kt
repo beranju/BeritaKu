@@ -1,6 +1,7 @@
 package com.nextgen.beritaku.core.domain.repository
 
 import com.nextgen.beritaku.core.data.source.Resource
+import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import kotlinx.coroutines.flow.Flow
 
@@ -9,9 +10,13 @@ interface INewsRepository {
 
     fun getAllNewsByCategory(category: String, query: String?): Flow<Resource<List<NewsModel>>>
 
-    fun searchNews(query: String): Flow<List<NewsModel>>
+    fun getNewsByQuery(query: String): Flow<List<NewsModel>>
 
-    fun getFavoriteNews(): Flow<List<NewsModel>>
+    fun getFavoriteNews(): Flow<Resource<List<NewsModel>>>
 
-    fun setFavoriteNews(newsModel: NewsModel, state: Boolean)
+    suspend fun isFavoriteNews(publishAt: String): Boolean
+
+    suspend fun insertFavoriteNews(news: NewsModel)
+
+    suspend fun deleteNews(news: NewsModel)
 }

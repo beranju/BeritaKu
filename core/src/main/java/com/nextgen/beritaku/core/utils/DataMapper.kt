@@ -61,4 +61,24 @@ object DataMapper {
             category = input.category,
             isFavorite = false
         )
+
+    fun mapResponseToModel(input: List<ArticlesItem>, category: String? = null): List<NewsModel>{
+        val newsList = ArrayList<NewsModel>()
+        input.map {
+            val news = NewsModel(
+                publishedAt = it.publishedAt,
+                author = it.author.toString(),
+                urlToImage = it.urlToImage.toString(),
+                description = it.description.toString(),
+                source = it.source.let {soure -> SourceModel(soure?.name.toString(), soure?.id.toString()) },
+                title = it.title.toString(),
+                url = it.url.toString(),
+                content = it.content.toString(),
+                category = category.toString(),
+                isFavorite = false
+            )
+            newsList.add(news)
+        }
+        return newsList
+    }
 }

@@ -73,5 +73,8 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    companion object
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

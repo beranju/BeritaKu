@@ -26,8 +26,9 @@ class DetailFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         dataNews =
             activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
-        setupView(dataNews)
 
+        viewModel.isFavoriteNews(dataNews!!.publishedAt)
+        setupView(dataNews)
         binding.backButton.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
 
@@ -52,12 +53,11 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     bundle.putString(WebFragment.URL, data?.url)
                     findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
                 }
-                var isFavorite = data!!.isFavorite
-                setStatusFavorite(isFavorite)
                 favorite.setOnClickListener {
-                    isFavorite = !isFavorite
-                    viewModel.setFavoriteNews(data, isFavorite)
-                    setStatusFavorite(isFavorite)
+                    viewModel.setFavoriteNews(dataNews!!)
+                }
+                viewModel.isFavorite.observe(viewLifecycleOwner){
+                    setStatusFavorite(it)
                 }
             }
         }
