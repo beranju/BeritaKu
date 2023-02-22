@@ -26,8 +26,12 @@ val databaseModule = module{
         /**
          * add database encryption to room
          * by add openhelperfactory to initialisation of room
+         *
+         * put android:allowBackup="false" and android:fullBackupContent="false" in manifest.xml
+         * this to avoid app backup data so the app not throw an error :
+         * net.sqlcipher.database.SQLiteException: file is not a database.
          */
-        val passPhrase: ByteArray = SQLiteDatabase.getBytes("beritaku".toCharArray())
+        val passPhrase: ByteArray = SQLiteDatabase.getBytes("beranju".toCharArray())
         val factory = SupportFactory(passPhrase)
 
         Room.databaseBuilder(
