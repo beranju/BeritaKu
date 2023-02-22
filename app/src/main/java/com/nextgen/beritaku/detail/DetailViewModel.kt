@@ -14,8 +14,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
-    private var _isFavorite: MutableLiveData<Boolean> = MutableLiveData()
-    val isFavorite: LiveData<Boolean> get() =  _isFavorite
+    private var _isFavorite: MutableLiveData<Boolean?> = MutableLiveData()
+    val isFavorite: LiveData<Boolean?> get() =  _isFavorite
 
     fun setFavoriteNews(news: NewsModel) {
         viewModelScope.launch {
