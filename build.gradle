@@ -26,6 +26,8 @@ buildscript {
     ext.core_testing_version = "2.1.0"
     ext.coroutine_test_version = "1.6.1"
     ext.turbine_version = "0.11.0"
+    ext.lottie_version = "3.4.1"
+    ext.shimmer_version = "0.5.0"
 
     repositories {
         google()

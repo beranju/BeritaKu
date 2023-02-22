@@ -26,16 +26,14 @@ class HomeViewModelTest {
 //    fun setup(){
 //        useCase = NewsInteractor(repository)
 //        viewModel = HomeViewModel(useCase)
+//
 //    }
 //
-//
-//    @OptIn(ExperimentalCoroutinesApi::class)
 //    @Test
 //    fun `fetch headlineNews should return success`() {
-//        runTest {
 //            val result = useCase.getAllNews()
 //            verify(useCase).getAllNews()
 //            assertNotNull(result)
 //        }
-//    }
+
 }

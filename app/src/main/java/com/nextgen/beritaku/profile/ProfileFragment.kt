@@ -29,13 +29,34 @@ class ProfileFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        setupView(auth.currentUser!!)
+        if (auth.currentUser == null){
+            isUserEmpty(true)
+            binding.emptyUser.btnGoLogin.setOnClickListener{
+                val go = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()
+                findNavController().navigate(go)
+            }
+        }else{
+            isUserEmpty(false)
+            setupView(auth.currentUser!!)
+        }
+
         setOtherMenu()
 
         binding.btnEdit.setOnClickListener {
             val action = ProfileFragmentDirections.actionAccountNavigationToFormProfileFragment()
             findNavController().navigate(action)
         }
+    }
+
+    private fun isUserEmpty(state: Boolean) {
+        if (state){
+            binding.emptyUser.root.visibility = View.VISIBLE
+            binding.userData.visibility = View.GONE
+        }else{
+            binding.emptyUser.root.visibility = View.GONE
+            binding.userData.visibility = View.VISIBLE
+        }
+
     }
 
     private fun setOtherMenu() {

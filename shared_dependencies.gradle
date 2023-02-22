@@ -47,4 +47,7 @@ dependencies {
     // implementasi of leak canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 
+    // lottie for animation
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
 }

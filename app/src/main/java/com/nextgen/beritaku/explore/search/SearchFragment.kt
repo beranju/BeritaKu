@@ -14,6 +14,7 @@ import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentSearchBinding
 import com.nextgen.beritaku.detail.DetailFragment
+import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -42,10 +43,14 @@ class SearchFragment : Fragment() {
             lifecycleScope.launch {
                 result
                     .onStart {
-                        binding.noData.visibility = View.GONE
+                        binding.loadData.visibility = View.VISIBLE
                     }
                     .collect{
-                        newsAdapter.setData(it)
+                        binding.noData.root.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                        binding.loadData.visibility = View.GONE
+                        if (it.isNotEmpty()){
+                            newsAdapter.setData(it)
+                        }
                     }
             }
         }

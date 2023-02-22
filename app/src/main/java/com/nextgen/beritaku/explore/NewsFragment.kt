@@ -49,6 +49,7 @@ class NewsFragment : Fragment() {
 
     private fun isLoading(state: Boolean) {
         binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
+        binding.rvNewsItem.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun fetchData(tabName: String) {
@@ -60,7 +61,7 @@ class NewsFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     isLoading(false)
-                    binding.emptyData.visibility = View.VISIBLE
+                    binding.emptyDataNews.root.visibility = View.VISIBLE
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {

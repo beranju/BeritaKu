@@ -50,4 +50,5 @@
     <string name="nothing_found_desc">nothing found</string>
     <string name="load_data_desc">load data ...</string>
     <string name="sign_up_desc">Sign Up</string>
+    <string name="no_account">Your profile not yet setup</string>
 </resources>
