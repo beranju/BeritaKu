@@ -97,6 +97,4 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object
 }

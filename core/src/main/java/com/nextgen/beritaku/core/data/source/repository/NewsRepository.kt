@@ -23,7 +23,7 @@ class NewsRepository (
             }catch (e: Exception){
                 emit(Resource.Error(e.localizedMessage!!))
             }
-        }.flowOn(Dispatchers.IO)
+        }.flowOn(Dispatchers.Default)
 
     override fun getAllNewsByCategory(
         category: String,
@@ -41,9 +41,11 @@ class NewsRepository (
 
     override fun getNewsByQuery(query: String): Flow<List<NewsModel>> =
         flow {
-                val response = apiService.getAllNews("general", null, null)
+                val response = apiService.getAllNews("general", query, null)
                 emit(DataMapper.mapResponseToModel(response.articles!!))
         }.flowOn(Dispatchers.IO)
+            // ** fetch latest news
+            .conflate()
 
     override fun getFavoriteNews(): Flow<Resource<List<NewsModel>>> =
         flow {
