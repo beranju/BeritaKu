@@ -11,6 +11,7 @@ import com.nextgen.beritaku.core.domain.repository.IAuthRepository
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -46,12 +47,23 @@ val networkModule = module {
         /**
          * add certificate pinning to network with okkhttp
          *
+         * https://www.ssllabs.com/ssltest
+         * this website can use to get SHA256 of web server
+         * add all sha that shown in web
          */
-        val hostName = ""
+        val hostName = "newsapi.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostName, "sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk=")
+            .add(hostName, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
+            .add(hostName, "sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU=")
+            .add(hostName, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+            .build()
+
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
