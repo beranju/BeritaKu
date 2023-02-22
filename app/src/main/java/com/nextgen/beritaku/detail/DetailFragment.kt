@@ -57,7 +57,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     viewModel.setFavoriteNews(dataNews!!)
                 }
                 viewModel.isFavorite.observe(viewLifecycleOwner){
-                    setStatusFavorite(it)
+                    setStatusFavorite(it!!)
                 }
             }
         }
