@@ -11,7 +11,7 @@
         app:layout_constraintEnd_toEndOf="@id/tv_empty"
         app:layout_constraintBottom_toTopOf="@id/tv_empty"
         android:layout_marginBottom="8dp"
-        app:lottie_fileName="emptybox.json"
+        app:lottie_fileName="emptysearch.json"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         />

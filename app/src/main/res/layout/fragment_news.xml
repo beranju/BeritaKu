@@ -42,7 +42,6 @@
                 <include layout="@layout/item_explore_placeholder"/>
                 <include layout="@layout/item_explore_placeholder"/>
                 <include layout="@layout/item_explore_placeholder"/>
-                <include layout="@layout/item_explore_placeholder"/>
             </LinearLayout>
         </ScrollView>
     </com.facebook.shimmer.ShimmerFrameLayout>

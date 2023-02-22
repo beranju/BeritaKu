@@ -44,9 +44,12 @@ class SearchFragment : Fragment() {
                 result
                     .onStart {
                         binding.loadData.visibility = View.VISIBLE
+                        binding.noData.root.visibility = View.GONE
+                        binding.rvItemSearch.visibility = View.GONE
                     }
                     .collect{
                         binding.noData.root.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                        binding.rvItemSearch.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
                         binding.loadData.visibility = View.GONE
                         if (it.isNotEmpty()){
                             newsAdapter.setData(it)
