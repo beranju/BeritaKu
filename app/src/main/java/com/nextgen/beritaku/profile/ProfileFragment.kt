@@ -82,7 +82,7 @@ class ProfileFragment : Fragment() {
         binding.tvUsername.text = currentUser.displayName
         Glide.with(requireContext())
             .load(currentUser.photoUrl)
-            .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_empty_data) )
+            .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image) )
             .into(binding.sivProfile)
     }
 

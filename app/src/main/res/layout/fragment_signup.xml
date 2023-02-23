@@ -167,7 +167,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:src="@drawable/ic_load_data" />
+            android:src="@drawable/ic_load_image" />
 
         <ProgressBar
             android:layout_width="30dp"

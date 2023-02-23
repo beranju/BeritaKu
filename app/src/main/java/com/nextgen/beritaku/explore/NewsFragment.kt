@@ -57,11 +57,13 @@ class NewsFragment : Fragment() {
             when(result){
                 is Resource.Success -> {
                     isLoading(false)
+                    binding.emptyDataNews.root.visibility = if (result.data!!.isEmpty()) View.VISIBLE else View.GONE
                     newsAdapter.setData(result.data)
                 }
                 is Resource.Error -> {
                     isLoading(false)
-                    binding.emptyDataNews.root.visibility = View.VISIBLE
+                    binding.error.root.visibility = View.VISIBLE
+                    binding.error.tvEmpty.text = result.message
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {

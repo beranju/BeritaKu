@@ -39,10 +39,20 @@ class NewsRepository (
             }
         }.flowOn(Dispatchers.IO)
 
-    override fun getNewsByQuery(query: String): Flow<List<NewsModel>> =
+    override fun getNewsByQuery(query: String): Flow<Resource<List<NewsModel>>> =
         flow {
+            emit(Resource.Loading())
+            try {
                 val response = apiService.getAllNews("general", query, null)
-                emit(DataMapper.mapResponseToModel(response.articles!!))
+                if (response.articles != null){
+                    val data = DataMapper.mapResponseToModel(response.articles)
+                    emit(Resource.Success(data))
+                }else{
+                    emit(Resource.Error("News Empty"))
+                }
+            }catch (e: Exception){
+                emit(Resource.Error(e.localizedMessage!!))
+            }
         }.flowOn(Dispatchers.IO)
             // ** fetch latest news
             .conflate()

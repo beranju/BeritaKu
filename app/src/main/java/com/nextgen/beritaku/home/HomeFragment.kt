@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsModel
@@ -64,6 +63,9 @@ class HomeFragment  : Fragment() {
                 }
                 is Resource.Error -> {
                     isLoading(false)
+                    binding.error.root.visibility = View.VISIBLE
+                    binding.error.tvEmpty.text = result.message
+                    binding.container.visibility = View.GONE
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {
@@ -74,12 +76,8 @@ class HomeFragment  : Fragment() {
     }
 
     private fun isLoading(state: Boolean) {
-        binding.pbMain.apply {
-            visibility = if (state) View.VISIBLE else View.GONE
-        }
-        binding.rvHeadline.apply {
-            visibility = if (state) View.GONE else View.VISIBLE
-        }
+        binding.pbMain.visibility = if (state) View.VISIBLE else View.GONE
+        binding.rvHeadline.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {

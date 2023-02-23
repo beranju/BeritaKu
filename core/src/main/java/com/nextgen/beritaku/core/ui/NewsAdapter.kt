@@ -58,7 +58,7 @@ class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
                 Glide.with(itemView.context)
                     .asBitmap()
                     .load(data.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
                     .centerCrop()
                     .into(ivThumbnail)
             }
@@ -80,7 +80,7 @@ class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
                 Glide.with(itemView.context)
                     .asBitmap()
                     .load(data.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_no_data))
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
                     .centerCrop()
                     .into(thumbnailHeadline)
             }

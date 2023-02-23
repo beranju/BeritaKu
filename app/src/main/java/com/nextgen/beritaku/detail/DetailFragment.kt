@@ -25,7 +25,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataNews =
-            activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
+            activity?.intent?.getParcelableExtra(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
 
         viewModel.isFavoriteNews(dataNews!!.publishedAt)
         setupView(dataNews)
@@ -45,7 +45,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 content.text = data?.content ?: ""
                 Glide.with(requireContext())
                     .load(data?.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_empty_data))
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
                     .centerCrop()
                     .into(thumbnail)
                 readmore.setOnClickListener{
