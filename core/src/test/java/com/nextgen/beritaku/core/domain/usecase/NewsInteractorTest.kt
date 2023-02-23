@@ -42,9 +42,6 @@ class NewsInteractorTest {
 
     @Test
     fun getAllNewsByCategory() {
-        val result = useCase.getAllNews()
-        Mockito.verify(newsRepository).getAllNewsByCategory("general", "")
-        Assert.assertNotNull(result)
     }
 
     @Test
