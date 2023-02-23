@@ -8,26 +8,6 @@ import com.nextgen.beritaku.core.domain.model.SourceModel
 
 object DataMapper {
 
-    fun mapResponseToEntity(input: List<ArticlesItem>, category: String? = null): List<NewsEntity>{
-        val newsList = ArrayList<NewsEntity>()
-        input.map {
-            val news = NewsEntity(
-                publishedAt = it.publishedAt,
-                author = it.author,
-                urlToImage = it.urlToImage,
-                description = it.description,
-                source = it.source,
-                title = it.title,
-                url = it.url,
-                content = it.content,
-                category = category,
-                isFavorite = false
-            )
-            newsList.add(news)
-        }
-        return newsList
-    }
-
     fun entityToDomain(input: List<NewsEntity>): List<NewsModel> =
         input.map {
             NewsModel(

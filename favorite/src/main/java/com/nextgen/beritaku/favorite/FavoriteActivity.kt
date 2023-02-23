@@ -3,6 +3,7 @@ package com.nextgen.beritaku.favorite
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +50,9 @@ class FavoriteActivity : AppCompatActivity() {
                     is Resource.Error -> {}
                     is Resource.Success -> {
                         binding.emptyFavorite.root.visibility = if (result.data!!.isNotEmpty()) View.GONE else View.VISIBLE
+                        binding.rvFavoriteNews.visibility = if (result.data!!.isEmpty()) View.GONE else View.VISIBLE
                         newsAdapter.setData(result.data)
+                        Log.d("Favorite Activity", "data: ${result.data}")
                     }
                 }
             }

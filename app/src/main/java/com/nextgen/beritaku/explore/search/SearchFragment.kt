@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel: SearchViewModel by viewModel()
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
@@ -44,19 +44,19 @@ class SearchFragment : Fragment() {
                     .collect{
                         when(it){
                             is Resource.Error -> {
-                                binding.error.root.visibility = View.VISIBLE
-                                binding.loadData.visibility = View.GONE
-                                binding.error.tvEmpty.text = it.message.toString()
+                                binding?.error?.root?.visibility = View.VISIBLE
+                                binding?.loadData?.visibility = View.GONE
+                                binding?.error?.tvEmpty?.text = it.message.toString()
                             }
                             is Resource.Loading -> {
                                 isLoading(true)
                             }
                             is Resource.Success -> {
                                 isLoading(false)
-                                binding.noData.root.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
-                                binding.rvItemSearch.visibility = if (it.data!!.isEmpty()) View.GONE else View.VISIBLE
+                                binding?.noData?.root?.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
+                                binding?.rvItemSearch?.visibility = if (it.data!!.isEmpty()) View.GONE else View.VISIBLE
                                 if (it.data!!.isNotEmpty()){
-                                    newsAdapter.setData(it.data!!)
+                                    newsAdapter.setData(it.data)
                                 }
                             }
                         }
@@ -66,8 +66,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun isLoading(state: Boolean) {
-            binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
-            binding.rvItemSearch.visibility = if (state) View.GONE else View.VISIBLE
+            binding?.loadData?.visibility = if (state) View.VISIBLE else View.GONE
+            binding?.rvItemSearch?.visibility = if (state) View.GONE else View.VISIBLE
 
     }
 
@@ -78,7 +78,7 @@ class SearchFragment : Fragment() {
             bundle.putParcelable(DetailFragment.DATA_ITEM, selectedItem)
             findNavController().navigate(R.id.action_searchFragment_to_detailFragment, bundle)
         }
-        binding.rvItemSearch.apply {
+        binding?.rvItemSearch?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
             adapter = newsAdapter
@@ -86,8 +86,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupSearchView() {
-        val searchField = binding.searchField
-        searchField.addTextChangedListener(object : TextWatcher{
+        val searchField = binding?.searchField
+        searchField?.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -108,9 +108,9 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {

@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.nextgen.beritaku.core.R
 import com.nextgen.beritaku.core.databinding.ItemExploreNewsBinding
 import com.nextgen.beritaku.core.databinding.ItemHeadlineNewsBinding
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
+import com.nextgen.beritaku.core.utils.loadImage
 
 private const val HEADLINE = 1
 
@@ -54,12 +52,7 @@ class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
                 tvTitlenews.text = data.title
                 author.text = data.author
                 time.text = DateUtils.dateFormat(data.publishedAt)
-                Glide.with(itemView.context)
-                    .asBitmap()
-                    .load(data.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
-                    .centerCrop()
-                    .into(ivThumbnail)
+                binding.ivThumbnail.loadImage(data.urlToImage)
             }
         }
 
@@ -76,12 +69,7 @@ class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
                 titleHeadline.text = data.title
                 timeHeadline.text = DateUtils.dateFormat(data.publishedAt)
                 author.text = data.author
-                Glide.with(itemView.context)
-                    .asBitmap()
-                    .load(data.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
-                    .centerCrop()
-                    .into(thumbnailHeadline)
+                binding.thumbnailHeadline.loadImage(data.urlToImage)
             }
         }
 

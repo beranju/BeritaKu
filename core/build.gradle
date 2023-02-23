@@ -25,6 +25,11 @@ android {
         release {
             buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
             buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+            buildConfigField "String", "SHA1", '"sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk="'
+            buildConfigField "String", "SHA2", '"sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA="'
+            buildConfigField "String", "SHA3", '"sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU="'
+            buildConfigField "String", "SHA4", '"sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4="'
+            buildConfigField "String", "PASSWORD", '"beranju"'
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -32,6 +37,11 @@ android {
         debug{
             buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
             buildConfigField "String", "API_KEY", '"065632db359c4f7f9ffd74105e77f66b"'
+            buildConfigField "String", "SHA1", '"sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk="'
+            buildConfigField "String", "SHA2", '"sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA="'
+            buildConfigField "String", "SHA3", '"sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU="'
+            buildConfigField "String", "SHA4", '"sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4="'
+            buildConfigField "String", "PASSWORD", '"beranju"'
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

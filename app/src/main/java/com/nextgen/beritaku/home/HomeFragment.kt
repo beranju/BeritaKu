@@ -21,16 +21,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment  : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding : FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
+    ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +42,7 @@ class HomeFragment  : Fragment() {
         homeViewModel.topNews.observe(viewLifecycleOwner){
             setTopNews(it)
         }
-        binding.tvViewMore.setOnClickListener {
+        binding?.tvViewMore?.setOnClickListener {
             findNavController().navigate(R.id.explore_navigation)
         }
     }
@@ -63,9 +63,9 @@ class HomeFragment  : Fragment() {
                 }
                 is Resource.Error -> {
                     isLoading(false)
-                    binding.error.root.visibility = View.VISIBLE
-                    binding.error.tvEmpty.text = result.message
-                    binding.container.visibility = View.GONE
+                    binding?.error?.root?.visibility = View.VISIBLE
+                    binding?.error?.tvEmpty?.text = result.message
+                    binding?.container?.visibility = View.GONE
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {
@@ -76,13 +76,13 @@ class HomeFragment  : Fragment() {
     }
 
     private fun isLoading(state: Boolean) {
-        binding.pbMain.visibility = if (state) View.VISIBLE else View.GONE
-        binding.rvHeadline.visibility = if (state) View.GONE else View.VISIBLE
+        binding?.pbMain?.visibility = if (state) View.VISIBLE else View.GONE
+        binding?.rvHeadline?.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {
         newsAdapter.viewType = 1
-        binding.rvHeadline.apply {
+        binding?.rvHeadline?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
             adapter = newsAdapter
@@ -91,7 +91,7 @@ class HomeFragment  : Fragment() {
     }
 
     private fun setTopNews(random: NewsModel) {
-        binding.apply {
+        binding?.apply {
             tvTitleNews.text = random.title
             tvLabel.text = random.source.name
             Glide.with(requireContext())
@@ -109,7 +109,7 @@ class HomeFragment  : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding.rvHeadline.adapter = null
+        binding?.rvHeadline?.adapter = null
         super.onDestroyView()
         _binding = null
     }
