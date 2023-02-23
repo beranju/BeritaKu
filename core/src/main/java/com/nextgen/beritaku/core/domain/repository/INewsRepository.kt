@@ -9,9 +9,13 @@ interface INewsRepository {
 
     fun getAllNewsByCategory(category: String, query: String?): Flow<Resource<List<NewsModel>>>
 
-    fun searchNews(query: String): Flow<List<NewsModel>>
+    fun getNewsByQuery(query: String): Flow<Resource<List<NewsModel>>>
 
-    fun getFavoriteNews(): Flow<List<NewsModel>>
+    fun getFavoriteNews(): Flow<Resource<List<NewsModel>>>
 
-    fun setFavoriteNews(newsModel: NewsModel, state: Boolean)
+    suspend fun isFavoriteNews(publishAt: String): Boolean
+
+    suspend fun insertFavoriteNews(news: NewsModel)
+
+    suspend fun deleteNews(news: NewsModel)
 }

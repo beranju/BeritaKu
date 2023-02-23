@@ -7,116 +7,154 @@
     tools:context=".home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/thumbnail_news"
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="@id/container"
-            app:layout_constraintEnd_toEndOf="@id/container"
-            app:layout_constraintStart_toStartOf="@id/container"
-            app:shapeAppearanceOverlay="@style/rounded_corner_bottom"
-            tools:srcCompat="@drawable/test" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/header_bg_rounded"
-            app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@id/thumbnail_news"
-            app:layout_constraintRight_toRightOf="@id/thumbnail_news"
-            app:layout_constraintTop_toTopOf="@+id/thumbnail_news"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tv_readmore"
-            style="@style/TextView.patrick_hand_18_3F4E4F"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:text="@string/read_more"
-            android:textColor="?attr/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_title_news"
-            style="@style/TextView.patrick_hand_24_181823"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:maxLength="80"
-            android:maxLines="3"
-            tools:text="lore kldfdjg  fjghs gj sfjgh  fjhgshdgsfjghfsdgh fjdgh g dfjhfdg dhjgdgdh fgjdshgghjgkd jgkdfgjdkj jgkdfgfkdjfdgkj"
-            app:layout_constraintBottom_toTopOf="@+id/tv_readmore"
-            app:layout_constraintEnd_toEndOf="@+id/tv_readmore"
-            app:layout_constraintStart_toStartOf="@+id/tv_readmore" />
-
-        <TextView
-            android:id="@+id/tv_label"
-            style="@style/TextView.patrick_hand_14_3F4E4F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_badge_pill"
-            android:paddingHorizontal="10dp"
-            tools:text="health"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_title_news"
-            app:layout_constraintStart_toStartOf="@+id/tv_title_news" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/TextView.patrick_hand_24_181823"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/headlines_news"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_view_more"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/thumbnail_news" />
-
-        <TextView
-            android:id="@+id/tv_view_more"
-            style="@style/TextView.patrick_hand_14_3F4E4F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:text="@string/more"
-            android:textColor="?attr/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_headline"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            tools:itemCount="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:listitem="@layout/item_headline_news" />
+            >
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/thumbnail_news"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="@id/container"
+                app:layout_constraintEnd_toEndOf="@id/container"
+                app:layout_constraintStart_toStartOf="@id/container"
+                app:shapeAppearanceOverlay="@style/rounded_corner_bottom"
+                tools:srcCompat="@drawable/test" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/header_bg_rounded"
+                app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@id/thumbnail_news"
+                app:layout_constraintRight_toRightOf="@id/thumbnail_news"
+                app:layout_constraintTop_toTopOf="@+id/thumbnail_news"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <ProgressBar
-            android:id="@+id/pb_main"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="24dp"
+            <TextView
+                android:id="@+id/tv_readmore"
+                style="@style/TextView.patrick_hand_18_3F4E4F"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/read_more"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/thumbnail_news"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title_news"
+                style="@style/TextView.patrick_hand_24_181823"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:maxLength="80"
+                android:maxLines="3"
+                tools:text="lore kldfdjg  fjghs gj sfjgh  fjhgshdgsfjghfsdgh fjdgh g dfjhfdg dhjgdgdh fgjdshgghjgkd jgkdfgjdkj jgkdfgfkdjfdgkj"
+                app:layout_constraintBottom_toTopOf="@+id/tv_readmore"
+                app:layout_constraintEnd_toEndOf="@+id/tv_readmore"
+                app:layout_constraintStart_toStartOf="@+id/tv_readmore" />
+
+            <TextView
+                android:id="@+id/tv_label"
+                style="@style/TextView.patrick_hand_14_3F4E4F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_badge_pill"
+                android:paddingHorizontal="10dp"
+                tools:text="health"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_title_news"
+                app:layout_constraintStart_toStartOf="@+id/tv_title_news" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextView.patrick_hand_24_181823"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/headlines_news"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_view_more"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thumbnail_news" />
+
+            <TextView
+                android:id="@+id/tv_view_more"
+                style="@style/TextView.patrick_hand_14_3F4E4F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/more"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                tools:itemCount="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:listitem="@layout/item_headline_news" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/pb_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:shimmer_auto_start="true">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <include layout="@layout/item_headline_placeholder" />
+
+                        <include layout="@layout/item_headline_placeholder" />
+
+                        <include layout="@layout/item_headline_placeholder" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/view_error"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintEnd_toStartOf="@+id/tv_view_more"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

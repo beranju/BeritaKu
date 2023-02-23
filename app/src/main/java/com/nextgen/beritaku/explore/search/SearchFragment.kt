@@ -11,10 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
+import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentSearchBinding
 import com.nextgen.beritaku.detail.DetailFragment
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,14 +41,34 @@ class SearchFragment : Fragment() {
         viewModel.searchResult.observe(viewLifecycleOwner){result->
             lifecycleScope.launch {
                 result
-                    .onStart {
-                        binding.noData.visibility = View.GONE
-                    }
                     .collect{
-                        newsAdapter.setData(it)
+                        when(it){
+                            is Resource.Error -> {
+                                binding.error.root.visibility = View.VISIBLE
+                                binding.loadData.visibility = View.GONE
+                                binding.error.tvEmpty.text = it.message.toString()
+                            }
+                            is Resource.Loading -> {
+                                isLoading(true)
+                            }
+                            is Resource.Success -> {
+                                isLoading(false)
+                                binding.noData.root.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
+                                binding.rvItemSearch.visibility = if (it.data!!.isEmpty()) View.GONE else View.VISIBLE
+                                if (it.data!!.isNotEmpty()){
+                                    newsAdapter.setData(it.data!!)
+                                }
+                            }
+                        }
                     }
             }
         }
+    }
+
+    private fun isLoading(state: Boolean) {
+            binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
+            binding.rvItemSearch.visibility = if (state) View.GONE else View.VISIBLE
+
     }
 
     private fun setupRecyclerView() {
@@ -97,6 +117,4 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object
 }

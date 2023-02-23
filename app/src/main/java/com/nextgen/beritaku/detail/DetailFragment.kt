@@ -25,9 +25,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataNews =
-            activity?.intent?.getParcelableExtra<NewsModel>(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
-        setupView(dataNews)
+            activity?.intent?.getParcelableExtra(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
 
+        viewModel.isFavoriteNews(dataNews!!.publishedAt)
+        setupView(dataNews)
         binding.backButton.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
 
@@ -44,7 +45,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 content.text = data?.content ?: ""
                 Glide.with(requireContext())
                     .load(data?.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_empty_data))
+                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
                     .centerCrop()
                     .into(thumbnail)
                 readmore.setOnClickListener{
@@ -52,12 +53,11 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     bundle.putString(WebFragment.URL, data?.url)
                     findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
                 }
-                var isFavorite = data!!.isFavorite
-                setStatusFavorite(isFavorite)
                 favorite.setOnClickListener {
-                    isFavorite = !isFavorite
-                    viewModel.setFavoriteNews(data, isFavorite)
-                    setStatusFavorite(isFavorite)
+                    viewModel.setFavoriteNews(dataNews!!)
+                }
+                viewModel.isFavorite.observe(viewLifecycleOwner){
+                    setStatusFavorite(it!!)
                 }
             }
         }

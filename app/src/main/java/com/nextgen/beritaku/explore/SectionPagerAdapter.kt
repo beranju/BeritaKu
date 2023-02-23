@@ -1,11 +1,12 @@
 package com.nextgen.beritaku.explore
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
+class SectionPagerAdapter(activity: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(activity, lifecycle) {
     override fun getItemCount(): Int = 6
 
     override fun createFragment(position: Int): Fragment {

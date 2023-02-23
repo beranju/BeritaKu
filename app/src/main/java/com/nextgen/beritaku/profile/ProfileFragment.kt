@@ -29,13 +29,34 @@ class ProfileFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        setupView(auth.currentUser!!)
+        if (auth.currentUser == null){
+            isUserEmpty(true)
+            binding.emptyUser.btnGoLogin.setOnClickListener{
+                val go = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()
+                findNavController().navigate(go)
+            }
+        }else{
+            isUserEmpty(false)
+            setupView(auth.currentUser!!)
+        }
+
         setOtherMenu()
 
         binding.btnEdit.setOnClickListener {
             val action = ProfileFragmentDirections.actionAccountNavigationToFormProfileFragment()
             findNavController().navigate(action)
         }
+    }
+
+    private fun isUserEmpty(state: Boolean) {
+        if (state){
+            binding.emptyUser.root.visibility = View.VISIBLE
+            binding.userData.visibility = View.GONE
+        }else{
+            binding.emptyUser.root.visibility = View.GONE
+            binding.userData.visibility = View.VISIBLE
+        }
+
     }
 
     private fun setOtherMenu() {
@@ -61,7 +82,7 @@ class ProfileFragment : Fragment() {
         binding.tvUsername.text = currentUser.displayName
         Glide.with(requireContext())
             .load(currentUser.photoUrl)
-            .apply(RequestOptions().placeholder(R.drawable.ic_load_data).error(R.drawable.ic_empty_data) )
+            .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image) )
             .into(binding.sivProfile)
     }
 
@@ -73,5 +94,8 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    companion object
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -3,8 +3,10 @@ package com.nextgen.beritaku.favorite
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.favorite.databinding.ActivityFavoriteBinding
@@ -29,6 +31,10 @@ class FavoriteActivity : AppCompatActivity() {
 
         loadKoinModules(favoriteModule)
         setupRecyclerView()
+        binding.emptyFavorite.btnFindNews.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://explore"))
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -38,7 +44,14 @@ class FavoriteActivity : AppCompatActivity() {
             adapter = newsAdapter
             newsAdapter.viewType = 2
             viewModel.favoriteNews.observe(this@FavoriteActivity){ result ->
-                newsAdapter.setData(result)
+                when(result){
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                    is Resource.Success -> {
+                        binding.emptyFavorite.root.visibility = if (result.data!!.isNotEmpty()) View.GONE else View.VISIBLE
+                        newsAdapter.setData(result.data)
+                    }
+                }
             }
             newsAdapter.onClick = { selectedItem ->
                 val uri = Uri.parse("beritaku://detail")

@@ -6,56 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".profile.ProfileFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/siv_profile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:layout_marginStart="32dp"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/user_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="32dp"
+            app:srcCompat="@drawable/ic_launcher_foreground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1"
+            app:shapeAppearanceOverlay="@style/rounded_corner" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            style="@style/TextView.patrick_hand_24_181823"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/siv_profile"
+            app:layout_constraintTop_toTopOf="@+id/siv_profile"
+            app:layout_constraintVertical_bias="0.23000002"
+            tools:text="Username" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            style="@style/Button.rectangle_8_primary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/btn_edit"
+            app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/siv_profile" />
+
+        <ListView
+            android:id="@+id/lv_menu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_edit"
+            tools:listitem="@android:layout/simple_list_item_1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <include
+        android:id="@+id/empty_user"
+        layout="@layout/empty_user"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1"
-        app:shapeAppearanceOverlay="@style/rounded_corner" />
-
-    <TextView
-        android:id="@+id/tv_username"
-        style="@style/TextView.patrick_hand_24_181823"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/siv_profile"
-        app:layout_constraintTop_toTopOf="@+id/siv_profile"
-        app:layout_constraintVertical_bias="0.23000002"
-        tools:text="Username" />
-
-    <Button
-        android:id="@+id/btn_edit"
-        style="@style/Button.rectangle_8_primary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/btn_edit"
-        app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/siv_profile" />
-
-    <ListView
-        android:id="@+id/lv_menu"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_edit"
-        tools:listitem="@android:layout/simple_list_item_1" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,14 +23,14 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.viewPager.adapter = SectionPagerAdapter( (activity as AppCompatActivity))
+        binding.viewPager.adapter = SectionPagerAdapter( childFragmentManager, viewLifecycleOwner.lifecycle)
         TabLayoutMediator(binding.tabs, binding.viewPager){tab, position->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
     }
 
     private fun setupToolbar() {
-        binding.searchButton.setOnClickListener {
+        binding.tvSearch.setOnClickListener {
             findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
         }
     }

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_explore_navigation_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="beritaku://explore" />
     </fragment>
     <fragment
         android:id="@+id/account_navigation"

@@ -49,6 +49,7 @@ class NewsFragment : Fragment() {
 
     private fun isLoading(state: Boolean) {
         binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
+        binding.rvNewsItem.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun fetchData(tabName: String) {
@@ -56,11 +57,13 @@ class NewsFragment : Fragment() {
             when(result){
                 is Resource.Success -> {
                     isLoading(false)
+                    binding.emptyDataNews.root.visibility = if (result.data!!.isEmpty()) View.VISIBLE else View.GONE
                     newsAdapter.setData(result.data)
                 }
                 is Resource.Error -> {
                     isLoading(false)
-                    binding.emptyData.visibility = View.VISIBLE
+                    binding.error.root.visibility = View.VISIBLE
+                    binding.error.tvEmpty.text = result.message
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {
@@ -79,6 +82,7 @@ class NewsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvNewsItem.adapter = null
         super.onDestroyView()
         _binding = null
     }

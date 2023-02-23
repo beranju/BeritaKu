@@ -22,15 +22,18 @@ android {
     }
 
     buildTypes {
-        debug{
+        release {
             buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
             buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        release {
+        debug{
             buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
             buildConfigField "String", "API_KEY", '"065632db359c4f7f9ffd74105e77f66b"'
 
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -52,6 +55,7 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:$room_version"
+    testImplementation 'junit:junit:4.12'
     kapt "androidx.room:room-compiler:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
 
@@ -70,4 +74,9 @@ dependencies {
     //testing
     testImplementation "org.mockito:mockito-core:3.2.4"
     testImplementation "org.mockito:mockito-inline:3.2.4"
+
+    // database encription
+    implementation "net.zetetic:android-database-sqlcipher:$sqlcipher_version"
+    implementation "androidx.sqlite:sqlite-ktx:$sqlite_ktx_version"
+
 }

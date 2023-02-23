@@ -3,7 +3,15 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+
+    // ** library for unit test
     testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "androidx.arch.core:core-testing:$core_testing_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
+    // ** turbine -> a small testing library for kotlin flow
+    testImplementation "app.cash.turbine:turbine:$turbine_version"
+
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "androidx.multidex:multidex:$multidex_version"
@@ -38,5 +46,8 @@ dependencies {
 
     // implementasi of leak canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+
+    // lottie for animation
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
 }

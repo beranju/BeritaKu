@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsModel
@@ -23,7 +22,6 @@ class HomeFragment  : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var auth: FirebaseAuth
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
     }
@@ -38,20 +36,15 @@ class HomeFragment  : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-
-        if (auth.currentUser == null){
-            val action = HomeFragmentDirections.actionHomeNavigationToLoginFragment()
-            findNavController().navigate(action)
-        }
-
         setupRecyclerView()
         fetchData()
 
+        homeViewModel.topNews.observe(viewLifecycleOwner){
+            setTopNews(it)
+        }
         binding.tvViewMore.setOnClickListener {
             findNavController().navigate(R.id.explore_navigation)
         }
-
     }
 
     private fun fetchData() {
@@ -67,10 +60,12 @@ class HomeFragment  : Fragment() {
                             findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
                         }
                     }
-                    setTopNews(result.data?.randomOrNull())
                 }
                 is Resource.Error -> {
                     isLoading(false)
+                    binding.error.root.visibility = View.VISIBLE
+                    binding.error.tvEmpty.text = result.message
+                    binding.container.visibility = View.GONE
                     Log.e(TAG, "${result.message}")
                 }
                 is Resource.Loading -> {
@@ -81,9 +76,8 @@ class HomeFragment  : Fragment() {
     }
 
     private fun isLoading(state: Boolean) {
-        binding.pbMain.apply {
-            visibility = if (state) View.VISIBLE else View.GONE
-        }
+        binding.pbMain.visibility = if (state) View.VISIBLE else View.GONE
+        binding.rvHeadline.visibility = if (state) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {
@@ -96,12 +90,12 @@ class HomeFragment  : Fragment() {
 
     }
 
-    private fun setTopNews(random: NewsModel?) {
+    private fun setTopNews(random: NewsModel) {
         binding.apply {
-            tvTitleNews.text = random?.title
-            tvLabel.text = random?.source?.name
+            tvTitleNews.text = random.title
+            tvLabel.text = random.source.name
             Glide.with(requireContext())
-                .load(random?.urlToImage)
+                .load(random.urlToImage)
                 .centerCrop()
                 .into(thumbnailNews)
 
@@ -115,6 +109,7 @@ class HomeFragment  : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvHeadline.adapter = null
         super.onDestroyView()
         _binding = null
     }
