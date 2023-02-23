@@ -1,8 +1,7 @@
 # BeritaKu
-Simple News App
+Simple News App 
 
-
-[![beranju](https://circleci.com/github/beranju/BeritaKu.svg?style=svg)](https://circleci.com/github/beranju/BeritaKu)
+[![beranju](https://circleci.com/gh/beranju/BeritaKu.svg?style=svg)](https://circleci.com/gh/beranju/BeritaKu)
 
 # Tech Stack
 * MVVM 
