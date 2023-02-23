@@ -8,17 +8,16 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
+import com.nextgen.beritaku.core.utils.loadImage
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel: DetailViewModel by viewModel()
     private var dataNews: NewsModel? = null
 
@@ -29,25 +28,21 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
         viewModel.isFavoriteNews(dataNews!!.publishedAt)
         setupView(dataNews)
-        binding.backButton.setOnClickListener(this)
-        binding.ivShare.setOnClickListener(this)
+        binding?.backButton?.setOnClickListener(this)
+        binding?.ivShare?.setOnClickListener(this)
 
     }
 
     private fun setupView(data: NewsModel?) {
         data.let {
-            binding.apply {
+            binding?.apply {
                 title.text = data?.title
-                label.text = data?.source?.name ?: "Anonim"
+                label.text = data?.source?.name ?: getString(R.string.text_anonim)
                 description.text = data?.description
-                author.text = data?.author ?: "Anonim"
+                author.text = data?.author ?: getString(R.string.text_anonim)
                 date.text = DateUtils.dateFormat(data?.publishedAt.toString())
-                content.text = data?.content ?: ""
-                Glide.with(requireContext())
-                    .load(data?.urlToImage)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
-                    .centerCrop()
-                    .into(thumbnail)
+                content.text = data?.content.toString()
+                thumbnail.loadImage(data?.urlToImage)
                 readmore.setOnClickListener{
                     val bundle = Bundle()
                     bundle.putString(WebFragment.URL, data?.url)
@@ -57,7 +52,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     viewModel.setFavoriteNews(dataNews!!)
                 }
                 viewModel.isFavorite.observe(viewLifecycleOwner){
-                    setStatusFavorite(it!!)
+                    if (it != null) setStatusFavorite(it)
                 }
             }
         }
@@ -66,18 +61,18 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     private fun setStatusFavorite(favorite: Boolean) {
         if (favorite){
-            binding.favorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24))
+            binding?.favorite?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24))
         }else{
-            binding.favorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24))
+            binding?.favorite?.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24))
         }
     }
 
     override fun onClick(view: View?) {
         when(view){
-            binding.backButton -> {
+            binding?.backButton -> {
                 findNavController().navigateUp()
             }
-            binding.ivShare -> {
+            binding?.ivShare -> {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_SUBJECT, "Baca berita menarik dari ${dataNews?.source?.name}")
@@ -93,9 +88,9 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {

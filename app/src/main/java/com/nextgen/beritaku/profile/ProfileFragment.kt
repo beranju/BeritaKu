@@ -9,18 +9,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.nextgen.beritaku.R
+import com.nextgen.beritaku.core.utils.loadImage
 import com.nextgen.beritaku.databinding.FragmentProfileBinding
 import com.nextgen.beritaku.utils.OtherMenu
 
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var auth: FirebaseAuth
     private val listMenu: Array<String> = OtherMenu.values().map { it.string }.toTypedArray()
 
@@ -31,7 +29,7 @@ class ProfileFragment : Fragment() {
 
         if (auth.currentUser == null){
             isUserEmpty(true)
-            binding.emptyUser.btnGoLogin.setOnClickListener{
+            binding?.emptyUser?.btnGoLogin?.setOnClickListener{
                 val go = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()
                 findNavController().navigate(go)
             }
@@ -42,7 +40,7 @@ class ProfileFragment : Fragment() {
 
         setOtherMenu()
 
-        binding.btnEdit.setOnClickListener {
+        binding?.btnEdit?.setOnClickListener {
             val action = ProfileFragmentDirections.actionAccountNavigationToFormProfileFragment()
             findNavController().navigate(action)
         }
@@ -50,19 +48,19 @@ class ProfileFragment : Fragment() {
 
     private fun isUserEmpty(state: Boolean) {
         if (state){
-            binding.emptyUser.root.visibility = View.VISIBLE
-            binding.userData.visibility = View.GONE
+            binding?.emptyUser?.root?.visibility = View.VISIBLE
+            binding?.userData?.visibility = View.GONE
         }else{
-            binding.emptyUser.root.visibility = View.GONE
-            binding.userData.visibility = View.VISIBLE
+            binding?.emptyUser?.root?.visibility = View.GONE
+            binding?.userData?.visibility = View.VISIBLE
         }
 
     }
 
     private fun setOtherMenu() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listMenu)
-        binding.lvMenu.adapter = adapter
-        binding.lvMenu.setOnItemClickListener { _, _, position, _ ->
+        binding?.lvMenu?.adapter = adapter
+        binding?.lvMenu?.setOnItemClickListener { _, _, position, _ ->
             when(listMenu[position]){
                 OtherMenu.FavoriteNews.string -> {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://favorite"))
@@ -79,19 +77,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupView(currentUser: FirebaseUser) {
-        binding.tvUsername.text = currentUser.displayName
-        Glide.with(requireContext())
-            .load(currentUser.photoUrl)
-            .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image) )
-            .into(binding.sivProfile)
+        binding?.tvUsername?.text = currentUser.displayName
+        binding?.sivProfile?.loadImage(currentUser.photoUrl.toString())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
+    ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {

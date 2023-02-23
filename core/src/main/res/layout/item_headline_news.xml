@@ -5,6 +5,7 @@
     android:layout_width="270dp"
     android:layout_height="270dp"
     android:paddingStart="24dp"
+    android:paddingEnd="0dp"
     >
 
     <com.google.android.material.imageview.ShapeableImageView

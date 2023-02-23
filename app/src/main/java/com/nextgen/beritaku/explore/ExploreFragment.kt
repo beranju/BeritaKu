@@ -12,7 +12,7 @@ import com.nextgen.beritaku.databinding.FragmentExploreBinding
 
 class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,14 +23,18 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.viewPager.adapter = SectionPagerAdapter( childFragmentManager, viewLifecycleOwner.lifecycle)
-        TabLayoutMediator(binding.tabs, binding.viewPager){tab, position->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+        binding?.viewPager?.adapter = SectionPagerAdapter( childFragmentManager, viewLifecycleOwner.lifecycle)
+        binding?.tabs?.let {
+            binding?.viewPager?.let { viewpager ->
+                TabLayoutMediator(it, viewpager){ tab, position->
+                    tab.text = resources.getString(TAB_TITLES[position])
+                }.attach()
+            }
+        }
     }
 
     private fun setupToolbar() {
-        binding.tvSearch.setOnClickListener {
+        binding?.tvSearch?.setOnClickListener {
             findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
         }
     }
@@ -38,9 +42,9 @@ class ExploreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View {
+    ): View? {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {
