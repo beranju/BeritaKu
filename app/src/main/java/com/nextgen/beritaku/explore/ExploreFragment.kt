@@ -30,7 +30,7 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.searchButton.setOnClickListener {
+        binding.tvSearch.setOnClickListener {
             findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
         }
     }

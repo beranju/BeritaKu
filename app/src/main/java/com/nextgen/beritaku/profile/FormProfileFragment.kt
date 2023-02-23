@@ -38,7 +38,7 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val emptyImage = AppCompatResources.getDrawable(requireActivity(), R.drawable.undraw_male_avatar_g98d)
+        val emptyImage = AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_empty_image)
         viewModel.getUser()?.let { user->
             uri = user.photoUrl
             Glide.with(requireContext())

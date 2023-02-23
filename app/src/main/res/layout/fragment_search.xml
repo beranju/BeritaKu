@@ -26,6 +26,7 @@
             android:layout_height="55dp"
             android:hint="@string/search_hint"
             android:maxLines="1"
+            android:inputType="text"
             android:singleLine="true"
             android:textColor="?attr/colorOnSecondary"
             android:textColorHint="?attr/colorOnSecondary"

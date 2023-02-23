@@ -167,6 +167,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
+            android:contentDescription="@string/sign_up_desc"
             android:src="@drawable/ic_load_image" />
 
         <ProgressBar

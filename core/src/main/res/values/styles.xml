@@ -5,10 +5,6 @@
         <item name="cornerSize">10dp</item>
     </style>
 
-    <style name="circle">
-        <item name="cornerSize">50%</item>
-    </style>
-
     <style name="TextView"/>
 
     <style name="TextView.patrick_hand_18_181823">

@@ -24,7 +24,6 @@ class NewsAdapter : RecyclerView.Adapter<ViewHolder>() {
         if (newListNews == null) return
         listNews.clear()
         listNews.addAll(newListNews)
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
