@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,7 +16,11 @@ import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
 import com.nextgen.beritaku.detail.DetailFragment
+import com.nextgen.beritaku.utils.UiState
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.coroutines.coroutineContext
 
 
 class HomeFragment  : Fragment() {
@@ -39,6 +44,16 @@ class HomeFragment  : Fragment() {
         setupRecyclerView()
         fetchData()
 
+//        homeViewModel.state.onEach { state ->
+//            when(state){
+//                is UiState.Loading -> showLoading()
+//                is UiState.Success -> showData(state.data)
+//                is UiState.Error -> showError(state.message)
+//            }
+//        }.launchIn(viewLifecycleOwner.lifecycleScope)
+//
+//        homeViewModel.fetchNews()
+
         homeViewModel.topNews.observe(viewLifecycleOwner){
             setTopNews(it)
         }
@@ -47,8 +62,18 @@ class HomeFragment  : Fragment() {
         }
     }
 
+//    private fun showLoading() {
+//        if (homeViewModel.state.value is UiState.Loading){
+//            binding.pbMain.visibility = View.VISIBLE
+//            binding.rvHeadline.visibility = View.GONE
+//        }else{
+//            binding.pbMain.visibility = View.GONE
+//            binding.rvHeadline.visibility = View.VISIBLE
+//        }
+//    }
+
     private fun fetchData() {
-        homeViewModel.headlineNews().observe(viewLifecycleOwner){result->
+           homeViewModel.headlineNews().observe(viewLifecycleOwner){result->
             when(result){
                 is Resource.Success -> {
                     isLoading(false)
@@ -73,6 +98,17 @@ class HomeFragment  : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showError(message: String) {
+        binding.error.root.visibility = View.VISIBLE
+        binding.error.tvEmpty.text = message
+        binding.container.visibility = View.GONE
+    }
+
+    private fun showData(data: List<NewsModel>) {
+        newsAdapter.setData(data)
+        Log.d(TAG, "$data")
     }
 
     private fun isLoading(state: Boolean) {
