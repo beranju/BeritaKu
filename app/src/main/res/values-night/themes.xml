@@ -32,4 +32,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.BeritaKu.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">?attr/colorPrimary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.BeritaKu</item>
+    </style>
+
 </resources>
