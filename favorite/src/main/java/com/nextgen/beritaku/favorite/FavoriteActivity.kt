@@ -43,16 +43,16 @@ class FavoriteActivity : AppCompatActivity() {
             setHasFixedSize(true)
             adapter = newsAdapter
             newsAdapter.viewType = 2
-            viewModel.favoriteNews.observe(this@FavoriteActivity){ result ->
-                when(result){
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {}
-                    is Resource.Success -> {
-                        binding.emptyFavorite.root.visibility = if (result.data!!.isNotEmpty()) View.GONE else View.VISIBLE
-                        newsAdapter.setData(result.data)
-                    }
-                }
-            }
+//            viewModel.favoriteNews.observe(this@FavoriteActivity){ result ->
+//                when(result){
+//                    is Resource.Loading -> {}
+//                    is Resource.Error -> {}
+//                    is Resource.Success -> {
+//                        binding.emptyFavorite.root.visibility = if (result.data!!.isNotEmpty()) View.GONE else View.VISIBLE
+//                        newsAdapter.setData(result.data)
+//                    }
+//                }
+//            }
             newsAdapter.onClick = { selectedItem ->
                 val uri = Uri.parse("beritaku://detail")
                 val intent = Intent(Intent.ACTION_VIEW, uri)

@@ -27,15 +27,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // ** delegation to disable dark mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         // ** setup bottom navigation
         val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.home_navigation, R.id.explore_navigation, R.id.account_navigation
-        ).build()
+//        val appBarConfiguration = AppBarConfiguration.Builder(
+//            R.id.home_navigation, R.id.explore_navigation, R.id.account_navigation
+//        ).build()
         val navController =navHostFragment.navController
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{_, destination: NavDestination, _ ->
@@ -57,22 +57,22 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.VISIBLE
         supportActionBar?.show()
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.favorite_menu -> {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://favorite"))
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_option_home, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when(item.itemId){
+//            R.id.favorite_menu -> {
+//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://favorite"))
+//                startActivity(intent)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
+//
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_option_home, menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
 
 
 }

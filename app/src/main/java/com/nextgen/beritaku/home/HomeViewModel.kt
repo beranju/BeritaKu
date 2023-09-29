@@ -3,48 +3,53 @@ package com.nextgen.beritaku.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.nextgen.beritaku.core.data.source.Resource
-import com.nextgen.beritaku.core.domain.model.NewsModel
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
-import com.nextgen.beritaku.utils.UiState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
+class HomeViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
 
-//    private var _stateUi = MutableStateFlow<UiState<List<NewsModel>>>(UiState.Loading)
-//    val state: StateFlow<UiState<List<NewsModel>>> get() = _stateUi
-//
-//    fun fetchNews(){
-//        viewModelScope.launch {
-//            newsUseCase.getAllNews().collect{resource ->
-//                _stateUi.value = when(resource){
-//                    is Resource.Loading -> UiState.Loading
-//                    is Resource.Success -> UiState.Success(resource.data!!)
-//                    is Resource.Error -> UiState.Error(resource.message!!)
-//                }
-//            }
-//        }
-//    }
+    private var _topNews: MutableLiveData<List<NewsDataItem>> = MutableLiveData()
+    val topNews: LiveData<List<NewsDataItem>> get() = _topNews
 
-    private var _topNews: MutableLiveData<NewsModel> = MutableLiveData()
-    val topNews: LiveData<NewsModel> get() = _topNews
+    private var _forYouNews: MutableLiveData<List<NewsDataItem>> = MutableLiveData()
+    val forYouNews: LiveData<List<NewsDataItem>> get() = _forYouNews
+
+    private var _loading: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loading: LiveData<Boolean> get() = _loading
+
+    private var _error: MutableLiveData<String?> = MutableLiveData(null)
+    val error: LiveData<String?> get() = _error
 
     init {
         topHeadline()
     }
 
-    fun headlineNews() = newsUseCase.getAllNews().asLiveData()
-
     private fun topHeadline() =
         viewModelScope.launch {
             newsUseCase.getAllNews()
-                .collect{
-                    if (it is Resource.Success){
-                        _topNews.value = it.data!!.randomOrNull()
+                .collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            if (result.data!!.isNotEmpty()) {
+                                _forYouNews.value = result.data!!
+                                _topNews.value = result.data!!.take(5).reversed()
+                            } else {
+                                _forYouNews.value = emptyList()
+                            }
+                            _loading.value = false
+                        }
+
+                        is Resource.Loading -> {
+                            _loading.value = true
+                        }
+
+                        is Resource.Error -> {
+                            _error.value = result.message.orEmpty()
+                            _loading.value = false
+                        }
                     }
                 }
         }

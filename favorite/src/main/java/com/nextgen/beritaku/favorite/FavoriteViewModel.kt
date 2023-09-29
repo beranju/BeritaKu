@@ -6,5 +6,5 @@ import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 
 
 class FavoriteViewModel (newsUseCase: NewsUseCase): ViewModel() {
-    val favoriteNews = newsUseCase.getFavoriteNews().asLiveData()
+//    val favoriteNews = newsUseCase.getFavoriteNews().asLiveData()
 }

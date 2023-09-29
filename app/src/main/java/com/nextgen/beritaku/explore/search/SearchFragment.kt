@@ -38,31 +38,31 @@ class SearchFragment : Fragment() {
 
     private fun getSearchNews() {
 
-        viewModel.searchResult.observe(viewLifecycleOwner){result->
-            lifecycleScope.launch {
-                result
-                    .collect{
-                        when(it){
-                            is Resource.Error -> {
-                                binding.error.root.visibility = View.VISIBLE
-                                binding.loadData.visibility = View.GONE
-                                binding.error.tvEmpty.text = it.message.toString()
-                            }
-                            is Resource.Loading -> {
-                                isLoading(true)
-                            }
-                            is Resource.Success -> {
-                                isLoading(false)
-                                binding.noData.root.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
-                                binding.rvItemSearch.visibility = if (it.data!!.isEmpty()) View.GONE else View.VISIBLE
-                                if (it.data!!.isNotEmpty()){
-                                    newsAdapter.setData(it.data!!)
-                                }
-                            }
-                        }
-                    }
-            }
-        }
+//        viewModel.searchResult.observe(viewLifecycleOwner){result->
+//            lifecycleScope.launch {
+//                result
+//                    .collect{
+////                        when(it){
+////                            is Resource.Error -> {
+////                                binding.error.root.visibility = View.VISIBLE
+////                                binding.loadData.visibility = View.GONE
+////                                binding.error.tvEmpty.text = it.message.toString()
+////                            }
+////                            is Resource.Loading -> {
+////                                isLoading(true)
+////                            }
+////                            is Resource.Success -> {
+////                                isLoading(false)
+////                                binding.noData.root.visibility = if (it.data!!.isEmpty()) View.VISIBLE else View.GONE
+////                                binding.rvItemSearch.visibility = if (it.data!!.isEmpty()) View.GONE else View.VISIBLE
+////                                if (it.data!!.isNotEmpty()){
+////                                    newsAdapter.setData(it.data!!)
+////                                }
+////                            }
+////                        }
+//                    }
+//            }
+//        }
     }
 
     private fun isLoading(state: Boolean) {

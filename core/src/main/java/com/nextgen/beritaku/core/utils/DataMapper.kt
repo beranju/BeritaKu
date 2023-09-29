@@ -2,11 +2,33 @@ package com.nextgen.beritaku.core.utils
 
 import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
+import com.nextgen.beritaku.core.data.source.remote.response.ResultsItem
 import com.nextgen.beritaku.core.data.source.remote.response.Source
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.model.SourceModel
 
 object DataMapper {
+
+    fun mapNewsDataResponseToNewsData(input: ResultsItem): NewsDataItem {
+        return NewsDataItem(
+            country = input.country,
+            creator = input.creator,
+            keywords = input.keywords,
+            imageUrl = input.imageUrl,
+            link = input.link,
+            description = input.description,
+            language = input.language,
+            title = input.title,
+            pubDate = input.pubDate,
+            content = input.content,
+            articleId = input.articleId,
+            videoUrl = input.videoUrl,
+            sourcePriority = input.sourcePriority,
+            sourceId = input.sourceId,
+            category = input.category
+        )
+    }
 
     fun mapResponseToEntity(input: List<ArticlesItem>, category: String? = null): List<NewsEntity>{
         val newsList = ArrayList<NewsEntity>()

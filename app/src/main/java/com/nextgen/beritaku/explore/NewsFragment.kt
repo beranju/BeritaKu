@@ -53,24 +53,24 @@ class NewsFragment : Fragment() {
     }
 
     private fun fetchData(tabName: String) {
-        viewModel.exploreNews(tabName, null).observe(viewLifecycleOwner){result->
-            when(result){
-                is Resource.Success -> {
-                    isLoading(false)
-                    binding.emptyDataNews.root.visibility = if (result.data!!.isEmpty()) View.VISIBLE else View.GONE
-                    newsAdapter.setData(result.data)
-                }
-                is Resource.Error -> {
-                    isLoading(false)
-                    binding.error.root.visibility = View.VISIBLE
-                    binding.error.tvEmpty.text = result.message
-                    Log.e(TAG, "${result.message}")
-                }
-                is Resource.Loading -> {
-                    isLoading(true)
-                }
-            }
-        }
+//        viewModel.exploreNews(tabName, null).observe(viewLifecycleOwner){result->
+//            when(result){
+//                is Resource.Success -> {
+//                    isLoading(false)
+//                    binding.emptyDataNews.root.visibility = if (result.data!!.isEmpty()) View.VISIBLE else View.GONE
+//                    newsAdapter.setData(result.data)
+//                }
+//                is Resource.Error -> {
+//                    isLoading(false)
+//                    binding.error.root.visibility = View.VISIBLE
+//                    binding.error.tvEmpty.text = result.message
+//                    Log.e(TAG, "${result.message}")
+//                }
+//                is Resource.Loading -> {
+//                    isLoading(true)
+//                }
+//            }
+//        }
     }
 
     override fun onCreateView(

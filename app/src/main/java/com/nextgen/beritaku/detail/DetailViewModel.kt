@@ -13,19 +13,19 @@ class DetailViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
     val isFavorite: LiveData<Boolean?> get() =  _isFavorite
 
     fun setFavoriteNews(news: NewsModel) {
-        viewModelScope.launch {
-            if (_isFavorite.value == true){
-                newsUseCase.deleteNews(news)
-            }else{
-                newsUseCase.insertFavoriteNews(news)
-            }
-            isFavoriteNews(news.publishedAt)
-        }
+//        viewModelScope.launch {
+//            if (_isFavorite.value == true){
+//                newsUseCase.deleteNews(news)
+//            }else{
+//                newsUseCase.insertFavoriteNews(news)
+//            }
+//            isFavoriteNews(news.publishedAt)
+//        }
     }
 
     fun isFavoriteNews(publishAt: String) {
-        viewModelScope.launch {
-            _isFavorite.value = newsUseCase.isFavoriteNews(publishAt)
-        }
+//        viewModelScope.launch {
+//            _isFavorite.value = newsUseCase.isFavoriteNews(publishAt)
+//        }
     }
 }

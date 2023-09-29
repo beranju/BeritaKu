@@ -10,15 +10,15 @@ class SearchViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
 
     val searchQuery = MutableStateFlow("")
 
-    val searchResult = searchQuery
-        .debounce(200)
-        .distinctUntilChanged()
-        .filter {
-            it.trim().isNotEmpty()
-        }
-        .mapLatest {
-            newsUseCase.searchNews(it)
-        }.flowOn(Dispatchers.Default).asLiveData()
+//    val searchResult = searchQuery
+//        .debounce(200)
+//        .distinctUntilChanged()
+//        .filter {
+//            it.trim().isNotEmpty()
+//        }
+//        .mapLatest {
+//            newsUseCase.searchNews(it)
+//        }.flowOn(Dispatchers.Default).asLiveData()
 
 
 

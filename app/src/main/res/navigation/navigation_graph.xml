@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_home_navigation_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_home_navigation_to_explore_navigation"
+            app:destination="@id/explore_navigation" />
     </fragment>
     <fragment
         android:id="@+id/explore_navigation"
