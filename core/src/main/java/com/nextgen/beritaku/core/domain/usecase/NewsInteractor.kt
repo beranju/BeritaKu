@@ -8,11 +8,10 @@ import kotlinx.coroutines.flow.Flow
 
 class NewsInteractor (private val newsRepository: INewsRepository): NewsUseCase {
     override fun getAllNews(): Flow<Resource<List<NewsDataItem>>> = newsRepository.getAllNews()
-//
-//    override fun getAllNewsByCategory(
-//        category: String,
-//        query: String?,
-//    ): Flow<Resource<List<NewsModel>>> = newsRepository.getAllNewsByCategory(category, query)
+    override fun getAllNewsByCategory(
+        category: String?,
+        query: String?
+    ): Flow<Resource<List<NewsDataItem>>> = newsRepository.getAllNewsByCategory(category, query)
 //
 //    override fun searchNews(query: String): Flow<Resource<List<NewsModel>>> = newsRepository.getNewsByQuery(query)
 //

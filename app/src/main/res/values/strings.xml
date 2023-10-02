@@ -48,5 +48,11 @@
 <!--    <string name="nothing_found_desc">nothing found</string>-->
 <!--    <string name="load_data_desc">load data ...</string>-->
     <string name="sign_up_desc">Sign Up</string>
-<!--    <string name="no_account">Your profile not yet setup</string>-->
+    <string name="environment">Environment</string>
+    <string name="food">Food</string>
+    <string name="politics">Politics</string>
+    <string name="top">Top</string>
+    <string name="tourism">Tourism</string>
+    <string name="world">World</string>
+    <!--    <string name="no_account">Your profile not yet setup</string>-->
 </resources>

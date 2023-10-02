@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
-import com.nextgen.beritaku.core.data.source.Resource
+import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
 import com.nextgen.beritaku.detail.DetailFragment
+import com.nextgen.beritaku.utils.Categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -23,13 +24,35 @@ class NewsFragment : Fragment() {
     private val newsAdapter: NewsAdapter by lazy {
         NewsAdapter()
     }
+    private val exploreAdapter: ForYouAdapter by lazy {
+        ForYouAdapter()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tabName = arguments?.getString(ARG_SECTION_NUMBER).toString()
 
-        fetchData(tabName)
-        setupRecyclerView()
+        if (tabName.isEmpty() || tabName == Categories.Semua.value) {
+            viewModel.fetchNews(null, null)
+        } else {
+            viewModel.fetchNews(tabName)
+        }
+
+        binding.rvNewsItem.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = exploreAdapter
+        }
+
+        viewModel.news.observe(viewLifecycleOwner) { data ->
+            exploreAdapter.submitList(data)
+        }
+        viewModel.loading.observe(viewLifecycleOwner){isLoading ->
+            isLoading(isLoading)
+        }
+        viewModel.error.observe(viewLifecycleOwner){error ->
+            Log.e(TAG, "onFailure: $error")
+        }
 
     }
 
@@ -40,7 +63,7 @@ class NewsFragment : Fragment() {
             setHasFixedSize(true)
             adapter = newsAdapter
         }
-        newsAdapter.onClick = {dataNews->
+        newsAdapter.onClick = { dataNews ->
             val bundle = Bundle()
             bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
             findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
@@ -90,12 +113,6 @@ class NewsFragment : Fragment() {
     companion object {
         private const val TAG = "NewsFragment"
         const val ARG_SECTION_NUMBER = "section_number"
-        const val TAB_BUSINESS = "business"
-        const val TAB_ENTERTAINMENT = "entertainment"
-        const val TAB_HEALTH = "health"
-        const val TAB_SCIENCE = "science"
-        const val TAB_SPORT = "sport"
-        const val TAB_TECH = "technology"
 
     }
 }

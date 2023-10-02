@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.databinding.FragmentExploreBinding
+import com.nextgen.beritaku.utils.Categories
 
 class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
@@ -23,9 +24,10 @@ class ExploreFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.viewPager.adapter = SectionPagerAdapter( childFragmentManager, viewLifecycleOwner.lifecycle)
-        TabLayoutMediator(binding.tabs, binding.viewPager){tab, position->
-            tab.text = resources.getString(TAB_TITLES[position])
+        binding.viewPager.adapter =
+            SectionPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = Categories.values()[position].name
         }.attach()
     }
 
@@ -49,13 +51,7 @@ class ExploreFragment : Fragment() {
     }
 
     companion object {
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2,
-            R.string.tab_text_3,
-            R.string.tab_text_4,
-            R.string.tab_text_5,
-            R.string.tab_text_6
-        )
+        private val TAB_TITLES: IntArray =
+            IntArray(Categories.values().size) { Categories.values()[it].ordinal }
     }
 }

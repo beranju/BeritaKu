@@ -11,5 +11,7 @@ object Constants {
     const val NEWS_API_HOST_NAME = "newsapi.org"
     const val NEWS_DATA_HOST_NAME = "newsdata.io"
 
+    const val TOP_CATEGORY = "top"
+
     const val WORD_PER_MINUTE = 200
 }

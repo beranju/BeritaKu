@@ -42,7 +42,7 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="?attr/colorPrimary"
         app:tabBackground="@android:color/transparent"
-        app:tabTextColor="?attr/colorOnSecondary" />
+        app:tabTextColor="?attr/colorOnSurfaceVariant" />
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"

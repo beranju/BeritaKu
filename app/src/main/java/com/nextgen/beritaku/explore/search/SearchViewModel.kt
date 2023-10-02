@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.*
 
 class SearchViewModel (private val newsUseCase: NewsUseCase): ViewModel() {
 
-    val searchQuery = MutableStateFlow("")
+//    val searchQuery = MutableStateFlow("")
 
 //    val searchResult = searchQuery
 //        .debounce(200)
