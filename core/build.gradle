@@ -23,21 +23,21 @@ android {
 
     buildTypes {
         release {
-            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"d7fb30a88c9047efbb9d6f9eb35d478e"'
+            buildConfigField "String", "BASE_URL", "\"${NEWS_API_BASE_URL}\""
+            buildConfigField "String", "API_KEY", "\"${NEWS_API_API_KEY_RELEASE}\""
 
-            buildConfigField "String", "NEWSDATA_BASE_URL", '"https://newsdata.io/api/1/"'
-            buildConfigField "String", "NEWSDATA_API_KEY", '"pub_299936f7b858d8d50d61b8d12d4e0fc43a41e"'
+            buildConfigField "String", "NEWSDATA_BASE_URL", "\"${NEWS_DATA_BASE_URL}\""
+            buildConfigField "String", "NEWSDATA_API_KEY", "\"${NEWS_DATA_API_KEY}\""
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug{
-            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"065632db359c4f7f9ffd74105e77f66b"'
+            buildConfigField "String", "BASE_URL", "\"${NEWS_API_BASE_URL}\""
+            buildConfigField "String", "API_KEY", "\"${NEWS_API_API_KEY}\""
 
-            buildConfigField "String", "NEWSDATA_BASE_URL", '"https://newsdata.io/api/1/"'
-            buildConfigField "String", "NEWSDATA_API_KEY", '"pub_299936f7b858d8d50d61b8d12d4e0fc43a41e"'
+            buildConfigField "String", "NEWSDATA_BASE_URL", "\"${NEWS_DATA_BASE_URL}\""
+            buildConfigField "String", "NEWSDATA_API_KEY", "\"${NEWS_DATA_API_KEY}\""
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
