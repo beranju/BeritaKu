@@ -1,6 +1,7 @@
 package com.nextgen.beritaku.home
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.google.android.material.carousel.CarouselLayoutManager
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.core.ui.HeadlineAdapter
+import com.nextgen.beritaku.core.utils.Utils.getCurrentDayDate
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
+import com.nextgen.beritaku.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -37,6 +41,27 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val currentDayDate = getCurrentDayDate()
+        binding.tvDateToday.text = currentDayDate
+        binding.tvGreeting.text = if (homeViewModel.userData == null){
+            "Hello, there"
+        }else {
+            buildString {
+                append("Welcome, ")
+                append(homeViewModel.userData?.displayName ?: "")
+            }
+    }
+
+        forYouAdapter.onClick = {item ->
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
+            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle )
+        }
+        headlineAdapter.onClick = {item ->
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
+            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle )
+        }
 
         binding.rvHomeForYou.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -48,6 +73,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
             setHasFixedSize(true)
             adapter = headlineAdapter
         }
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(binding.rvHomeHeadline)
 
         homeViewModel.forYouNews.observe(viewLifecycleOwner) { items ->
             forYouAdapter.submitList(items)

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.utils.DateUtils
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
@@ -20,41 +21,42 @@ class DetailFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModel()
-    private var dataNews: NewsModel? = null
+    private var dataNews: NewsDataItem? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataNews =
             activity?.intent?.getParcelableExtra(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
 
-        viewModel.isFavoriteNews(dataNews!!.publishedAt)
+        viewModel.isFavoriteNews(dataNews!!.pubDate.orEmpty())
         setupView(dataNews)
         binding.backButton.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
 
     }
 
-    private fun setupView(data: NewsModel?) {
+    private fun setupView(data: NewsDataItem?) {
         data.let {
             binding.apply {
                 title.text = data?.title
-                label.text = data?.source?.name ?: "Anonim"
+                label.text = data?.sourceId ?: "Anonim"
                 description.text = data?.description
-                author.text = data?.author ?: "Anonim"
-                date.text = DateUtils.dateFormat(data?.publishedAt.toString())
+                author.text = data?.creator ?: data?.sourceId
+//                date.text = DateUtils.dateFormat(data?.pubDate.toString())
+                date.text = data?.pubDate.toString()
                 content.text = data?.content ?: ""
                 Glide.with(requireContext())
-                    .load(data?.urlToImage)
+                    .load(data?.imageUrl)
                     .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
                     .centerCrop()
                     .into(thumbnail)
                 readmore.setOnClickListener{
                     val bundle = Bundle()
-                    bundle.putString(WebFragment.URL, data?.url)
+                    bundle.putString(WebFragment.URL, data?.link)
                     findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
                 }
                 favorite.setOnClickListener {
-                    viewModel.setFavoriteNews(dataNews!!)
+//                    viewModel.setFavoriteNews(dataNews!!)
                 }
                 viewModel.isFavorite.observe(viewLifecycleOwner){
                     setStatusFavorite(it!!)
@@ -80,8 +82,8 @@ class DetailFragment : Fragment(), View.OnClickListener {
             binding.ivShare -> {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_SUBJECT, "Baca berita menarik dari ${dataNews?.source?.name}")
-                    putExtra(Intent.EXTRA_TEXT, dataNews?.title + "\nKlik link dibawah untuk selengkapnya ${dataNews?.url}")
+                    putExtra(Intent.EXTRA_SUBJECT, "Baca berita menarik dari ${dataNews?.sourceId}")
+                    putExtra(Intent.EXTRA_TEXT, dataNews?.title + "\nKlik link dibawah untuk selengkapnya ${dataNews?.link}")
                     type = "text/plain"
                 }
                 val shareNews = Intent.createChooser(intent, null)

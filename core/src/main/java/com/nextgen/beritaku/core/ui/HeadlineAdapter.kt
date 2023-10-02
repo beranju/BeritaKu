@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nextgen.beritaku.core.databinding.HeadlineItemBinding
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
+import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage
 
 class HeadlineAdapter : ListAdapter<NewsDataItem, HeadlineAdapter.HeadlineViewHolder>(DIFF_UTIL) {
     var onClick: ((NewsDataItem) -> Unit)? = null
@@ -34,9 +35,7 @@ class HeadlineAdapter : ListAdapter<NewsDataItem, HeadlineAdapter.HeadlineViewHo
                 tvCategory.text = item?.category?.first()
                 tvSource.text = item?.sourceId
                 tvTitleNews.text = item?.title.orEmpty()
-                Glide.with(itemView.context)
-                    .load(item?.imageUrl)
-                    .into(ivThumbnail)
+                binding.ivThumbnail.loadImage(item?.imageUrl.toString())
             }
         }
 

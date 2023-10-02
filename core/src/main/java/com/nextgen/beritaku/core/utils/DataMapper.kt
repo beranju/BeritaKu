@@ -13,9 +13,9 @@ object DataMapper {
     fun mapNewsDataResponseToNewsData(input: ResultsItem): NewsDataItem {
         return NewsDataItem(
             country = input.country,
-            creator = input.creator,
-            keywords = input.keywords,
-            imageUrl = input.imageUrl,
+            creator = input.creator.toString(),
+            keywords = input.keywords.toString(),
+            imageUrl = input.imageUrl.toString(),
             link = input.link,
             description = input.description,
             language = input.language,
@@ -23,7 +23,7 @@ object DataMapper {
             pubDate = input.pubDate,
             content = input.content,
             articleId = input.articleId,
-            videoUrl = input.videoUrl,
+            videoUrl = input.videoUrl.toString(),
             sourcePriority = input.sourcePriority,
             sourceId = input.sourceId,
             category = input.category

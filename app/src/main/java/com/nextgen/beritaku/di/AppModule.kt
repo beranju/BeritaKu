@@ -10,6 +10,7 @@ import com.nextgen.beritaku.explore.search.SearchViewModel
 import com.nextgen.beritaku.home.HomeViewModel
 import com.nextgen.beritaku.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.scope.get
 import org.koin.dsl.module
 
 val useCaseModule = module {

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nextgen.beritaku.core.databinding.ForYouItemBinding
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
+import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage
 import com.nextgen.beritaku.core.utils.Utils.calculateReadTime
 
 class ForYouAdapter : ListAdapter<NewsDataItem, ForYouAdapter.ForYouViewHolder>(DIFF_UTIL) {
@@ -35,11 +36,9 @@ class ForYouAdapter : ListAdapter<NewsDataItem, ForYouAdapter.ForYouViewHolder>(
             with(binding) {
                 tvTitle.text = item?.title.orEmpty()
                 tvCategory.text = item?.category?.first()
-                tvAuthor.text = item?.creator.toString() ?: ""
+                tvAuthor.text = item?.creator ?: item?.sourceId
                 tvReadTime.text = calculateReadTime(item?.content.orEmpty())
-                Glide.with(itemView.context)
-                    .load(item?.imageUrl.toString())
-                    .into(sivPhoto)
+                sivPhoto.loadImage(item?.imageUrl.toString())
             }
         }
         init {

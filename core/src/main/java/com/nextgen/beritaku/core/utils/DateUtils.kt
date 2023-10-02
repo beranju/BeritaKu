@@ -10,7 +10,5 @@ object DateUtils {
         val now = Calendar.getInstance().timeInMillis
         val result = android.text.format.DateUtils.getRelativeTimeSpanString(dateTime.time, now, android.text.format.DateUtils.MINUTE_IN_MILLIS)
         return result.toString()
-
-
     }
 }
