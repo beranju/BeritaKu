@@ -54,5 +54,6 @@
     <string name="top">Top</string>
     <string name="tourism">Tourism</string>
     <string name="world">World</string>
+    <string name="searchbar_hint">Temukan berita mu</string>
     <!--    <string name="no_account">Your profile not yet setup</string>-->
 </resources>

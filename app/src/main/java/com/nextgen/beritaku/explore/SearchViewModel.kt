@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
-import com.nextgen.beritaku.core.utils.Constants.TOP_CATEGORY
 import kotlinx.coroutines.launch
 
-class ExploreViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
+class SearchViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
+
+    private var _query: MutableLiveData<String> = MutableLiveData()
+    val query: LiveData<String> = _query
 
     private var _news: MutableLiveData<List<NewsDataItem>> = MutableLiveData()
     val news: LiveData<List<NewsDataItem>> get() = _news
@@ -21,13 +23,9 @@ class ExploreViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
     private var _error: MutableLiveData<String?> = MutableLiveData(null)
     val error: LiveData<String?> get() = _error
 
-    init {
-        fetchNews(category = TOP_CATEGORY)
-    }
-
-    fun fetchNews(category: String?, query: String? = null) {
+    fun findNewsByQuery(query: String) {
         viewModelScope.launch {
-            newsUseCase.getAllNewsByCategory(category, query)
+            newsUseCase.getAllNewsByCategory(category = null, query)
                 .collect { result ->
                     when (result) {
                         is Resource.Loading -> {
@@ -41,14 +39,25 @@ class ExploreViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
 
                         is Resource.Success -> {
                             _loading.value = false
-                            if (result.data?.isNotEmpty() == true) {
-                                _news.value = result.data!!
-                            } else {
-                                _news.value = emptyList()
-                            }
+                            _news.value =
+                                if (result.data?.isNotEmpty() == true) result.data!! else emptyList()
                         }
                     }
                 }
         }
     }
+
+//    val searchQuery = MutableStateFlow("")
+
+//    val searchResult = searchQuery
+//        .debounce(200)
+//        .distinctUntilChanged()
+//        .filter {
+//            it.trim().isNotEmpty()
+//        }
+//        .mapLatest {
+//            newsUseCase.searchNews(it)
+//        }.flowOn(Dispatchers.Default).asLiveData()
+
+
 }
