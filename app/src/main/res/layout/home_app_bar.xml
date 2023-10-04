@@ -27,6 +27,16 @@
         app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
         app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
 
+    <ImageView
+        android:id="@+id/iv_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_favorite_24"
+        app:layout_constraintBottom_toBottomOf="@+id/siv_profile"
+        app:layout_constraintEnd_toStartOf="@+id/siv_profile"
+        app:layout_constraintTop_toTopOf="@+id/siv_profile" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/siv_profile"
         android:layout_width="48dp"

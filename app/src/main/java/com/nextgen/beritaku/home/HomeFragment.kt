@@ -1,7 +1,7 @@
 package com.nextgen.beritaku.home
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
+import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.core.ui.HeadlineAdapter
@@ -43,24 +45,24 @@ class HomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         val currentDayDate = getCurrentDayDate()
         binding.tvDateToday.text = currentDayDate
-        binding.tvGreeting.text = if (homeViewModel.userData == null){
-            "Hello, there"
-        }else {
+        binding.tvGreeting.text = if (homeViewModel.userData == null) {
+            "Welcome, Temukan berita mu"
+        } else {
             buildString {
                 append("Welcome, ")
                 append(homeViewModel.userData?.displayName ?: "")
             }
-    }
-
-        forYouAdapter.onClick = {item ->
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
-            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle )
         }
-        headlineAdapter.onClick = {item ->
+
+        forYouAdapter.onClick = { item ->
             val bundle = Bundle()
             bundle.putParcelable(DetailFragment.DATA_ITEM, item)
-            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle )
+            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
+        }
+        headlineAdapter.onClick = { item ->
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
+            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
         }
 
         binding.rvHomeForYou.apply {
@@ -91,6 +93,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         binding.tvForYouViewAll.setOnClickListener(this)
         binding.appBar.sivProfile.setOnClickListener(this)
+        binding.appBar.ivFavorite.setOnClickListener(this)
     }
 
     private fun showError(message: String) {
@@ -118,9 +121,56 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.account_navigation)
             }
 
+            binding.appBar.ivFavorite -> {
+                if (homeViewModel.userData == null || homeViewModel.userData!!.isAnonymous) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Anda harus login dahulu agar bisa menyimpan berita",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    try {
+                        installModuleFavorite()
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "Module Not Found", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+
             else -> {
                 Toast.makeText(requireContext(), "No action", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun installModuleFavorite() {
+        val splitInstallManager = SplitInstallManagerFactory.create(requireContext())
+        val moduleFavorite = "favorite"
+        if (splitInstallManager.installedModules.contains(moduleFavorite)) {
+            moveToActivity()
+        } else {
+            val request = SplitInstallRequest.newBuilder()
+                .addModule(moduleFavorite)
+                .build()
+            splitInstallManager.startInstall(request)
+                .addOnSuccessListener {
+                    moveToActivity()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), "Error installing module", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        }
+
+    }
+
+    private fun moveToActivity() {
+        startActivity(
+            Intent(
+                requireContext(),
+                Class.forName("com.nextgen.beritaku.favorite.FavoriteActivity")
+            )
+        )
     }
 }
