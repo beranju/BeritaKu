@@ -32,7 +32,7 @@ class HomeViewModel(private val newsUseCase: NewsUseCase, private val authReposi
         topHeadline()
     }
 
-    private fun topHeadline() =
+    fun topHeadline() =
         viewModelScope.launch {
             newsUseCase.getAllNews()
                 .collect { result ->
@@ -40,6 +40,7 @@ class HomeViewModel(private val newsUseCase: NewsUseCase, private val authReposi
                         is Resource.Success -> {
                             if (result.data!!.isNotEmpty()) {
                                 _forYouNews.value = result.data!!
+                                _topNews.value = emptyList()
                                 _topNews.value = result.data!!.take(5).reversed()
                             } else {
                                 _forYouNews.value = emptyList()

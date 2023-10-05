@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.nextgen.beritaku.core.databinding.HeadlineItemBinding
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage

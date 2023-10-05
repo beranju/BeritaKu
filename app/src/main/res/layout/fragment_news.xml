@@ -11,7 +11,7 @@
         android:id="@+id/rv_news_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_explore_news"
+        tools:listitem="@layout/for_you_item"
         />
 
     <include
@@ -47,10 +47,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <include layout="@layout/item_explore_placeholder"/>
-                <include layout="@layout/item_explore_placeholder"/>
-                <include layout="@layout/item_explore_placeholder"/>
-                <include layout="@layout/item_explore_placeholder"/>
+                <include layout="@layout/for_you_item_placeholder"/>
+                <include layout="@layout/for_you_item_placeholder"/>
+                <include layout="@layout/for_you_item_placeholder"/>
+                <include layout="@layout/for_you_item_placeholder"/>
             </LinearLayout>
         </ScrollView>
     </com.facebook.shimmer.ShimmerFrameLayout>

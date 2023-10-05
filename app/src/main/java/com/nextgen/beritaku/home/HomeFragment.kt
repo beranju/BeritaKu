@@ -46,7 +46,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val currentDayDate = getCurrentDayDate()
         binding.tvDateToday.text = currentDayDate
         binding.tvGreeting.text = if (homeViewModel.userData == null) {
-            "Welcome, Temukan berita mu"
+            "Welcome,\nTemukan berita mu"
         } else {
             buildString {
                 append("Welcome, ")
@@ -91,6 +91,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             isLoading(it)
         }
 
+        binding.srlHome.setOnRefreshListener {
+            homeViewModel.topHeadline()
+        }
         binding.tvForYouViewAll.setOnClickListener(this)
         binding.appBar.sivProfile.setOnClickListener(this)
         binding.appBar.ivFavorite.setOnClickListener(this)
@@ -105,6 +108,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.sflForYou.visibility = if (state) View.VISIBLE else View.GONE
         binding.sflHeadline.visibility = if (state) View.VISIBLE else View.GONE
         binding.rvHomeForYou.visibility = if (state) View.GONE else View.VISIBLE
+        binding.rvHomeHeadline.visibility = if (state) View.GONE else View.VISIBLE
+        if(state){
+            binding.srlHome.isRefreshing = false
+        }
     }
 
     companion object {
@@ -122,19 +129,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             binding.appBar.ivFavorite -> {
-                if (homeViewModel.userData == null || homeViewModel.userData!!.isAnonymous) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Anda harus login dahulu agar bisa menyimpan berita",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    try {
-                        installModuleFavorite()
-                    } catch (e: Exception) {
-                        Toast.makeText(requireContext(), "Module Not Found", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                try {
+                    installModuleFavorite()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Module Not Found", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 

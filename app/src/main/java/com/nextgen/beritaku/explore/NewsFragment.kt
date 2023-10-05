@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
-import com.nextgen.beritaku.core.ui.NewsAdapter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
 import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.utils.Categories
@@ -21,9 +20,6 @@ class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ExploreViewModel by viewModel()
-    private val newsAdapter: NewsAdapter by lazy {
-        NewsAdapter()
-    }
     private val exploreAdapter: ForYouAdapter by lazy {
         ForYouAdapter()
     }
@@ -56,44 +52,9 @@ class NewsFragment : Fragment() {
 
     }
 
-    private fun setupRecyclerView() {
-        newsAdapter.viewType = 2
-        binding.rvNewsItem.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-            adapter = newsAdapter
-        }
-        newsAdapter.onClick = { dataNews ->
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, dataNews)
-            findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
-        }
-    }
-
     private fun isLoading(state: Boolean) {
         binding.loadData.visibility = if (state) View.VISIBLE else View.GONE
         binding.rvNewsItem.visibility = if (state) View.GONE else View.VISIBLE
-    }
-
-    private fun fetchData(tabName: String) {
-//        viewModel.exploreNews(tabName, null).observe(viewLifecycleOwner){result->
-//            when(result){
-//                is Resource.Success -> {
-//                    isLoading(false)
-//                    binding.emptyDataNews.root.visibility = if (result.data!!.isEmpty()) View.VISIBLE else View.GONE
-//                    newsAdapter.setData(result.data)
-//                }
-//                is Resource.Error -> {
-//                    isLoading(false)
-//                    binding.error.root.visibility = View.VISIBLE
-//                    binding.error.tvEmpty.text = result.message
-//                    Log.e(TAG, "${result.message}")
-//                }
-//                is Resource.Loading -> {
-//                    isLoading(true)
-//                }
-//            }
-//        }
     }
 
     override fun onCreateView(
