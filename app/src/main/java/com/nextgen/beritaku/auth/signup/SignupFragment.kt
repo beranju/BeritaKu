@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SignupFragment : Fragment(), View.OnClickListener {
 
     private var _binding : FragmentSignupBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel: SignUpViewModel by viewModel()
 
 
@@ -25,13 +25,13 @@ class SignupFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSignup.setOnClickListener(this)
-        binding.tvLogin.setOnClickListener(this)
+        binding?.btnSignup?.setOnClickListener(this)
+        binding?.tvLogin?.setOnClickListener(this)
         viewModel.uiState.observe(viewLifecycleOwner){state->
             when(state){
                 is UiState.Loading -> {
                     Log.d(TAG, "Loading...")
-                    binding.apply {
+                    binding?.apply {
                         btnSignup.isEnabled = false
                         tvLogin.isEnabled = false
                     }
@@ -52,16 +52,16 @@ class SignupFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when(view){
-            binding.btnSignup -> {
-                val name = binding.edtName.text.toString().trim()
-                val email = binding.etEmail.text.toString().trim()
-                val password = binding.etPassword.text.toString().trim()
-                val rePassword = binding.etReTypePass.text.toString().trim()
+            binding?.btnSignup -> {
+                val name = binding?.edtName?.text.toString().trim()
+                val email = binding?.etEmail?.text.toString().trim()
+                val password = binding?.etPassword?.text.toString().trim()
+                val rePassword = binding?.etReTypePass?.text.toString().trim()
                 if (validate(name, email, password, rePassword)){
                     viewModel.registerWithEmail(email, password, name)
                 }
             }
-            binding.tvLogin -> {
+            binding?.tvLogin -> {
                 val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
                 findNavController().navigate(action)
             }
@@ -76,35 +76,35 @@ class SignupFragment : Fragment(), View.OnClickListener {
     ): Boolean {
         resetAllError()
         if(name.isEmpty()){
-            binding.edtName.error = getString(R.string.error_et_name)
+            binding?.edtName?.error = getString(R.string.error_et_name)
             return false
         }
 
         if (email.isEmpty()){
-            binding.etEmail.error = getString(R.string.error_et_email)
+            binding?.etEmail?.error = getString(R.string.error_et_email)
             return false
         }
 
         if (password.isEmpty() || rePassword.isEmpty()){
-            binding.etPassword.error = getString(R.string.error_et_password)
-            binding.etReTypePass.error = getString(R.string.error_et_password)
+            binding?.etPassword?.error = getString(R.string.error_et_password)
+            binding?.etReTypePass?.error = getString(R.string.error_et_password)
             return false
         }
 
         if (password != rePassword){
-            binding.etPassword.error = getString(R.string.error_pass_not_match)
+            binding?.etPassword?.error = getString(R.string.error_pass_not_match)
             return false
         }
 
         if (!email.isEmailValid()){
-            binding.etEmail.error = getString(R.string.error_email_not_valid)
+            binding?.etEmail?.error = getString(R.string.error_email_not_valid)
             return false
         }
         return true
     }
 
     private fun resetAllError() {
-        binding.apply {
+        binding?.apply {
             edtName.error = null
             etEmail.error = null
             etPassword.error = null
@@ -115,9 +115,9 @@ class SignupFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentSignupBinding.inflate(layoutInflater)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {

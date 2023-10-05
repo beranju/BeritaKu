@@ -56,4 +56,11 @@
     <string name="world">World</string>
     <string name="searchbar_hint">Temukan berita mu</string>
     <!--    <string name="no_account">Your profile not yet setup</string>-->
+    <string name="text_anonim">Anonim</string>
+    <string name="web_view_title">Read News</string>
+    <string name="let_set_your_profile">Let set your profile!</string>
+    <string name="btn_go">Go !</string>
+    <string name="oopss_nothing_found">Oopss, nothing found</string>
+    <string name="oopss_something_went_wrong">Oopss, something went wrong</string>
+    <!--    <string name="no_account">Your profile not yet setup</string>-->
 </resources>

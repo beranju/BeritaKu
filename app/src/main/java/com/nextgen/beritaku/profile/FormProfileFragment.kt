@@ -10,11 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.nextgen.beritaku.R
+import com.nextgen.beritaku.core.utils.loadImage
 import com.nextgen.beritaku.databinding.FragmentFormProfileBinding
 import com.nextgen.beritaku.utils.UiState
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FormProfileFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentFormProfileBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private var uri: Uri? = null
     private val viewModel: ProfileViewModel by viewModel()
 
@@ -30,7 +29,7 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
             if (result.resultCode == Activity.RESULT_OK){
                 uri = result.data?.data
-                Glide.with(requireActivity()).load(uri).into(binding.photoProfile)
+                binding?.photoProfile?.let { Glide.with(requireActivity()).load(uri).into(it) }
             }
 
         }
@@ -38,21 +37,18 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val emptyImage = AppCompatResources.getDrawable(requireActivity(), R.drawable.ic_empty_image)
         viewModel.getUser()?.let { user->
             uri = user.photoUrl
-            Glide.with(requireContext())
-                .load(uri ?: emptyImage)
-                .into(binding.photoProfile)
-            binding.edtName.setText(user.displayName)
+            binding?.photoProfile?.loadImage(user.photoUrl.toString())
+            binding?.edtName?.setText(user.displayName)
         }
-        binding.ivSelectPhoto.setOnClickListener(this)
-        binding.btnUpdate.setOnClickListener(this)
+        binding?.ivSelectPhoto?.setOnClickListener(this)
+        binding?.btnUpdate?.setOnClickListener(this)
 
         viewModel.uiState.observe(viewLifecycleOwner){state ->
             when(state){
                 is UiState.Loading -> {
-                    binding.btnUpdate.isEnabled = false
+                    binding?.btnUpdate?.isEnabled = false
                 }
                 is UiState.Success -> {
                     val go = FormProfileFragmentDirections.actionFormProfileFragmentToAccountNavigation()
@@ -69,9 +65,9 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentFormProfileBinding.inflate(layoutInflater)
-        return binding.root
+        return binding?.root
     }
 
     override fun onDestroyView() {
@@ -79,19 +75,15 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
-    companion object {
-        const val TAG = "FormProfileFragment"
-    }
-
     override fun onClick(v: View?) {
         when(v){
-            binding.ivSelectPhoto -> {
+            binding?.ivSelectPhoto -> {
                 Intent(Intent.ACTION_PICK).apply {
                     type = "image/*"
                 }.also { intentGallery.launch(Intent.createChooser(it, null)) }
             }
-            binding.btnUpdate -> {
-                val name = binding.edtName.text.toString().trim()
+            binding?.btnUpdate -> {
+                val name = binding?.edtName?.text.toString().trim()
                 updateUserProfile(name, uri!!)
             }
         }
@@ -99,5 +91,9 @@ class FormProfileFragment : Fragment(), View.OnClickListener {
 
     private fun updateUserProfile(name: String, uri: Uri) {
         viewModel.updateDataUser(name, uri)
+    }
+
+    companion object {
+        const val TAG = "FormProfileFragment"
     }
 }
