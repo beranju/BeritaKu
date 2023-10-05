@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nextgen.beritaku.core.databinding.ForYouItemBinding
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
+import com.nextgen.beritaku.core.utils.DateUtils.dateFormat
+import com.nextgen.beritaku.core.utils.DateUtils.dateToTimeAgo
 import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage
 import com.nextgen.beritaku.core.utils.Utils.calculateReadTime
 
@@ -38,6 +40,7 @@ class ForYouAdapter : ListAdapter<NewsDataItem, ForYouAdapter.ForYouViewHolder>(
                 tvAuthor.text =
                     if (item?.creator.equals("null")) item?.sourceId else item?.creator
                 tvReadTime.text = calculateReadTime(item?.content.orEmpty())
+                tvDate.text = dateToTimeAgo(item?.pubDate.orEmpty())
                 sivPhoto.loadImage(item?.imageUrl.toString())
             }
         }

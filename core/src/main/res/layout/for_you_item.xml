@@ -37,39 +37,40 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:maxLines="2"
-        android:text="Lorem ipsum dolor lorem ipsum dolor lorem"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_author"
         app:layout_constraintEnd_toStartOf="@+id/siv_photo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_category" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_category"
+        tools:text="Lorem ipsum dolor lorem ipsum dolor lorem" />
 
     <TextView
         android:id="@+id/tv_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Author"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Author" />
 
     <TextView
         android:id="@+id/tv_read_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="4 min"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_author" />
+        app:layout_constraintStart_toEndOf="@id/tv_author"
+        tools:text="4 min" />
 
     <TextView
+        android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="12 hours ago"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_read_time" />
+        app:layout_constraintStart_toEndOf="@id/tv_read_time"
+        tools:text="12 hours ago" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@ import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.core.ui.HeadlineAdapter
-import com.nextgen.beritaku.core.utils.Utils.getCurrentDayDate
+import com.nextgen.beritaku.core.utils.DateUtils.getCurrentDayDate
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
 import com.nextgen.beritaku.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel

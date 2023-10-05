@@ -18,10 +18,4 @@ object Utils {
         return "$estimate min"
     }
 
-    fun getCurrentDayDate(): String {
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("EEEE, MMMM dd yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
-    }
-
 }
