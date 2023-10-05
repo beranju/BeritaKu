@@ -1,6 +1,8 @@
 package com.nextgen.beritaku.detail
 
 import android.content.Intent
+import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
-import com.nextgen.beritaku.core.domain.model.NewsModel
-import com.nextgen.beritaku.core.utils.DateUtils
+import com.nextgen.beritaku.core.utils.ExtentionFun.parcelable
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,10 +26,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataNews =
-            activity?.intent?.getParcelableExtra(DATA_ITEM) ?: arguments?.getParcelable(DATA_ITEM)
+        // ** this exp use extension fun
+        dataNews = requireActivity().intent.parcelable(DATA_ITEM)
 
-        viewModel.isFavoriteNews(dataNews!!.pubDate.orEmpty())
+//        viewModel.isFavoriteNews(dataNews!!.pubDate.orEmpty())
         setupView(dataNews)
         binding.backButton.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
@@ -47,10 +48,13 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 content.text = data?.content ?: ""
                 Glide.with(requireContext())
                     .load(data?.imageUrl)
-                    .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image))
+                    .apply(
+                        RequestOptions().placeholder(R.drawable.ic_load_image)
+                            .error(R.drawable.ic_empty_image)
+                    )
                     .centerCrop()
                     .into(thumbnail)
-                readmore.setOnClickListener{
+                readmore.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putString(WebFragment.URL, data?.link)
                     findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
@@ -58,7 +62,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 favorite.setOnClickListener {
 //                    viewModel.setFavoriteNews(dataNews!!)
                 }
-                viewModel.isFavorite.observe(viewLifecycleOwner){
+                viewModel.isFavorite.observe(viewLifecycleOwner) {
                     setStatusFavorite(it!!)
                 }
             }
@@ -67,23 +71,37 @@ class DetailFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setStatusFavorite(favorite: Boolean) {
-        if (favorite){
-            binding.favorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24))
-        }else{
-            binding.favorite.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_border_24))
+        if (favorite) {
+            binding.favorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_favorite_24
+                )
+            )
+        } else {
+            binding.favorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_favorite_border_24
+                )
+            )
         }
     }
 
     override fun onClick(view: View?) {
-        when(view){
+        when (view) {
             binding.backButton -> {
                 findNavController().navigateUp()
             }
+
             binding.ivShare -> {
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_SUBJECT, "Baca berita menarik dari ${dataNews?.sourceId}")
-                    putExtra(Intent.EXTRA_TEXT, dataNews?.title + "\nKlik link dibawah untuk selengkapnya ${dataNews?.link}")
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        dataNews?.title + "\nKlik link dibawah untuk selengkapnya ${dataNews?.link}"
+                    )
                     type = "text/plain"
                 }
                 val shareNews = Intent.createChooser(intent, null)

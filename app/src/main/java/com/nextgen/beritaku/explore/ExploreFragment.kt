@@ -35,7 +35,7 @@ class ExploreFragment : Fragment() {
         setupTabLayout()
 
         binding.searchView.setupWithSearchBar(binding.searchBar)
-        binding.searchView.editText.setOnEditorActionListener { v, actionId, event ->
+        binding.searchView.editText.setOnEditorActionListener { _, actionId, _ ->
             searchBar.text = searchView.text
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
                 val query = searchView.text.toString()
