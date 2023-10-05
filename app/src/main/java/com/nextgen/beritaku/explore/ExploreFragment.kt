@@ -16,8 +16,6 @@ import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.databinding.FragmentExploreBinding
 import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.utils.Categories
-import kotlinx.android.synthetic.main.fragment_explore.searchBar
-import kotlinx.android.synthetic.main.fragment_explore.searchView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ExploreFragment : Fragment() {
@@ -30,22 +28,21 @@ class ExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupToolbar()
         setupTabLayout()
 
         binding.searchView.setupWithSearchBar(binding.searchBar)
         binding.searchView.editText.setOnEditorActionListener { _, actionId, _ ->
-            searchBar.text = searchView.text
-            if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                val query = searchView.text.toString()
+            binding.searchBar.text = binding.searchView.text
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val query = binding.searchView.text.toString()
                 if (query.isNotEmpty()) {
                     viewModel.findNewsByQuery(query)
                 } else {
-                    Toast.makeText(requireContext(), "Masukkan beberapa kata", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Masukkan beberapa kata", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 true
-            }else{
+            } else {
                 false
             }
         }
@@ -65,10 +62,10 @@ class ExploreFragment : Fragment() {
         viewModel.news.observe(viewLifecycleOwner) { data ->
             searchAdapter.submitList(data)
         }
-        viewModel.loading.observe(viewLifecycleOwner){isLoading ->
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             isLoading(isLoading)
         }
-        viewModel.error.observe(viewLifecycleOwner){error ->
+        viewModel.error.observe(viewLifecycleOwner) { error ->
             Log.e(TAG, "onFailure: $error")
         }
 
@@ -82,11 +79,6 @@ class ExploreFragment : Fragment() {
         }.attach()
     }
 
-    private fun setupToolbar() {
-        binding.tvSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_explore_navigation_to_searchFragment)
-        }
-    }
 
     private fun isLoading(state: Boolean) {
         binding.loadData.root.visibility = if (state) View.VISIBLE else View.GONE
@@ -109,7 +101,5 @@ class ExploreFragment : Fragment() {
 
     companion object {
         const val TAG = "ExploreFragment"
-        private val TAB_TITLES: IntArray =
-            IntArray(Categories.values().size) { Categories.values()[it].ordinal }
     }
 }
