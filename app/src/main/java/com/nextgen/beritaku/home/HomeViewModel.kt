@@ -1,5 +1,6 @@
 package com.nextgen.beritaku.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,6 +39,7 @@ class HomeViewModel(private val newsUseCase: NewsUseCase, private val authReposi
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {
+                            Log.d("HomeFragment", "Sukses fetch data")
                             if (result.data!!.isNotEmpty()) {
                                 _forYouNews.value = result.data!!
                                 _topNews.value = emptyList()
@@ -49,10 +51,12 @@ class HomeViewModel(private val newsUseCase: NewsUseCase, private val authReposi
                         }
 
                         is Resource.Loading -> {
+                            Log.d("HomeFragment", "Loading")
                             _loading.value = true
                         }
 
                         is Resource.Error -> {
+                            Log.e("HomeFragment", "error: ${result.message}")
                             _error.value = result.message.orEmpty()
                             _loading.value = false
                         }

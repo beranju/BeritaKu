@@ -4,6 +4,7 @@ import com.nextgen.beritaku.core.data.source.remote.response.NewsDataResponse
 import com.nextgen.beritaku.core.data.source.remote.response.NewsResponse
 import com.nextgen.beritaku.core.utils.Constants.NEWS_API_API_KEY
 import com.nextgen.beritaku.core.utils.Constants.NEWS_DATA_API_KEY
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -32,7 +33,7 @@ interface ApiService {
         @Query("image") image: Int = 1,
         @Query("country") country: String = "id",
         @Query("apiKey") apiKey: String = NEWS_DATA_API_KEY
-    ): NewsDataResponse
+    ): Response<NewsDataResponse>
 
 
 }

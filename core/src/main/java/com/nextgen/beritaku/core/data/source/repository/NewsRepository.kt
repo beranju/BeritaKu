@@ -1,5 +1,6 @@
 package com.nextgen.beritaku.core.data.source.repository
 
+import android.util.Log
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.data.source.local.room.NewsDao
 import com.nextgen.beritaku.core.data.source.remote.network.ApiService
@@ -94,11 +95,13 @@ class NewsRepository(
             emit(Resource.Loading())
             try {
                 val response = apiService.getAllNewsData()
-                if (response.status == "success") {
-                    if (response.results?.isNotEmpty() == true) {
-                        val result = response.results.let { items ->
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body?.results?.isNotEmpty() == true) {
+                        val result = body.results.let { items ->
                             items.map { mapNewsDataResponseToNewsData(it!!) }
                         }
+                        Log.d("Repository", "Sukses fetch data")
                         emit(Resource.Success(result))
                     } else {
                         emit(Resource.Success(emptyList()))
@@ -107,6 +110,8 @@ class NewsRepository(
                     emit(Resource.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
+                Log.e("Repository", "${e.message}")
+                e.printStackTrace()
                 emit(Resource.Error(e.localizedMessage?.toString() ?: "Something went wrong"))
             }
         }.flowOn(Dispatchers.IO)
@@ -119,9 +124,10 @@ class NewsRepository(
             emit(Resource.Loading())
             try {
                 val response = apiService.getAllNewsData(category = category, query = query)
-                if (response.status == "success") {
-                    if (response.results?.isNotEmpty() == true) {
-                        val result = response.results.let { items ->
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body?.results?.isNotEmpty() == true) {
+                        val result = body.results.let { items ->
                             items.map { mapNewsDataResponseToNewsData(it!!) }
                         }
                         emit(Resource.Success(result))
