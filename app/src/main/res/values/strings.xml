@@ -62,5 +62,7 @@
     <string name="btn_go">Go !</string>
     <string name="oopss_nothing_found">Oopss, nothing found</string>
     <string name="oopss_something_went_wrong">Oopss, something went wrong</string>
+    <string name="txt_untuk_anda">Untuk Anda</string>
+    <string name="txt_selengkapnya">Selengkapnya</string>
     <!--    <string name="no_account">Your profile not yet setup</string>-->
 </resources>
