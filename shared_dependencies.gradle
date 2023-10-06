@@ -11,10 +11,10 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$core_testing_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
     // ** turbine -> a small testing library for kotlin flow
-    testImplementation "app.cash.turbine:turbine:$turbine_version"
+    testImplementation "app.cash.turbine:turbine:1.0.0"
 
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
     implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
@@ -23,7 +23,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_ktx_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_ktx_version"
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+//    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:$viewmodel_ktx_version"
@@ -46,9 +46,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
 
     // implementasi of leak canary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.12"
 
     // lottie for animation
-    implementation "com.airbnb.android:lottie:$lottie_version"
+    implementation "com.airbnb.android:lottie:6.1.0"
 
 }
