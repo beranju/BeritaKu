@@ -3,6 +3,9 @@ package com.nextgen.beritaku.core.utils
 import com.nextgen.beritaku.core.BuildConfig
 
 object Constants {
+    const val NEWS_DATA = "newData"
+    const val NEWS_API = "newApi"
+
     const val NEWS_API_API_KEY = BuildConfig.API_KEY
     const val NEWS_API_BASE_URL = BuildConfig.BASE_URL
     const val NEWS_DATA_API_KEY = BuildConfig.NEWSDATA_API_KEY

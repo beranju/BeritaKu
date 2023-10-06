@@ -6,19 +6,25 @@ import com.nextgen.beritaku.core.BuildConfig
 import com.nextgen.beritaku.core.data.source.local.room.NewsDatabase
 import com.nextgen.beritaku.core.data.source.remote.network.ApiService
 import com.nextgen.beritaku.core.data.source.repository.AuthRepository
+import com.nextgen.beritaku.core.data.source.repository.NewsDataRepository
 import com.nextgen.beritaku.core.data.source.repository.NewsRepository
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
+import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.repository.IAuthRepository
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
+import com.nextgen.beritaku.core.utils.Constants.NEWS_API
+import com.nextgen.beritaku.core.utils.Constants.NEWS_API_BASE_URL
 import com.nextgen.beritaku.core.utils.Constants.NEWS_API_HOST_NAME
+import com.nextgen.beritaku.core.utils.Constants.NEWS_DATA
 import com.nextgen.beritaku.core.utils.Constants.NEWS_DATA_BASE_URL
 import com.nextgen.beritaku.core.utils.Constants.NEWS_DATA_HOST_NAME
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,6 +32,7 @@ import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
     factory { get<NewsDatabase>().newsDao() }
+    factory { get<NewsDatabase>().newsDataDao() }
     single {
         /**
          * add database encryption to room
@@ -43,7 +50,7 @@ val databaseModule = module {
             NewsDatabase::class.java,
             "newsdb"
         )
-            .fallbackToDestructiveMigration()
+//            .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
     }
@@ -51,7 +58,7 @@ val databaseModule = module {
 }
 
 val networkModule = module {
-    single {
+    single(named(NEWS_API)) {
         /**
          * add certificate pinning to network with okkhttp
          *
@@ -59,15 +66,34 @@ val networkModule = module {
          * this website can use to get SHA256 of web server
          * add all sha that shown in web
          */
-        // ** this certificate use fot NEWSAPI
-//        val certificatePinner = CertificatePinner.Builder()
-//            .add(NEWS_API_HOST_NAME, "sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk=")
-//            .add(NEWS_API_HOST_NAME, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
-//            .add(NEWS_API_HOST_NAME, "sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU=")
-//            .add(NEWS_API_HOST_NAME, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
-//            .build()
+        val certificatePinner = CertificatePinner.Builder()
+            .add(NEWS_API_HOST_NAME, "sha256/svXYI8MQpjkQ2SAbnIiqZOvk/sdbTlWScBbeJk4Legk=")
+            .add(NEWS_API_HOST_NAME, "sha256/hS5jJ4P+iQUErBkvoWBQOd1T7VOAYlOVegvv1iMzpxA=")
+            .add(NEWS_API_HOST_NAME, "sha256/7xmA6N1F1gp6ikj57Bg4DMG0jfUB+mZsEL4mZO0qbfU=")
+            .add(NEWS_API_HOST_NAME, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+            .build()
 
-        // ** this certificate used for NEWSDATA
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level =
+                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        }
+
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
+            .build()
+    }
+
+    single(named(NEWS_DATA)) {
+        /**
+         * add certificate pinning to network with okkhttp
+         *
+         * https://www.ssllabs.com/ssltest
+         * this website can use to get SHA256 of web server
+         * add all sha that shown in web
+         */
         val certificatePinner = CertificatePinner.Builder()
             .add(NEWS_DATA_HOST_NAME, "sha256/+LPoBcBSYRVb3qALxSD4hBQF3uhTYa1m9BCB/4NBpHM=")
             .add(NEWS_DATA_HOST_NAME, "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8=")
@@ -95,11 +121,20 @@ val networkModule = module {
             .build()
     }
 
-    single {
+    single(named(NEWS_API)) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(NEWS_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get(named(NEWS_API)))
+            .build()
+        retrofit.create(ApiService::class.java)
+    }
+
+    single(named(NEWS_DATA)) {
         val retrofit = Retrofit.Builder()
             .baseUrl(NEWS_DATA_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(get())
+            .client(get(named(NEWS_DATA)))
             .build()
         retrofit.create(ApiService::class.java)
     }
@@ -110,5 +145,6 @@ val authRepositoryModule = module {
 }
 
 val repositoryModule = module {
-    single<INewsRepository> { NewsRepository(get(), get()) }
+    single<INewsRepository<NewsModel>> { NewsRepository(get(named(NEWS_API)), get()) }
+    single<INewsRepository<NewsDataItem>> { NewsDataRepository(get(named(NEWS_DATA)), get()) }
 }

@@ -1,5 +1,6 @@
 package com.nextgen.beritaku.core.utils
 
+import com.nextgen.beritaku.core.data.source.local.entity.NewsDataEntity
 import com.nextgen.beritaku.core.data.source.local.entity.NewsEntity
 import com.nextgen.beritaku.core.data.source.remote.response.ArticlesItem
 import com.nextgen.beritaku.core.data.source.remote.response.ResultsItem
@@ -27,6 +28,35 @@ object DataMapper {
             sourcePriority = input.sourcePriority,
             sourceId = input.sourceId,
             category = input.category
+        )
+    }
+
+    fun mapNewsDataItemToNewsDataEntity(item: NewsDataItem): NewsDataEntity {
+        return NewsDataEntity(
+            articleId = item.articleId.orEmpty(),
+            creator = item.creator,
+            imageUrl = item.imageUrl,
+            link = item.link,
+            description = item.description,
+            title = item.title,
+            pubDate = item.pubDate,
+            content = item.content,
+            sourceId = item.sourceId,
+            category = item.category,
+        )
+    }
+    fun mapNewsDataEntityToNewsDataItem(item: NewsDataEntity): NewsDataItem {
+        return NewsDataItem(
+            articleId = item.articleId,
+            creator = item.creator,
+            imageUrl = item.imageUrl,
+            link = item.link,
+            description = item.description,
+            title = item.title,
+            pubDate = item.pubDate,
+            content = item.content,
+            sourceId = item.sourceId,
+            category = item.category,
         )
     }
 
