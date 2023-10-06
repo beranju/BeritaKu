@@ -10,6 +10,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.core.R
 
 object ExtentionFun {
+    fun String?.toListConverter(): List<String> = this?.split(",") ?: emptyList()
+    fun List<String?>?.toStringConverter(): String? = this?.joinToString(",")
+
+
     fun ImageView.loadImage(url: String?) = Glide.with(this).load(url)
         .apply(RequestOptions().placeholder(R.drawable.ic_load_image).error(R.drawable.ic_empty_image)).into(this)
 

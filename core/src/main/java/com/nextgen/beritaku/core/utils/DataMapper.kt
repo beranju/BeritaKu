@@ -8,6 +8,8 @@ import com.nextgen.beritaku.core.data.source.remote.response.Source
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.model.SourceModel
+import com.nextgen.beritaku.core.utils.ExtentionFun.toListConverter
+import com.nextgen.beritaku.core.utils.ExtentionFun.toStringConverter
 
 object DataMapper {
 
@@ -32,6 +34,7 @@ object DataMapper {
     }
 
     fun mapNewsDataItemToNewsDataEntity(item: NewsDataItem): NewsDataEntity {
+        val categoryString = item.category.toStringConverter()
         return NewsDataEntity(
             articleId = item.articleId.orEmpty(),
             creator = item.creator,
@@ -42,10 +45,11 @@ object DataMapper {
             pubDate = item.pubDate,
             content = item.content,
             sourceId = item.sourceId,
-            category = item.category,
+            category = categoryString,
         )
     }
     fun mapNewsDataEntityToNewsDataItem(item: NewsDataEntity): NewsDataItem {
+        val listCategory = item.category.toListConverter()
         return NewsDataItem(
             articleId = item.articleId,
             creator = item.creator,
@@ -56,7 +60,7 @@ object DataMapper {
             pubDate = item.pubDate,
             content = item.content,
             sourceId = item.sourceId,
-            category = item.category,
+            category = listCategory,
         )
     }
 

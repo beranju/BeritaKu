@@ -29,5 +29,5 @@ data class NewsDataEntity(
     @ColumnInfo(name = "sourceId")
     val sourceId: String? = null,
     @ColumnInfo(name = "category")
-    val category: List<String?>? = null
+    val category: String? = null
 ) : Parcelable

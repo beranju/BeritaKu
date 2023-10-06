@@ -11,10 +11,7 @@ import com.nextgen.beritaku.core.utils.SourceConverter
 @Database(
     entities = [NewsEntity::class, NewsDataEntity::class],
     version = 2,
-    autoMigrations = [
-        AutoMigration(from = 1, to = 2)
-                     ],
-    exportSchema = true
+    exportSchema = false
 )
 @TypeConverters(SourceConverter::class)
 abstract class NewsDatabase: RoomDatabase() {
