@@ -3,9 +3,10 @@ package com.nextgen.beritaku.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 
-class DetailViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
+class DetailViewModel(private val newsUseCase: NewsUseCase<NewsDataItem>) : ViewModel() {
     private var _isFavorite: MutableLiveData<Boolean?> = MutableLiveData()
     val isFavorite: LiveData<Boolean?> get() = _isFavorite
 

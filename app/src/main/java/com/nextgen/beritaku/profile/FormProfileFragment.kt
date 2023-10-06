@@ -13,7 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.nextgen.beritaku.core.utils.loadImage
+import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage
 import com.nextgen.beritaku.databinding.FragmentFormProfileBinding
 import com.nextgen.beritaku.utils.UiState
 import org.koin.androidx.viewmodel.ext.android.viewModel

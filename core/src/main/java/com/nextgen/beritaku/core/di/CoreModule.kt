@@ -50,7 +50,7 @@ val databaseModule = module {
             NewsDatabase::class.java,
             "newsdb"
         )
-//            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
     }
@@ -145,6 +145,6 @@ val authRepositoryModule = module {
 }
 
 val repositoryModule = module {
-    single<INewsRepository<NewsModel>> { NewsRepository(get(named(NEWS_API)), get()) }
-    single<INewsRepository<NewsDataItem>> { NewsDataRepository(get(named(NEWS_DATA)), get()) }
+    single<INewsRepository<NewsModel>>(named(NEWS_API)) { NewsRepository(get(named(NEWS_API)), get()) }
+    single<INewsRepository<NewsDataItem>>(named(NEWS_DATA)) { NewsDataRepository(get(named(NEWS_DATA)), get()) }
 }
