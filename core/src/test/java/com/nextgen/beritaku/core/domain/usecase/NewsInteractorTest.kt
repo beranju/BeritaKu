@@ -1,7 +1,7 @@
 package com.nextgen.beritaku.core.domain.usecase
 
 import com.nextgen.beritaku.core.data.source.Resource
-import com.nextgen.beritaku.core.domain.model.NewsModel
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.repository.INewsRepository
 import com.nextgen.beritaku.core.utils.DataDummy
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.flow
 import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
-
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -25,10 +24,10 @@ class NewsInteractorTest {
     private lateinit var newsRepository: INewsRepository
 
     @Before
-    fun setup(){
+    fun setup() {
         useCase = NewsInteractor(newsRepository)
-        val expected: Flow<Resource<List<NewsModel>>> = flow {
-            emit(Resource.Success(DataDummy.generateListNewsModel()))
+        val expected: Flow<Resource<List<NewsDataItem>>> = flow {
+            emit(Resource.Success(DataDummy.generateListNewsData()))
         }
         Mockito.`when`(newsRepository.getAllNews()).thenReturn(expected)
     }
@@ -37,7 +36,7 @@ class NewsInteractorTest {
     fun getAllNews() {
         val result = useCase.getAllNews()
         Mockito.verify(newsRepository).getAllNews()
-        Assert.assertNotNull(result)
+        assertNotNull(result)
     }
 
     @Test

@@ -6,7 +6,7 @@ import com.nextgen.beritaku.core.domain.usecase.NewsInteractor
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 import com.nextgen.beritaku.detail.DetailViewModel
 import com.nextgen.beritaku.explore.ExploreViewModel
-import com.nextgen.beritaku.explore.search.SearchViewModel
+import com.nextgen.beritaku.explore.SearchViewModel
 import com.nextgen.beritaku.home.HomeViewModel
 import com.nextgen.beritaku.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

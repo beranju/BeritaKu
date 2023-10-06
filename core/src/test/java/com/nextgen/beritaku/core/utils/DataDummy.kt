@@ -1,5 +1,6 @@
 package com.nextgen.beritaku.core.utils
 
+import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.model.NewsModel
 import com.nextgen.beritaku.core.domain.model.SourceModel
 
@@ -13,6 +14,15 @@ object DataDummy {
                     i.toString(),
                     i.toString(),
                 ),i.toString(),i.toString(),i.toString(),i.toString(), false)
+            data.add(list)
+        }
+        return data
+    }
+    fun generateListNewsData(): List<NewsDataItem>{
+        val data = ArrayList<NewsDataItem>()
+        for (i in 1..5){
+            val list =
+                NewsDataItem(articleId = i.toString())
             data.add(list)
         }
         return data

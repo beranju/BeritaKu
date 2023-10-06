@@ -1,7 +1,7 @@
 plugins {
     id "com.android.library"
     id "kotlin-android"
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
 
 }
@@ -23,25 +23,21 @@ android {
 
     buildTypes {
         release {
-            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"YOUR_API_KEY"'
-            buildConfigField "String", "SHA1", '"SHA1"'
-            buildConfigField "String", "SHA2", '"SHA2"'
-            buildConfigField "String", "SHA3", '"SHA3"'
-            buildConfigField "String", "SHA4", '"SHA4"'
-            buildConfigField "String", "PASSWORD", '"PASSWORD"'
+            buildConfigField "String", "BASE_URL", "\"${NEWS_API_BASE_URL}\""
+            buildConfigField "String", "API_KEY", "\"${NEWS_API_API_KEY_RELEASE}\""
+
+            buildConfigField "String", "NEWSDATA_BASE_URL", "\"${NEWS_DATA_BASE_URL}\""
+            buildConfigField "String", "NEWSDATA_API_KEY", "\"${NEWS_DATA_API_KEY}\""
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug{
-            buildConfigField "String", "BASE_URL", '"https://newsapi.org/v2/"'
-            buildConfigField "String", "API_KEY", '"YOUR_API_KEY"'
-            buildConfigField "String", "SHA1", '"SHA1"'
-            buildConfigField "String", "SHA2", '"SHA2"'
-            buildConfigField "String", "SHA3", '"SHA3"'
-            buildConfigField "String", "SHA4", '"SHA4"'
-            buildConfigField "String", "PASSWORD", '"PASSWORD"'
+            buildConfigField "String", "BASE_URL", "\"${NEWS_API_BASE_URL}\""
+            buildConfigField "String", "API_KEY", "\"${NEWS_API_API_KEY}\""
+
+            buildConfigField "String", "NEWSDATA_BASE_URL", "\"${NEWS_DATA_BASE_URL}\""
+            buildConfigField "String", "NEWSDATA_API_KEY", "\"${NEWS_DATA_API_KEY}\""
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -55,6 +51,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures{
+        buildConfig = true
         viewBinding true
     }
 }
@@ -65,7 +62,7 @@ dependencies {
 
     //room
     implementation "androidx.room:room-runtime:$room_version"
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     kapt "androidx.room:room-compiler:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
 
@@ -78,12 +75,12 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation "androidx.room:room-ktx:$room_version"
-    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.2"
+    kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0'
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //testing
-    testImplementation "org.mockito:mockito-core:3.2.4"
-    testImplementation "org.mockito:mockito-inline:3.2.4"
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
 
     // database encription
     implementation "net.zetetic:android-database-sqlcipher:$sqlcipher_version"

@@ -14,7 +14,7 @@
 
     <application>
         <activity
-            android:name=".FavoriteActivity"
+            android:name="FavoriteActivity"
             android:exported="true"
             android:noHistory="true"
             >
@@ -29,5 +29,4 @@
                 android:value="" />
         </activity>
     </application>
-
 </manifest>
