@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/colorSurface">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -21,33 +22,23 @@
         style="@style/TextView.patrick_hand_20_181823"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/oopss_something_went_wrong"
+        tools:text="@string/oopss_something_went_wrong"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_subtitle"
-        style="@style/TextView.patrick_hand_14_3F4E4F"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/oopss_something_went_wrong"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_try_again"
-        style="@style/Button.rectangle_8_primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Coba lagi"
-        app:layout_constraintEnd_toEndOf="@+id/tv_subtitle"
-        app:layout_constraintStart_toStartOf="@+id/tv_subtitle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_subtitle" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btn_try_again"-->
+<!--        style="@style/Button.rectangle_8_primary"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text="Coba lagi"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/tv_title"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/tv_title"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_title" />-->
 
 
 

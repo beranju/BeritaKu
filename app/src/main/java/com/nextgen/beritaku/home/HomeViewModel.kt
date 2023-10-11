@@ -50,11 +50,13 @@ class HomeViewModel(
                                 _forYouNews.value = emptyList()
                             }
                             _loading.value = false
+                            _error.value = null
                         }
 
                         is Resource.Loading -> {
                             Log.d("HomeFragment", "Loading")
                             _loading.value = true
+                            _error.value = null
                         }
 
                         is Resource.Error -> {

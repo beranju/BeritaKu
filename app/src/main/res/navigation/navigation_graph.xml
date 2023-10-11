@@ -55,6 +55,9 @@
         <deepLink
             android:id="@+id/deepLink"
             app:uri="beritaku://detail" />
+        <argument
+            android:name="dataItem"
+            app:argType="com.nextgen.beritaku.core.domain.model.NewsDataItem" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"

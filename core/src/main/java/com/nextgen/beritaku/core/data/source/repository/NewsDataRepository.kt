@@ -1,6 +1,5 @@
 package com.nextgen.beritaku.core.data.source.repository
 
-import android.util.Log
 import com.nextgen.beritaku.core.data.source.Resource
 import com.nextgen.beritaku.core.data.source.local.room.NewsDataDao
 import com.nextgen.beritaku.core.data.source.remote.network.ApiService
@@ -14,6 +13,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.HttpException
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class NewsDataRepository(
     private val apiService: ApiService,
@@ -30,18 +32,24 @@ class NewsDataRepository(
                         val result = body.results.let { items ->
                             items.map { DataMapper.mapNewsDataResponseToNewsData(it!!) }
                         }
-                        Log.d("Repository", "Sukses fetch data")
                         emit(Resource.Success(result))
                     } else {
                         emit(Resource.Success(emptyList()))
                     }
                 } else {
-                    emit(Resource.Error("Something went wrong"))
+                    emit(Resource.Error("Terjadi Kesalahan"))
                 }
-            } catch (e: Exception) {
-                Log.e("Repository", "${e.message}")
-                e.printStackTrace()
-                emit(Resource.Error(e.localizedMessage?.toString() ?: "Something went wrong"))
+            } catch (e: IOException) {
+                emit(Resource.Error("Koneksi gagal, periksa internet anda"))
+            } catch (e: SocketTimeoutException) {
+                emit(Resource.Error("Waktu request habis, coba lagi"))
+            } catch (e: HttpException) {
+                val errorMessage: String = when (e.code()) {
+                    400 -> "Kesalahan request, coba lagi"
+                    500 -> "Server sedang bermasalah"
+                    else -> "Terjadi Kesalahan"
+                }
+                emit(Resource.Error(errorMessage))
             }
         }.flowOn(Dispatchers.IO)
 
@@ -66,8 +74,17 @@ class NewsDataRepository(
                 } else {
                     emit(Resource.Error("Something went wrong"))
                 }
-            } catch (e: Exception) {
-                emit(Resource.Error(e.message.toString()))
+            } catch (e: IOException) {
+                emit(Resource.Error("Koneksi gagal, periksa internet anda"))
+            } catch (e: SocketTimeoutException) {
+                emit(Resource.Error("Waktu request habis, coba lagi"))
+            } catch (e: HttpException) {
+                val errorMessage: String = when (e.code()) {
+                    400 -> "Kesalahan request, coba lagi"
+                    500 -> "Server sedang bermasalah"
+                    else -> "Terjadi Kesalahan"
+                }
+                emit(Resource.Error(errorMessage))
             }
         }
 
@@ -81,8 +98,17 @@ class NewsDataRepository(
                         val newsData = data.map { mapNewsDataEntityToNewsDataItem(it) }
                         emit(Resource.Success(newsData))
                     }
-            } catch (e: Exception) {
-                emit(Resource.Error(message = e.message.toString(), data = null))
+            } catch (e: IOException) {
+                emit(Resource.Error("Koneksi gagal, periksa internet anda"))
+            } catch (e: SocketTimeoutException) {
+                emit(Resource.Error("Waktu request habis, coba lagi"))
+            } catch (e: HttpException) {
+                val errorMessage: String = when (e.code()) {
+                    400 -> "Kesalahan request, coba lagi"
+                    500 -> "Server sedang bermasalah"
+                    else -> "Terjadi Kesalahan"
+                }
+                emit(Resource.Error(errorMessage))
             }
         }
 

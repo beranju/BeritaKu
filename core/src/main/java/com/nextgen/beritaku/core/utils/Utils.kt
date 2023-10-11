@@ -1,5 +1,10 @@
 package com.nextgen.beritaku.core.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkInfo
+import android.os.Build
 import com.nextgen.beritaku.core.utils.Constants.WORD_PER_MINUTE
 import java.text.SimpleDateFormat
 import java.time.ZoneId
@@ -17,5 +22,6 @@ object Utils {
         val estimate = wordCount / WORD_PER_MINUTE
         return "$estimate min"
     }
+
 
 }
