@@ -53,7 +53,6 @@ class ExploreFragment : Fragment() {
             bundle.putParcelable(DetailFragment.DATA_ITEM, it)
             findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
         }
-
         binding.rvItemSearch.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)

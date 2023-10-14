@@ -5,16 +5,6 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
 
-    // ** library for unit test
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito:mockito-core:$mockito_version"
-    testImplementation "androidx.arch.core:core-testing:$core_testing_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
-    // ** turbine -> a small testing library for kotlin flow
-    testImplementation "app.cash.turbine:turbine:1.0.0"
-
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
     implementation "androidx.multidex:multidex:$multidex_version"
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
@@ -50,5 +40,16 @@ dependencies {
 
     // lottie for animation
     implementation "com.airbnb.android:lottie:6.1.0"
+
+    // ** library for unit test
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "androidx.arch.core:core-testing:$core_testing_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
+    // ** turbine -> a small testing library for kotlin flow
+    testImplementation "app.cash.turbine:turbine:1.0.0"
+
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 
 }

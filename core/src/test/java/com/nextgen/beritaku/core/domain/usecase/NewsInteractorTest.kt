@@ -18,14 +18,14 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class NewsInteractorTest {
 
-    private lateinit var useCase: NewsInteractor
+    private lateinit var useCase: NewsDataInteractor
 
     @Mock
-    private lateinit var newsRepository: INewsRepository
+    private lateinit var newsRepository: INewsRepository<NewsDataItem>
 
     @Before
     fun setup() {
-        useCase = NewsInteractor(newsRepository)
+        useCase = NewsDataInteractor(newsRepository)
         val expected: Flow<Resource<List<NewsDataItem>>> = flow {
             emit(Resource.Success(DataDummy.generateListNewsData()))
         }
