@@ -112,9 +112,20 @@ class NewsDataRepository(
             }
         }
 
-    override fun getFavoriteNews(): Flow<Resource<List<NewsDataItem>>> {
-        return flow { emit(Resource.Loading()) }
-    }
+    override fun getFavoriteNews(): Flow<Resource<List<NewsDataItem>>> =
+        flow {
+            emit(Resource.Loading())
+            try {
+                newsDataDao.getAllNews()
+                    .catch { Resource.Error(it.message.toString(), null) }
+                    .collect { data ->
+                        val listNews = data.map { mapNewsDataEntityToNewsDataItem(it) }
+                        emit(Resource.Success(listNews))
+                    }
+            } catch (e: Exception) {
+                emit(Resource.Error(e.localizedMessage!!, null))
+            }
+        }
 
     override suspend fun isFavoriteNews(id: String): Boolean = newsDataDao.isNewsFavorite(id)
 

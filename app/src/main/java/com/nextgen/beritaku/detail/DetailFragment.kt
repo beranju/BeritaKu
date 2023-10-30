@@ -1,8 +1,6 @@
 package com.nextgen.beritaku.detail
 
 import android.content.Intent
-import android.os.Build
-import android.os.Build.VERSION
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
-import com.nextgen.beritaku.core.utils.ExtentionFun.parcelable
+import com.nextgen.beritaku.core.utils.DateUtils
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,7 +30,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
         dataNews = DetailFragmentArgs.fromBundle(arguments as Bundle).dataItem
         Log.d("DetailFragment", "data: $dataNews")
 
-//        viewModel.isFavoriteNews(dataNews!!.pubDate.orEmpty())
+        viewModel.isFavoriteNews(dataNews!!.articleId.orEmpty())
         if (dataNews != null) setupView(dataNews)
         binding.backButton.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
@@ -43,10 +41,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
         data.let {
             binding.apply {
                 title.text = data?.title
-                label.text = data?.sourceId ?: "Anonim"
+                label.text = if (data?.creator.equals("null")) data?.sourceId else data?.creator
                 description.text = data?.description
                 author.text = data?.creator ?: data?.sourceId
-//                date.text = DateUtils.dateFormat(data?.pubDate.toString())
+                date.text = DateUtils.dateToTimeAgo(data?.pubDate.toString())
                 date.text = data?.pubDate.toString()
                 content.text = data?.content ?: ""
                 Glide.with(requireContext())
@@ -63,7 +61,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
                 }
                 favorite.setOnClickListener {
-//                    viewModel.setFavoriteNews(dataNews!!)
+                    viewModel.setFavoriteNews(dataNews!!)
                 }
                 viewModel.isFavorite.observe(viewLifecycleOwner) {
                     setStatusFavorite(it!!)

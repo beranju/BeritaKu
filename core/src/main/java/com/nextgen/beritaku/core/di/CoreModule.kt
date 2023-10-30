@@ -51,7 +51,7 @@ val databaseModule = module {
             "newsdb"
         )
             .fallbackToDestructiveMigration()
-            .openHelperFactory(factory)
+//            .openHelperFactory(factory)
             .build()
     }
 
