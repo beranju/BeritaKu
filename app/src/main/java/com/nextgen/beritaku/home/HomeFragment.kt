@@ -146,14 +146,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val splitInstallManager = SplitInstallManagerFactory.create(requireContext())
         val moduleFavorite = "favorite"
         if (splitInstallManager.installedModules.contains(moduleFavorite)) {
-            moveToActivity()
+            findNavController().navigate(R.id.action_home_navigation_to_favoriteFragment)
         } else {
             val request = SplitInstallRequest.newBuilder()
                 .addModule(moduleFavorite)
                 .build()
             splitInstallManager.startInstall(request)
                 .addOnSuccessListener {
-                    moveToActivity()
+                    findNavController().navigate(R.id.action_home_navigation_to_favoriteFragment)
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Error installing module", Toast.LENGTH_SHORT)

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_home_navigation_to_explore_navigation"
             app:destination="@id/explore_navigation" />
+        <action
+            android:id="@+id/action_home_navigation_to_favoriteFragment"
+            app:destination="@id/favorite"/>
     </fragment>
     <fragment
         android:id="@+id/explore_navigation"
@@ -103,4 +106,14 @@
             android:id="@+id/action_formProfileFragment_to_account_navigation"
             app:destination="@id/account_navigation" />
     </fragment>
+
+    <fragment
+        app:moduleName="favorite"
+        android:id="@+id/favorite"
+        android:name="com.nextgen.beritaku.favorite.FavoriteFragment">
+        <action
+            android:id="@+id/action_favorite_to_detail"
+            app:destination="@id/detailFragment"/>
+    </fragment>
+
 </navigation>

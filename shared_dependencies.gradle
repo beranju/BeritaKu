@@ -12,6 +12,7 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_ktx_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_ktx_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.7.4"
 
 //    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_version"
@@ -39,7 +40,10 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:2.12"
 
     // lottie for animation
-    implementation "com.airbnb.android:lottie:6.1.0"
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
+    // shimmer for load placeholder
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 
     // ** library for unit test
     testImplementation "junit:junit:$junit_version"
