@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.databinding.FragmentNewsBinding
-import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.utils.Categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,11 +41,16 @@ class NewsFragment : Fragment() {
         viewModel.news.observe(viewLifecycleOwner) { data ->
             exploreAdapter.submitList(data)
         }
-        viewModel.loading.observe(viewLifecycleOwner){isLoading ->
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             isLoading(isLoading)
         }
-        viewModel.error.observe(viewLifecycleOwner){error ->
+        viewModel.error.observe(viewLifecycleOwner) { error ->
             Log.e(TAG, "onFailure: $error")
+        }
+
+        exploreAdapter.onClick = { item ->
+            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(item)
+            findNavController().navigate(action)
         }
 
     }
