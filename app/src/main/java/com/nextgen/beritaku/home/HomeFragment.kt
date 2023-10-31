@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -124,7 +125,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             binding.appBar.sivProfile -> {
-                findNavController().navigate(R.id.account_navigation)
+                val navOption = NavOptions.Builder()
+                    .setPopUpTo(R.id.home_navigation, true, saveState = true)
+                    .setRestoreState(true)
+                    .setLaunchSingleTop(true)
+                    .build()
+
+                findNavController().navigate(R.id.account_navigation, null, navOption)
             }
 
             binding.appBar.ivFavorite -> {

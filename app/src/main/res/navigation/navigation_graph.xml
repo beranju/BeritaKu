@@ -9,7 +9,7 @@
         android:id="@+id/home_navigation"
         android:name="com.nextgen.beritaku.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_navigation_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -21,16 +21,24 @@
             app:destination="@id/explore_navigation" />
         <action
             android:id="@+id/action_home_navigation_to_favoriteFragment"
-            app:destination="@id/favorite"/>
+            app:destination="@id/favorite"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/explore_navigation"
         android:name="com.nextgen.beritaku.explore.ExploreFragment"
         android:label="Explore"
-        tools:layout="@layout/fragment_explore" >
+        tools:layout="@layout/fragment_explore">
         <action
             android:id="@+id/action_explore_navigation_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
         <deepLink
             android:id="@+id/deepLink"
             app:uri="beritaku://explore" />
@@ -39,7 +47,7 @@
         android:id="@+id/account_navigation"
         android:name="com.nextgen.beritaku.profile.ProfileFragment"
         android:label="Your Profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_account_navigation_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -54,7 +62,11 @@
         tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_detailFragment_to_webFragment"
-            app:destination="@id/webFragment" />
+            app:destination="@id/webFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
         <deepLink
             android:id="@+id/deepLink"
             app:uri="beritaku://detail" />
@@ -66,7 +78,7 @@
         android:id="@+id/newsFragment"
         android:name="com.nextgen.beritaku.explore.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/action_newsFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -80,7 +92,7 @@
         android:id="@+id/signupFragment"
         android:name="com.nextgen.beritaku.auth.signup.SignupFragment"
         android:label="fragment_signup"
-        tools:layout="@layout/fragment_signup" >
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -89,31 +101,39 @@
         android:id="@+id/loginFragment"
         android:name="com.nextgen.beritaku.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_home_navigation"
             app:destination="@id/home_navigation" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     <fragment
         android:id="@+id/formProfileFragment"
         android:name="com.nextgen.beritaku.profile.FormProfileFragment"
         android:label="fragment_form_profile"
-        tools:layout="@layout/fragment_form_profile" >
+        tools:layout="@layout/fragment_form_profile">
         <action
             android:id="@+id/action_formProfileFragment_to_account_navigation"
             app:destination="@id/account_navigation" />
     </fragment>
 
     <fragment
-        app:moduleName="favorite"
         android:id="@+id/favorite"
-        android:name="com.nextgen.beritaku.favorite.FavoriteFragment">
+        android:name="com.nextgen.beritaku.favorite.FavoriteFragment"
+        app:moduleName="favorite">
         <action
             android:id="@+id/action_favorite_to_detail"
-            app:destination="@id/detailFragment"/>
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
 
 </navigation>
