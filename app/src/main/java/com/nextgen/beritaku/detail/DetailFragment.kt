@@ -2,7 +2,6 @@ package com.nextgen.beritaku.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataNews = DetailFragmentArgs.fromBundle(arguments as Bundle).dataItem
-        Log.d("DetailFragment", "data: $dataNews")
 
         viewModel.isFavoriteNews(dataNews!!.articleId.orEmpty())
         if (dataNews != null) setupView(dataNews)
