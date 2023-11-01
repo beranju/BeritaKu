@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.nextgen.beritaku.core.utils.loadImage
+import com.nextgen.beritaku.core.utils.ExtentionFun.loadImage
 import com.nextgen.beritaku.databinding.FragmentProfileBinding
 import com.nextgen.beritaku.utils.OtherMenu
 
@@ -27,13 +27,13 @@ class ProfileFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        if (auth.currentUser == null){
+        if (auth.currentUser == null) {
             isUserEmpty(true)
-            binding?.emptyUser?.btnGoLogin?.setOnClickListener{
+            binding?.emptyUser?.btnGoLogin?.setOnClickListener {
                 val go = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()
                 findNavController().navigate(go)
             }
-        }else{
+        } else {
             isUserEmpty(false)
             setupView(auth.currentUser!!)
         }
@@ -47,10 +47,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun isUserEmpty(state: Boolean) {
-        if (state){
+        if (state) {
             binding?.emptyUser?.root?.visibility = View.VISIBLE
             binding?.userData?.visibility = View.GONE
-        }else{
+        } else {
             binding?.emptyUser?.root?.visibility = View.GONE
             binding?.userData?.visibility = View.VISIBLE
         }
@@ -61,11 +61,12 @@ class ProfileFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listMenu)
         binding?.lvMenu?.adapter = adapter
         binding?.lvMenu?.setOnItemClickListener { _, _, position, _ ->
-            when(listMenu[position]){
+            when (listMenu[position]) {
                 OtherMenu.FavoriteNews.string -> {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse("beritaku://favorite"))
                     startActivity(intent)
                 }
+
                 OtherMenu.Logout.string -> {
                     auth.signOut()
                     val action = ProfileFragmentDirections.actionAccountNavigationToLoginFragment()

@@ -14,7 +14,7 @@
     <string name="tab_text_6">Technology</string>
     <string name="title_favorite">Favorite</string>
     <string name="name">Nama</string>
-<!--    <string name="alamat">Alamat</string>-->
+    <!--    <string name="alamat">Alamat</string>-->
     <string name="simpan">Simpan</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -36,17 +36,17 @@
     <string name="back_button_desc">Back Button</string>
     <string name="action_favorite_desc">Action Favorite</string>
     <string name="action_share_desc">Action Share</string>
-<!--    <string name="button_search_desc">Button Search</string>-->
+    <!--    <string name="button_search_desc">Button Search</string>-->
     <string name="select_photo_desc">Select Photo</string>
     <string name="authentication_image_acc_desc">Authentication Image Acc</string>
     <string name="text_signup">Signup</string>
-<!--    <string name="empty_image_acc_desc">Empty Image Acc</string>-->
-<!--    <string name="error_news_not_found">news not found</string>-->
-<!--    <string name="load_data_image_acc_desc">Load Data Image Acc</string>-->
-<!--    <string name="load_data_status">load data ...</string>-->
+    <!--    <string name="empty_image_acc_desc">Empty Image Acc</string>-->
+    <!--    <string name="error_news_not_found">news not found</string>-->
+    <!--    <string name="load_data_image_acc_desc">Load Data Image Acc</string>-->
+    <!--    <string name="load_data_status">load data ...</string>-->
     <string name="search_hint">explore news</string>
-<!--    <string name="nothing_found_desc">nothing found</string>-->
-<!--    <string name="load_data_desc">load data ...</string>-->
+    <!--    <string name="nothing_found_desc">nothing found</string>-->
+    <!--    <string name="load_data_desc">load data ...</string>-->
     <string name="sign_up_desc">Sign Up</string>
     <string name="environment">Environment</string>
     <string name="food">Food</string>
@@ -62,5 +62,9 @@
     <string name="btn_go">Go !</string>
     <string name="oopss_nothing_found">Oopss, nothing found</string>
     <string name="oopss_something_went_wrong">Oopss, something went wrong</string>
+    <string name="txt_untuk_anda">Untuk Anda</string>
+    <string name="txt_selengkapnya">Selengkapnya</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--    <string name="no_account">Your profile not yet setup</string>-->
 </resources>

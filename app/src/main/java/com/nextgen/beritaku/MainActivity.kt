@@ -1,18 +1,12 @@
 package com.nextgen.beritaku
 
-import android.content.Intent
-import android.net.Uri
+import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nextgen.beritaku.databinding.ActivityMainBinding
 
@@ -26,20 +20,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // lock the screen orientation to portrait
+        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         // ** delegation to disable dark mode
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         // ** setup bottom navigation
-        val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 //        val appBarConfiguration = AppBarConfiguration.Builder(
 //            R.id.home_navigation, R.id.explore_navigation, R.id.account_navigation
 //        ).build()
-        val navController =navHostFragment.navController
+        val navController = navHostFragment.navController
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener{_, destination: NavDestination, _ ->
-            when(destination.id){
+        navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            when (destination.id) {
                 R.id.home_navigation -> visible()
                 R.id.explore_navigation -> visible()
                 R.id.account_navigation -> visible()

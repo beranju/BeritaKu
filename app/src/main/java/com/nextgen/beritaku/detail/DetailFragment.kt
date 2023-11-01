@@ -1,8 +1,6 @@
 package com.nextgen.beritaku.detail
 
 import android.content.Intent
-import android.os.Build
-import android.os.Build.VERSION
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +8,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.domain.model.NewsDataItem
-import com.nextgen.beritaku.core.utils.ExtentionFun.parcelable
+import com.nextgen.beritaku.core.utils.Utils
 import com.nextgen.beritaku.databinding.FragmentDetailBinding
+import com.nextgen.beritaku.utils.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment(), View.OnClickListener {
@@ -26,45 +23,35 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // ** this exp use extension fun
-        dataNews = requireActivity().intent.parcelable(DATA_ITEM)
+        dataNews = DetailFragmentArgs.fromBundle(arguments as Bundle).dataItem
 
-//        viewModel.isFavoriteNews(dataNews!!.pubDate.orEmpty())
-        setupView(dataNews)
-        binding.backButton.setOnClickListener(this)
+        viewModel.isFavoriteNews(dataNews!!.articleId.orEmpty())
+        if (dataNews != null) setupView(dataNews)
+
+        binding.ivNavigateUp.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
+        binding.btnReadMore.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(WebFragment.URL, dataNews?.link)
+            findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
+        }
 
     }
 
     private fun setupView(data: NewsDataItem?) {
-        data.let {
-            binding.apply {
-                title.text = data?.title
-                label.text = data?.sourceId ?: "Anonim"
-                description.text = data?.description
-                author.text = data?.creator ?: data?.sourceId
-//                date.text = DateUtils.dateFormat(data?.pubDate.toString())
-                date.text = data?.pubDate.toString()
-                content.text = data?.content ?: ""
-                Glide.with(requireContext())
-                    .load(data?.imageUrl)
-                    .apply(
-                        RequestOptions().placeholder(R.drawable.ic_load_image)
-                            .error(R.drawable.ic_empty_image)
-                    )
-                    .centerCrop()
-                    .into(thumbnail)
-                readmore.setOnClickListener {
-                    val bundle = Bundle()
-                    bundle.putString(WebFragment.URL, data?.link)
-                    findNavController().navigate(R.id.action_detailFragment_to_webFragment, bundle)
-                }
-                favorite.setOnClickListener {
-//                    viewModel.setFavoriteNews(dataNews!!)
-                }
-                viewModel.isFavorite.observe(viewLifecycleOwner) {
-                    setStatusFavorite(it!!)
-                }
+        binding.sivThumbnail.loadImage(data?.imageUrl.orEmpty())
+        binding.apply {
+            tvTitle.text = data?.title
+            tvAuthor.text = if (data?.creator.equals("null")) data?.sourceId else data?.creator
+            tvCategory.text = data?.category?.first() ?: "Semua"
+            tvDescription.text = data?.description
+            tvContent.text = data?.content
+            tvDate.text = Utils.calculateReadTime(data?.pubDate.orEmpty())
+            ivFavorite.setOnClickListener {
+                viewModel.setFavoriteNews(dataNews!!)
+            }
+            viewModel.isFavorite.observe(viewLifecycleOwner) {
+                setStatusFavorite(it!!)
             }
         }
 
@@ -72,14 +59,14 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     private fun setStatusFavorite(favorite: Boolean) {
         if (favorite) {
-            binding.favorite.setImageDrawable(
+            binding.ivFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
                     requireContext(),
                     R.drawable.ic_baseline_favorite_24
                 )
             )
         } else {
-            binding.favorite.setImageDrawable(
+            binding.ivFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
                     requireContext(),
                     R.drawable.ic_baseline_favorite_border_24
@@ -90,7 +77,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view) {
-            binding.backButton -> {
+            binding.ivNavigateUp -> {
                 findNavController().navigateUp()
             }
 

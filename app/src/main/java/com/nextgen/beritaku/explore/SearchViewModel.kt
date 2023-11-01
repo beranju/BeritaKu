@@ -9,7 +9,7 @@ import com.nextgen.beritaku.core.domain.model.NewsDataItem
 import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
+class SearchViewModel(private val newsUseCase: NewsUseCase<NewsDataItem>) : ViewModel() {
 
     private var _query: MutableLiveData<String> = MutableLiveData()
     val query: LiveData<String> = _query

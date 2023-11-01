@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
-import com.nextgen.beritaku.R
 import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.databinding.FragmentExploreBinding
-import com.nextgen.beritaku.detail.DetailFragment
 import com.nextgen.beritaku.utils.Categories
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,13 +45,11 @@ class ExploreFragment : Fragment() {
             }
         }
 
-        searchAdapter.onClick = {
+        searchAdapter.onClick = { item ->
             binding.searchView.hide()
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, it)
-            findNavController().navigate(R.id.action_explore_navigation_to_detailFragment, bundle)
+            val action = ExploreFragmentDirections.actionExploreNavigationToDetailFragment(item)
+            findNavController().navigate(action)
         }
-
         binding.rvItemSearch.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)

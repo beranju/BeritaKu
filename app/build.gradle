@@ -11,12 +11,12 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.nextgen.beritaku'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.nextgen.beritaku"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -53,17 +53,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // ** Split Manager to install library module
-    implementation "com.google.android.play:core:1.10.3"
+//    implementation "com.google.android.play:core:1.10.3"
 
     implementation 'androidx.core:core-splashscreen:1.0.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-
-    // lottie for animation
-    implementation "com.airbnb.android:lottie:$lottie_version"
-
-    // shimmer for load placeholder
-    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 
 
 }

@@ -91,7 +91,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/searchView" />
 
             <include
                 android:id="@+id/load_data"
@@ -99,7 +99,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/rv_item_search" />
+                app:layout_constraintTop_toTopOf="@id/searchView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.search.SearchView>
 

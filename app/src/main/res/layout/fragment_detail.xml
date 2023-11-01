@@ -1,156 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".detail.DetailFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/test" />
-
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:contentDescription="@string/back_button_desc"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/header_bg_rounded"
-        android:orientation="vertical"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/label"
-            style="@style/TextView.patrick_hand_12_3F4E4F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_badge_pill"
-            android:paddingHorizontal="8dp"
-            tools:text="news.com" />
-
-        <TextView
-            android:id="@+id/title"
-            style="@style/TextView.patrick_hand_28_181823"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="100"
-            android:maxLines="3"
-            tools:text="lkdfjg lgkajg lkdfjg lkfdjg aak,fjg" />
-
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bottom_bg_rounded"
-        android:elevation="4dp"
-        android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        android:layout_height="wrap_content"
+        android:padding="24dp">
 
-        <TextView
-            android:id="@+id/author"
-            style="@style/TextView.patrick_hand_12_3F4E4F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_badge_pill"
-            android:maxLines="40"
-            android:paddingHorizontal="8dp"
+
+        <ImageView
+            android:id="@+id/iv_navigate_up"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="Navigasi kembali"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="beranju" />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/TextView.patrick_hand_14_3F4E4F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/author"
-            app:layout_constraintStart_toStartOf="@+id/author"
-            app:layout_constraintTop_toBottomOf="@+id/author"
-            tools:text="1 min ago" />
-
-        <TextView
-            android:id="@+id/description"
-            style="@style/TextView.patrick_hand_14_3F4E4F"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:maxLines="3"
-            app:layout_constraintTop_toBottomOf="@+id/date"
-            tools:layout_editor_absoluteX="24dp"
-            tools:text="dkfljg adgkljda gafgjk dgdgjdkghjd gdgf vklsjv kslfjlk vsklfj v skfjvvs lkdhg dfghjdfkhg dghjdk" />
-
-        <TextView
-            android:id="@+id/content"
-            style="@style/TextView.patrick_hand_14_3F4E4F"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:maxLines="2"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            tools:text="fkgjaljg aflkgjfalgj afglkjdf gdlfjg dflgjdlkgj dflkgj dlfgj dflgjdfjgdjlfgdjgdjfgldjgjdjgdlgd fkldgjdalkg dg" />
-
-        <Button
-            android:id="@+id/readmore"
-            style="@style/Button.rectangle_8_primary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@string/read_more"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_share" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/action_share_desc"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="Bagikan berita"
             android:src="@drawable/ic_baseline_share_24"
-            app:layout_constraintBottom_toBottomOf="@+id/readmore"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/readmore" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/action_favorite_desc"
-            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-            app:layout_constraintBottom_toBottomOf="@+id/date"
+            android:id="@+id/iv_favorite"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="Tambahkan berita ke favorite"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintBottom_toBottomOf="@id/iv_share"
+            app:layout_constraintEnd_toStartOf="@+id/iv_share"
+            app:layout_constraintTop_toTopOf="@id/iv_share" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TextView.roboto_bold_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="@+id/iv_share"
+            app:layout_constraintStart_toStartOf="@+id/iv_navigate_up"
+            app:layout_constraintTop_toBottomOf="@+id/iv_navigate_up"
+            tools:text="Sample title with roboto bold 24 sp" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            style="@style/TextView.roboto_bold_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Author" />
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_author"
+            app:layout_constraintStart_toEndOf="@id/tv_author"
+            app:layout_constraintTop_toTopOf="@id/tv_author"
+            tools:text="Top" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_author"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/author" />
+
+            app:layout_constraintTop_toTopOf="@id/tv_author"
+            tools:text="2 hari lalu" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
+            tools:layout_editor_absoluteX="24dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:lineHeight="20dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/siv_thumbnail"
+            tools:text="Sample of the news description the will be show here this is just the preview to show you how it will look like" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:lineHeight="20dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description"
+            tools:layout_editor_absoluteX="24dp"
+            tools:text="Sample of the news content the will be show here this is just the preview to show you how it will look like" />
+
+        <Button
+            android:id="@+id/btn_read_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/read_more"
+            app:layout_constraintTop_toBottomOf="@+id/tv_content"
+            tools:layout_editor_absoluteX="24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

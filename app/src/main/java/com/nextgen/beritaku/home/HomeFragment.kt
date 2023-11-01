@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -18,7 +19,6 @@ import com.nextgen.beritaku.core.ui.ForYouAdapter
 import com.nextgen.beritaku.core.ui.HeadlineAdapter
 import com.nextgen.beritaku.core.utils.DateUtils.getCurrentDayDate
 import com.nextgen.beritaku.databinding.FragmentHomeBinding
-import com.nextgen.beritaku.detail.DetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -43,6 +43,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val currentDayDate = getCurrentDayDate()
         binding.tvDateToday.text = currentDayDate
         binding.tvGreeting.text = if (homeViewModel.userData == null) {
@@ -55,14 +56,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
 
         forYouAdapter.onClick = { item ->
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
-            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
+            val navToDetail = HomeFragmentDirections.actionHomeNavigationToDetailFragment(item)
+            findNavController().navigate(navToDetail)
         }
         headlineAdapter.onClick = { item ->
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.DATA_ITEM, item)
-            findNavController().navigate(R.id.action_home_navigation_to_detailFragment, bundle)
+            val navToDetail = HomeFragmentDirections.actionHomeNavigationToDetailFragment(item)
+            findNavController().navigate(navToDetail)
         }
 
         binding.rvHomeForYou.apply {
@@ -85,7 +84,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             headlineAdapter.submitList(items)
         }
         homeViewModel.error.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) showError(it)
+            showError(it)
         }
         homeViewModel.loading.observe(viewLifecycleOwner) {
             isLoading(it)
@@ -99,9 +98,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.appBar.ivFavorite.setOnClickListener(this)
     }
 
-    private fun showError(message: String) {
-        binding.error.root.visibility = View.VISIBLE
-        binding.error.tvEmpty.text = message
+    private fun showError(message: String?) {
+        binding.llError.visibility = if (message.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.error.tvTitle.text = message
+        binding.content.visibility = if (message.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun isLoading(state: Boolean) {
@@ -109,7 +109,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.sflHeadline.visibility = if (state) View.VISIBLE else View.GONE
         binding.rvHomeForYou.visibility = if (state) View.GONE else View.VISIBLE
         binding.rvHomeHeadline.visibility = if (state) View.GONE else View.VISIBLE
-        if(state){
+        if (!state) {
             binding.srlHome.isRefreshing = false
         }
     }
@@ -125,7 +125,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
 
             binding.appBar.sivProfile -> {
-                findNavController().navigate(R.id.account_navigation)
+                val navOption = NavOptions.Builder()
+                    .setPopUpTo(R.id.home_navigation, true, saveState = true)
+                    .setRestoreState(true)
+                    .setLaunchSingleTop(true)
+                    .build()
+
+                findNavController().navigate(R.id.account_navigation, null, navOption)
             }
 
             binding.appBar.ivFavorite -> {
@@ -147,21 +153,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val splitInstallManager = SplitInstallManagerFactory.create(requireContext())
         val moduleFavorite = "favorite"
         if (splitInstallManager.installedModules.contains(moduleFavorite)) {
-            moveToActivity()
+            findNavController().navigate(R.id.action_home_navigation_to_favoriteFragment)
         } else {
             val request = SplitInstallRequest.newBuilder()
                 .addModule(moduleFavorite)
                 .build()
             splitInstallManager.startInstall(request)
                 .addOnSuccessListener {
-                    moveToActivity()
+                    findNavController().navigate(R.id.action_home_navigation_to_favoriteFragment)
                 }
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Error installing module", Toast.LENGTH_SHORT)
                         .show()
                 }
         }
-
     }
 
     private fun moveToActivity() {

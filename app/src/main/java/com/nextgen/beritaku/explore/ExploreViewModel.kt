@@ -10,7 +10,7 @@ import com.nextgen.beritaku.core.domain.usecase.NewsUseCase
 import com.nextgen.beritaku.core.utils.Constants.TOP_CATEGORY
 import kotlinx.coroutines.launch
 
-class ExploreViewModel(private val newsUseCase: NewsUseCase) : ViewModel() {
+class ExploreViewModel(private val newsUseCase: NewsUseCase<NewsDataItem>) : ViewModel() {
 
     private var _news: MutableLiveData<List<NewsDataItem>> = MutableLiveData()
     val news: LiveData<List<NewsDataItem>> get() = _news

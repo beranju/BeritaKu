@@ -5,8 +5,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.nextgen.beritaku.core.data.source.remote.response.Source
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+
+import kotlinx.parcelize.RawValue
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "news")
@@ -41,4 +42,4 @@ data class NewsEntity(
 
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
-): Parcelable
+) : Parcelable

@@ -3,7 +3,7 @@
 -keep,includedescriptorclasses interface net.sqlcipher.** { *; }
 
 
-##---------------Begin: proguard configuration for Gson ----------
+##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
 -keepattributes Signature
@@ -18,6 +18,20 @@
 # Application classes that will be serialized/deserialized over Gson
 -keep class com.google.gson.examples.android.model.** { <fields>; }
 
+# Keep the names of classes/members that are used in Gson serialization/deserialization
+-keepnames class com.google.gson.** { *; }
+
+# Keep Parcelable classes
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# Keep enum types along with their fields and methods
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
 # Prevent proguard from stripping interface information from TypeAdapter, TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
 -keep class * extends com.google.gson.TypeAdapter
@@ -27,8 +41,20 @@
 
 # Prevent R8 from leaving Data object members always null
 -keepclassmembers,allowobfuscation class * {
-@com.google.gson.annotations.SerializedName <fields>;
+  @com.google.gson.annotations.SerializedName <fields>;
 }
+
+# Keep all Kotlin data classes
+-keepclassmembers class com.nextgen.** {
+    @com.google.gson.annotations.SerializedName <fields>;
+    <init>(...);
+}
+
+# Retain generic signatures of TypeToken and its subclasses with R8 version 3.0 and higher.
+-keep,allowobfuscation,allowshrinking class com.google.gson.reflect.TypeToken
+-keep,allowobfuscation,allowshrinking class * extends com.google.gson.reflect.TypeToken
+
+##---------------End: proguard configuration for Gson  ----------
 
 
 ##---------------Begin: proguard configuration for Retrofit ----------
@@ -38,6 +64,15 @@
 
 # Retrofit does reflection on method and parameter annotations.
 -keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+
+# Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+
+# With R8 full mode generic signatures are stripped for classes that are not
+# kept. Suspend functions are wrapped in continuations where the type argument
+# is used.
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 
 # Retain service method parameters when optimizing.
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
